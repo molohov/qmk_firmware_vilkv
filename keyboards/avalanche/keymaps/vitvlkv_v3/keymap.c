@@ -21,18 +21,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC__MUTE,MT_GRV,  KC_LSFT, MT_SPC,  MT_LALT, MT_RALT,  FN_1,   KC_RSFT, KC_TILD, KC_INS
     ),
     [LAYER_1] = LAYOUT(
-                 _______, XXXXXXX, XXXXXXX, KC_EQL,  XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                 XXXXXXX, XXXXXXX, XXXXXXX, KC_EQL,  XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                  _______, XXXXXXX, KC_LPRN, KC_PLUS, KC_RPRN, XXXXXXX,                                     XXXXXXX, KC_HOME, KC_UP,   KC_END,  XXXXXXX, XXXXXXX,
-        _______, _______, XXXXXXX, KC_LBRC, KC_MINS, KC_RBRC, KC_DEL,                                      KC_BSPC, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, _______, XXXXXXX, KC_LBRC, KC_MINS, KC_RBRC, KC_DEL,                                      KC_BSPC, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX, XXXXXXX,
                  _______, XXXXXXX, KC_LCBR, KC_UNDS, KC_RCBR, XXXXXXX, _______, _______, _______, _______, XXXXXXX, KC_PGUP, KC_PGDN, XXXXXXX, XXXXXXX, _______,
-                                            _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+                                            _______, XXXXXXX, _______, _______, _______, _______, _______, _______, XXXXXXX, XXXXXXX
     ),
     [LAYER_2] = LAYOUT(
-                 _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, KC_DOT,  KC_0,    KC_COMM, XXXXXXX, XXXXXXX,
+                 XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, KC_DOT,  KC_0,    KC_COMM, XXXXXXX, XXXXXXX,
                  _______, XXXXXXX, KC_EXLM, KC_AT,   KC_HASH, XXXXXXX,                                     XXXXXXX, KC_1,    KC_2,    KC_3,    XXXXXXX, XXXXXXX,
-        _______, _______, XXXXXXX, KC_DLR,  KC_PERC, KC_CIRC, KC_DEL,                                      KC_BSPC, KC_4,    KC_5,    KC_6,    XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, _______, XXXXXXX, KC_DLR,  KC_PERC, KC_CIRC, KC_DEL,                                      KC_BSPC, KC_4,    KC_5,    KC_6,    XXXXXXX, XXXXXXX, XXXXXXX,
                  _______, XXXXXXX, KC_AMPR, KC_ASTR, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, KC_7,    KC_8,    KC_9,    XXXXXXX, _______,
-                                            _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+                                            _______, XXXXXXX, _______, _______, _______, _______, _______, _______, XXXXXXX, XXXXXXX
     ),
 };
 
