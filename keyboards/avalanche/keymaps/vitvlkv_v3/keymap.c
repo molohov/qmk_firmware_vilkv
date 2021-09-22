@@ -4,14 +4,6 @@ enum layers {
     _QWERTY,
     _LOWER,
     _RAISE,
-    // _ADJUST,
-};
-
-enum custom_keycodes {
-    QWERTY = SAFE_RANGE,
-    LOWER,
-    RAISE,
-    // ADJUST,
 };
 
 #define MT_LALT LALT_T(KC_ESC)
@@ -40,13 +32,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  _______, XXXXXXX, KC_AMPR, KC_ASTR, KC_PCMM, XXXXXXX, _______, _______, _______, _______, XXXXXXX, KC_7,    KC_8,    KC_9,    KC_0,    _______,
                                             _______, XXXXXXX, _______, _______, _______, _______, _______, _______, XXXXXXX, XXXXXXX
     ),
-    // [_ADJUST] = LAYOUT(
-    //              XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, KC_PCMM, XXXXXXX, XXXXXXX, XXXXXXX,
-    //              KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC,                                     KC_AMPR, KC_ASTR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    //     XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    //              _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
-    //                                         _______, XXXXXXX, _______, _______, _______, _______, _______, _______, XXXXXXX, XXXXXXX
-    // ),
 };
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
