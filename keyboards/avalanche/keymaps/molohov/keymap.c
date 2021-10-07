@@ -25,10 +25,26 @@ enum custom_keycodes {
     KC_RAISE,
     KC_ADJUST,
     KC_NUMROW,
+    KC_VIMWRITE,
+    KC_VIMSAVEEXIT,
+    KC_VIMQUIT,
 };
 
 #define MINSNUM LT(_NUMROW, KC_MINS)
 #define ENTNUM LT(_NUMROW, KC_ENT)
+#define SPCNAV LT(_BYOBU_NAV, KC_SPC)
+#define KC_PC_UNDO LCTL(KC_Z)
+#define KC_PC_CUT LCTL(KC_X)
+#define KC_PC_COPY LCTL(KC_C)
+#define KC_PC_PASTE LCTL(KC_V)
+#define KC_PC_FIND LCTL(KC_F)
+#define KC_PC_BKSPC_WORD LCTL(KC_BSPC)
+#define KC_PC_AHK_SLACK LALT(KC_Q)
+#define KC_LINUX_PASTE LSFT(LCTL(KC_V))
+#define KC_LINUX_LWORD LALT(KC_B)
+#define KC_LINUX_RWORD LALT(KC_F)
+#define KC_BYOBU_KILLPANE LCTL(KC_F6)
+#define KC_BYOBU_DISFKEYS LSFT(KC_F12)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
@@ -58,9 +74,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_HANDS_DOWN] = LAYOUT(
                  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
                  KC_EQL,  KC_X,    KC_F,    KC_M,    KC_P,    KC_B,                                  KC_MINS, KC_SLSH, KC_DOT,  KC_COMM, KC_J,    KC_BSLS,
- LCAG_T(KC_GRV), KC_Z,    KC_R,    KC_S,    KC_N,    KC_T,    KC_G,    KC_LCBR,             KC_RCBR, KC_QUOT, KC_A,    KC_E,    KC_I,    KC_H,    KC_Q, KC_BSLS,
-                 KC_HOME, KC_W,    KC_C,    KC_L,    KC_D,    KC_V,    KC_BSPC,             KC_EQL,  KC_SCLN, KC_U,    KC_O,    KC_Y,    KC_K,    KC_END,
-                                   XXXXXXX,  KC_ADJUST, KC_RAISE,LSFT_T(KC_BSPC), KC_TAB,              KC_ENT, KC_SPC,  KC_BYOBU_NAV,KC_NUMROW, KC_MUTE
+ LCAG_T(KC_GRV), KC_Z,    KC_R,    KC_S,    KC_N,    KC_T,    KC_G,    KC_LCBR,               KC_RCBR, KC_QUOT, KC_A,    KC_E,    KC_I,    KC_H,    KC_Q,    KC_BSLS,
+                 KC_HOME, KC_W,    KC_C,    KC_L,    KC_D,    KC_V,    KC_PC_BKSPC_WORD,      KC_PC_AHK_SLACK,  KC_SCLN, KC_U,    KC_O,    KC_Y,    KC_K,    KC_END,
+                            XXXXXXX, KC_ADJUST, KC_DEL, LSFT_T(KC_BSPC), KC_TAB,              KC_ENT, SPCNAV,   KC_ESC,  KC_NUMROW, KC_MUTE
     ),
 
 /*
@@ -89,9 +105,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_BYOBU_NAV] = LAYOUT(
                  XXXXXXX, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                 KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-                 _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                               KC_CIRC, KC_AMPR, KC_UP,   KC_PGUP, KC_PGDN, _______,
-        XXXXXXX, _______, XXXXXXX, XXXXXXX, KC_LPRN, KC_RPRN, XXXXXXX, KC_LBRC,             KC_RBRC, XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, _______, _______, KC_F12,
-                 _______, XXXXXXX, XXXXXXX, KC_LCBR, KC_RCBR, XXXXXXX, _______,             _______, KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F8,   KC_F6,
+                 KC_PC_FIND, KC_EXLM, KC_PC_CUT,   KC_HASH, KC_VIMSAVEEXIT,  XXXXXXX,                               KC_CIRC, KC_AMPR, KC_UP,   KC_PGUP, KC_PGDN, _______,
+        XXXXXXX, KC_PC_UNDO, KC_LINUX_PASTE, KC_PC_COPY, KC_PC_PASTE, KC_VIMWRITE, KC_VIMQUIT, KC_LBRC,             KC_RBRC, KC_LINUX_LWORD, KC_LEFT, KC_DOWN, KC_RIGHT, KC_LINUX_RWORD, _______, KC_F12,
+                 KC_BYOBU_KILLPANE, KC_BYOBU_DISFKEYS, XXXXXXX, KC_LCBR, KC_RCBR, XXXXXXX, _______,             _______, KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F8,   KC_F6,
                                    XXXXXXX, XXXXXXX, _______, _______, _______,             _______, _______, _______, _______, _______
     ),
 
@@ -441,6 +457,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
+        case KC_VIMWRITE:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_ESCAPE) SS_DELAY(100) SS_LSFT(SS_TAP(X_SCOLON)) SS_DELAY(100) SS_TAP(X_W) SS_DELAY(100) SS_TAP(X_ENTER));
+            }
+            break;
+
+        case KC_VIMSAVEEXIT:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_ESCAPE) SS_DELAY(100) SS_LSFT(SS_TAP(X_SCOLON)) SS_DELAY(100) SS_TAP(X_X) SS_DELAY(100) SS_TAP(X_ENTER));
+            }
+            break;
+
+        case KC_VIMQUIT:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_ESCAPE) SS_DELAY(100) SS_LSFT(SS_TAP(X_SCOLON)) SS_DELAY(100) SS_TAP(X_Q) SS_DELAY(100) SS_LSFT(SS_TAP(X_1)) SS_DELAY(100) SS_TAP(X_ENTER));
+            }
+            break;
         // case KC_REDO:
         //     if (record->event.pressed) {
         //         register_code(KC_LGUI);
@@ -482,7 +515,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         switch(biton32(layer_state)) {
-        case _QWERTY:
+        case _HANDS_DOWN:
             alt_tab_timer = timer_read();
             if (!is_alt_tab_active) {
                 is_alt_tab_active = true;
@@ -514,11 +547,11 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
     } else if (index == 1) {
         switch(biton32(layer_state)) {
-        case _QWERTY:
+        case _HANDS_DOWN:
             if (clockwise) {
-                tap_code(KC_VOLU);
+                tap_code(KC_PGUP);
             } else {
-                tap_code(KC_VOLD);
+                tap_code(KC_PGDN);
             }
             break;
         case _RAISE:
