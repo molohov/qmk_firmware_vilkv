@@ -8,3 +8,4 @@ LTO_ENABLE = yes
 # Disable unsupported hardware, maybe it reduces firmware size?
 AUDIO_SUPPORTED = no
 BACKLIGHT_SUPPORTED = no
+COMBO_ENABLE = yes
