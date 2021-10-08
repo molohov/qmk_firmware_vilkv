@@ -36,3 +36,7 @@
 /* lighting layers */
 #define RGBLIGHT_LAYERS
 #define RGBLIGHT_LAYERS_OVERRIDE_RGB_OFF
+
+// For home row mods
+#define TAPPING_TERM 200
+#define IGNORE_MOD_TAP_INTERRUPT

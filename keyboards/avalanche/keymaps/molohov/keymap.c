@@ -28,16 +28,17 @@ enum custom_keycodes {
     KC_VIMWRITE,
     KC_VIMSAVEEXIT,
     KC_VIMQUIT,
+    KC_LINUX_LAST,
 };
 
-#define MINSNUM LT(_NUMROW, KC_MINS)
-#define ENTNUM LT(_NUMROW, KC_ENT)
+#define ESCNUM LT(_NUMROW, KC_ESC)
 #define SPCNAV LT(_BYOBU_NAV, KC_SPC)
 #define KC_PC_UNDO LCTL(KC_Z)
 #define KC_PC_CUT LCTL(KC_X)
 #define KC_PC_COPY LCTL(KC_C)
 #define KC_PC_PASTE LCTL(KC_V)
 #define KC_PC_FIND LCTL(KC_F)
+#define KC_PC_LOCK LGUI(KC_L)
 #define KC_PC_BKSPC_WORD LCTL(KC_BSPC)
 #define KC_PC_AHK_SLACK LALT(KC_Q)
 #define KC_LINUX_PASTE LSFT(LCTL(KC_V))
@@ -72,11 +73,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                                                        ╰────────╯   ╰────────╯
  */
     [_HANDS_DOWN] = LAYOUT(
-                 KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
-                 KC_EQL,  KC_X,    KC_F,    KC_M,    KC_P,    KC_B,                                  KC_MINS, KC_SLSH, KC_DOT,  KC_COMM, KC_J,    KC_BSLS,
- LCAG_T(KC_GRV), KC_Z,    KC_R,    KC_S,    KC_N,    KC_T,    KC_G,    KC_LCBR,               KC_RCBR, KC_QUOT, KC_A,    KC_E,    KC_I,    KC_H,    KC_Q,    KC_BSLS,
-                 KC_HOME, KC_W,    KC_C,    KC_L,    KC_D,    KC_V,    KC_PC_BKSPC_WORD,      KC_PC_AHK_SLACK,  KC_SCLN, KC_U,    KC_O,    KC_Y,    KC_K,    KC_END,
-                            XXXXXXX, KC_ADJUST, KC_DEL, LSFT_T(KC_BSPC), KC_TAB,              KC_ENT, SPCNAV,   KC_ESC,  KC_NUMROW, KC_MUTE
+                 KC_GRV,  KC_1,    KC_2,    KC_3,        KC_4,    KC_5,                                             KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
+                 KC_EQL,  KC_X,    KC_F,    KC_M,        KC_P,    KC_B,                                             KC_MINS, KC_SLSH, KC_DOT,  KC_COMM, KC_J,    KC_BSLS,
+ LCAG_T(KC_GRV), KC_Z,    KC_R,    KC_S,    CTL_T(KC_N), ALT_T(KC_T), KC_G,    KC_PC_LOCK,  KC_MPLY,         KC_QUOT, SFT_T(KC_A), CTL_T(KC_E), ALT_T(KC_I), GUI_T(KC_H),    KC_Q,    KC_BSLS,
+                 KC_HOME, KC_W,    KC_C,    KC_L,    KC_D,    KC_V,   KC_PC_BKSPC_WORD,      KC_PC_AHK_SLACK,  KC_SCLN, KC_U,    KC_O,    KC_Y,    KC_K,    KC_END,
+                                         XXXXXXX, KC_ADJUST, KC_DEL, SFT_T(KC_BSPC), KC_TAB,              KC_ENT, SPCNAV,   ESCNUM,  KC_NUMROW, KC_MUTE
     ),
 
 /*
@@ -105,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_BYOBU_NAV] = LAYOUT(
                  XXXXXXX, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                 KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-                 KC_PC_FIND, KC_EXLM, KC_PC_CUT,   KC_HASH, KC_VIMSAVEEXIT,  XXXXXXX,                               KC_CIRC, KC_AMPR, KC_UP,   KC_PGUP, KC_PGDN, _______,
+                 _______, KC_PC_FIND, KC_LINUX_LAST, KC_PC_CUT, KC_VIMSAVEEXIT,  XXXXXXX,                               KC_CIRC, KC_AMPR, KC_UP,   KC_PGUP, KC_PGDN, _______,
         XXXXXXX, KC_PC_UNDO, KC_LINUX_PASTE, KC_PC_COPY, KC_PC_PASTE, KC_VIMWRITE, KC_VIMQUIT, KC_LBRC,             KC_RBRC, KC_LINUX_LWORD, KC_LEFT, KC_DOWN, KC_RIGHT, KC_LINUX_RWORD, _______, KC_F12,
                  KC_BYOBU_KILLPANE, KC_BYOBU_DISFKEYS, XXXXXXX, KC_LCBR, KC_RCBR, XXXXXXX, _______,             _______, KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F8,   KC_F6,
                                    XXXXXXX, XXXXXXX, _______, _______, _______,             _______, _______, _______, _______, _______
@@ -234,10 +235,10 @@ _______, LCTL_T(KC_CAPS), XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX, KC_LBRC, 
 
         [_NUMROW] = LAYOUT(
                 _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
-                XXXXXXX, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
-        XXXXXXX,XXXXXXX, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,             _______, XXXXXXX, KC_4,    KC_5,    KC_6,    XXXXXXX, _______, _______,
-                XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_COMM, KC_DOT,  _______,             _______, XXXXXXX, KC_1,    KC_2,    KC_3,    KC_COMM, KC_DOT,
-                                  _______, _______, _______, _______, _______,             _______, _______, KC_0,    _______, _______
+                XXXXXXX, KC_BSLS, KC_ASTR, KC_X,    KC_GRV,  _______,                               _______, _______, _______, _______, _______,  _______,
+        XXXXXXX,KC_LBRC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______,             _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_RBRC, _______,
+                _______, KC_COLN, KC_PERC, KC_LPRN, KC_RPRN, _______, _______,             _______, KC_PEQL, KC_PPLS, KC_PMNS, KC_PAST, KC_PSLS, _______,
+                                  _______, _______, _______, _______, _______,             _______, _______, _______, _______, _______
         ),
 
 /*
@@ -358,11 +359,11 @@ static void print_status_narrow(void) {
         case _QWERTY:
             oled_write_P(PSTR("QWERTY\n"), false);
             break;
-        case _RAISE:
-            oled_write_P(PSTR("Raise"), false);
-            break;
         case _BYOBU_NAV:
-            oled_write_P(PSTR("Lower"), false);
+            oled_write_P(PSTR("ByobuNav"), false);
+            break;
+        case _NUMROW:
+            oled_write_P(PSTR("NumSym"), false);
             break;
         case _ADJUST:
             oled_write_P(PSTR("Adj\n"), false);
@@ -472,6 +473,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_VIMQUIT:
             if (record->event.pressed) {
                 SEND_STRING(SS_TAP(X_ESCAPE) SS_DELAY(100) SS_LSFT(SS_TAP(X_SCOLON)) SS_DELAY(100) SS_TAP(X_Q) SS_DELAY(100) SS_LSFT(SS_TAP(X_1)) SS_DELAY(100) SS_TAP(X_ENTER));
+            }
+            break;
+
+        case KC_LINUX_LAST:
+            if (record->event.pressed) {
+              SEND_STRING(SS_LSFT(SS_TAP(X_1)) SS_DELAY(100) SS_LSFT(SS_TAP(X_4)) SS_DELAY(100) SS_TAP(X_SPACE));
             }
             break;
         // case KC_REDO:
