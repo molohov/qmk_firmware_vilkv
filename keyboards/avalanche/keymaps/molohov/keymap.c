@@ -439,11 +439,11 @@ enum combo_events {
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
 // vim combos rooted from left home row middle finger
-const uint16_t PROGMEM vimwrite[] =     {KC_M, KC_P, COMBO_END};
-const uint16_t PROGMEM vimwritequit[] = {KC_M, KC_T, COMBO_END};
-const uint16_t PROGMEM vimquit[] =      {KC_M, KC_B, COMBO_END};
-const uint16_t PROGMEM vimquitall[] =   {KC_M, KC_G, COMBO_END};
-const uint16_t PROGMEM vimshiftv[] =    {KC_M, KC_F, COMBO_END};
+// const uint16_t PROGMEM vimwrite[] =     {KC_M, KC_P, COMBO_END};
+// const uint16_t PROGMEM vimwritequit[] = {KC_M, KC_T, COMBO_END};
+// const uint16_t PROGMEM vimquit[] =      {KC_M, KC_B, COMBO_END};
+// const uint16_t PROGMEM vimquitall[] =   {KC_M, KC_G, COMBO_END};
+// const uint16_t PROGMEM vimshiftv[] =    {KC_M, KC_F, COMBO_END};
 
 // copy/paste combos or left bottom row
 const uint16_t PROGMEM pc_copy[] =      {KC_L, KC_D, COMBO_END};
@@ -452,15 +452,22 @@ const uint16_t PROGMEM pc_paste[] =     {KC_C, KC_L, COMBO_END};
 const uint16_t PROGMEM pc_find[] =      {KC_C, KC_N, COMBO_END};
 const uint16_t PROGMEM pc_undo[] =      {KC_W, KC_C, COMBO_END};
 
-// linux/vim combos rooted from right hone row middle finver
-const uint16_t PROGMEM lnx_rsearch[] =  {HRM_A, KC_QUOT, COMBO_END};
+// vim combos rooted from right home row middle finger
+const uint16_t PROGMEM vimwrite[] =     {KC_E, KC_A, COMBO_END};
+const uint16_t PROGMEM vimwritequit[] = {KC_E, KC_U, COMBO_END};
+const uint16_t PROGMEM vimquit[] =      {KC_E, KC_QUOT, COMBO_END};
+const uint16_t PROGMEM vimquitall[] =   {KC_E, KC_MINS, COMBO_END};
+const uint16_t PROGMEM vimshiftv[] =    {KC_E, KC_SLSH, COMBO_END};
+
+// linux combos rooted from right home row ring finger
+const uint16_t PROGMEM lnx_rsearch[] =  {KC_I, KC_E, COMBO_END};
 
 combo_t key_combos[] = {
     [COMBO_VIM_WRITE]     = COMBO(vimwrite,       VIMWRITE),
     [COMBO_VIM_WRITEQUIT] = COMBO(vimwritequit,   VIMWRITEQUIT),
     [COMBO_VIM_QUIT]      = COMBO(vimquit,        VIMQUIT),
     [COMBO_VIM_QUITALL]   = COMBO(vimquitall,     VIMQUITALL),
-    [COMBO_VIM_SHIFTV]    = COMBO(vimshiftv,      LSFT(KC_V)),
+    [COMBO_VIM_SHIFTV]    = COMBO(vimshiftv,      S(KC_V)),
     [COMBO_PC_COPY]       = COMBO(pc_copy,        PC_COPY),
     [COMBO_PC_CUT]        = COMBO(pc_cut,         PC_CUT),
     [COMBO_PC_PASTE]      = COMBO(pc_paste,       PC_PASTE),
@@ -483,23 +490,23 @@ bool process_adaptive_key(uint16_t keycode, const keyrecord_t *record) {
             switch (keycode) {
                 case KC_M:
                     switch (prior_keycode) {
-                        case KC_F:
-                        case KC_P:
-                        case KC_B:
+                        case KC_F: // FM -> FL
+                        case KC_P: // PM -> PL
+                        case KC_B: // BM -> BL
                             tap_code(KC_L);
                             return_state = false; // done.
                     }
                     break;
-                case KC_W:
-                    switch (prior_keycode) {
-                        case KC_C:
-                            tap_code(KC_R);
-                            return_state = false; // done.
-                    }
-                    break;
+                // case KC_W:
+                //     switch (prior_keycode) {
+                //         case KC_C: //CW -> CR
+                //             tap_code(KC_R);
+                //             return_state = false; // done.
+                //     }
+                //     break;
                 case KC_F:
                     switch (prior_keycode) {
-                        case KC_X:
+                        case KC_X: //XF -> XC
                             tap_code(KC_C);
                             return_state = false; // done.
                     }
@@ -805,22 +812,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 tap_code(KC_VOLD);
             }
             break;
-        // case _RAISE:
-        //     if (clockwise) {
-        //         register_code16(KC_LGUI);
-        //         register_code16(KC_LALT);
-        //         tap_code(KC_RGHT);
-        //         unregister_code16(KC_LGUI);
-        //         unregister_code16(KC_LALT);
-        //     } else {
-        //         register_code16(KC_LGUI);
-        //         register_code16(KC_LALT);
-        //         tap_code(KC_LEFT);
-        //         unregister_code16(KC_LGUI);
-        //         unregister_code16(KC_LALT);
-        //     }
-        //     break;
-
         case _ADJUST:
             if (clockwise) {
                 rgblight_increase_hue();
