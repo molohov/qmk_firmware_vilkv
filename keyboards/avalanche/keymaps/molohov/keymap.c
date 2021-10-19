@@ -23,41 +23,56 @@ enum custom_keycodes {
     VIMWRITE,
     VIMWRITEQUIT,
     VIMQUIT,
+    VIMQUITALL,
     VIMPASTE,
     LNX_LAST,
 };
 
-#define ESCNUM LT(_NUMROW, KC_ESC)
-#define SPCNAV LT(_BYOBU_NAV, KC_SPC)
-#define SFTBSP SFT_T(KC_BSPC)
-#define ADJUST TG(_ADJUST)
-#define QWERTY TG(_QWERTY)
-#define PC_UNDO LCTL(KC_Z)
-#define PC_CUT LCTL(KC_X)
-#define PC_COPY LCTL(KC_C)
-#define PC_PASTE LCTL(KC_V)
-#define PC_FIND LCTL(KC_F)
-#define PC_LOCK LGUI(KC_L)
-#define PC_BWORD LCTL(KC_BSPC)
-#define PC_SLACK LALT(KC_Q)
-#define PC_SCRNSHT LGUI(LSFT(KC_S))
-#define LNX_PASTE LSFT(LCTL(KC_V))
-#define LNX_LWORD LALT(KC_B)
-#define LNX_RWORD LALT(KC_F)
-#define LNX_RSRCH LCTL(KC_R)
-#define BYO_VSPLIT LCTL(KC_F2)
-#define BYO_HSPLIT LSFT(KC_F2)
-#define BYO_LAYOUT LSFT(KC_F8)
-#define BYO_FULLPANE LSFT(KC_F11)
-#define BYO_KILLPANE LCTL(KC_F6)
-#define BYO_DISFKEYS LSFT(KC_F12)
+#define  ESCNUM        LT(_NUMROW, KC_ESC)
+#define  SPCNAV        LT(_BYOBU_NAV, KC_SPC)
+#define  SFTBSP        SFT_T(KC_BSPC)
+#define  CTLTAB        CTL_T(KC_TAB)
+#define  ALTENT        ALT_T(KC_ENT)
+#define  GUIDEL        GUI_T(KC_DEL)
+#define  ADJUST        TG(_ADJUST)
+#define  QWERTY        TG(_QWERTY)
+#define  PC_UNDO       LCTL(KC_Z)
+#define  PC_CUT        LCTL(KC_X)
+#define  PC_COPY       LCTL(KC_C)
+#define  PC_PASTE      LCTL(KC_V)
+#define  PC_FIND       LCTL(KC_F)
+#define  PC_LOCK       LGUI(KC_L)
+#define  PC_BWORD      LCTL(KC_BSPC)
+#define  PC_SLACK      LALT(KC_Q)
+#define  PC_SCRNSHT    LGUI(LSFT(KC_S))
+#define  LNX_PASTE     LSFT(LCTL(KC_V))
+#define  LNX_LWORD     LALT(KC_B)
+#define  LNX_RWORD     LALT(KC_F)
+#define  LNX_RSRCH     LCTL(KC_R)
+#define  BYO_VSPLIT    LCTL(KC_F2)
+#define  BYO_HSPLIT    LSFT(KC_F2)
+#define  BYO_LAYOUT    LSFT(KC_F8)
+#define  BYO_FULLPANE  LSFT(KC_F11)
+#define  BYO_KILLPANE  LCTL(KC_F6)
+#define  BYO_DISFKEYS  LSFT(KC_F12)
+#define  BYO_MVWINL    S(C(KC_F3))
+#define  BYO_MVWINR    S(C(KC_F4))
+
+#ifdef HRM
 #define HRM_N CTL_T(KC_N)
 #define HRM_T ALT_T(KC_T)
 #define HRM_A SFT_T(KC_A)
 #define HRM_E CTL_T(KC_E)
 #define HRM_I ALT_T(KC_I)
 #define HRM_H GUI_T(KC_H)
-
+#else
+#define HRM_N KC_N
+#define HRM_T KC_T
+#define HRM_A KC_A
+#define HRM_E KC_E
+#define HRM_I KC_I
+#define HRM_H KC_H
+#endif
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
@@ -89,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             KC_EQL,  KC_X,  KC_F,   KC_M,    KC_P,   KC_B,                              KC_MINS, KC_SLSH, KC_DOT,  KC_COMM, KC_J,    KC_BSLS,
  VIMPASTE,  KC_Z,    KC_R,  KC_S,   HRM_N,   HRM_T,  KC_G,   PC_LOCK,       KC_MPLY,    KC_QUOT, HRM_A,   HRM_E,   HRM_I,   HRM_H,   KC_Q,    PC_SCRNSHT,
             KC_HOME, KC_W,  KC_C,   KC_L,    KC_D,   KC_V,   PC_BWORD,      PC_SLACK,   KC_SCLN, KC_U,    KC_O,    KC_Y,    KC_K,    KC_END,
-                            ADJUST, XXXXXXX, KC_DEL, SFTBSP, KC_TAB,        KC_ENT,     SPCNAV,  ESCNUM,  LNX_RSRCH,  QWERTY
+                            ADJUST, XXXXXXX, GUIDEL, SFTBSP, CTLTAB,        ALTENT,     SPCNAV,  ESCNUM,  LNX_RSRCH,  QWERTY
     ),
 
 /*
@@ -117,12 +132,45 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                                                        ╰────────╯   ╰────────╯
  */
     [_BYOBU_NAV] = LAYOUT(
-                 XXXXXXX, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                 KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-                 _______, PC_FIND, LNX_LAST, PC_CUT, VIMWRITEQUIT,  XXXXXXX,                               KC_CIRC, KC_AMPR, KC_UP,   KC_PGUP, KC_PGDN, _______,
-        XXXXXXX, PC_UNDO, LNX_PASTE, PC_COPY, PC_PASTE, VIMWRITE, VIMQUIT, KC_LBRC,             KC_RBRC, LNX_LWORD, KC_LEFT, KC_DOWN, KC_RIGHT, LNX_RWORD, _______, KC_F12,
-                 BYO_KILLPANE, BYO_DISFKEYS, BYO_VSPLIT, BYO_HSPLIT, BYO_LAYOUT, BYO_FULLPANE, _______,             _______, KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F8,   KC_F6,
-                                   XXXXXXX, XXXXXXX, _______, _______, _______,             _______, _______, _______, _______, _______
+                 XXXXXXX,       KC_F1,          KC_F2,   KC_F3,   KC_F4,   KC_F5,                                 KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
+                 _______,       PC_FIND,        LNX_LAST, PC_CUT, VIMWRITEQUIT,  XXXXXXX,                               KC_CIRC, KC_AMPR, KC_UP,   KC_PGUP, KC_PGDN, _______,
+        XXXXXXX, PC_UNDO,       LNX_PASTE,      PC_COPY, PC_PASTE, VIMWRITE, VIMQUIT, KC_LBRC,             KC_RBRC, LNX_LWORD, KC_LEFT, KC_DOWN, KC_RIGHT, LNX_RWORD, _______, KC_F12,
+                 BYO_KILLPANE,  BYO_DISFKEYS,   BYO_VSPLIT, BYO_HSPLIT, BYO_LAYOUT, BYO_FULLPANE, _______,             _______, KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F8,   KC_F6,
+                                BYO_MVWINL,     BYO_MVWINR, _______, _______, _______,             _______, _______, _______, _______, _______
     ),
+
+/*
+ * Layer: NUMROW
+ *                                     ╭────────╮                                                                         ╭────────╮
+ *                            ╭────────╯        ╰────────╮                                                       ╭────────╯        ╰────────╮
+ *                            │        │        │        ╰────────╮                                     ╭────────╯        │        │        │
+ *          ╭────────╮────────╯        ╰────────╯        │        │                                     │        │        ╰────────╯        ╰────────╭────────╮
+ *          │        │        ╰────────╯        ╰────────╯        │                                     │        ╰────────╯        ╰────────╯        │        │
+ *          │        │        │        │        │        ╰────────╯                                     ╰────────╯        │        │        │        │        │
+ *          ╰────────╯────────╯        ╰────────╯        │        │                                     │        │        ╰────────╯        ╰────────╰────────╯
+ *          │        │        ╰────────╯        ╰────────╯        │                                     │        ╰────────╯        ╰────────╯        │        │
+ *          │        │        │        │        │        ╰────────╯ ╭────────╮               ╭────────╮ ╰────────╯        │        │        │        │        │
+ * ╭────────╯────────╯────────╯        ╰────────╯        │        │ │        │               │        │ │        │        ╰────────╯        ╰────────╰────────╰────────╮
+ * │        │        │        ╰────────╯        ╰────────╯        │ │        │               │        │ │        ╰────────╯        ╰────────╯        │        │        │
+ * │        │        │        │        │        │        ╰────────╯ ╰─encodr─╯               ╰─encodr─╯ ╰────────╯        │        │        │        │        │        │
+ * ╰────────╮────────╯────────╯        ╰────────╯        │        │  ╭────────╮             ╭────────╮  │        │        ╰────────╯        ╰────────╰────────╭────────╯
+ *          │        │        ╰────────╯        ╰────────╯        │  │        │             │        │  │        ╰────────╯        ╰────────╯        │        │
+ *          │        │        │                ╭────────╮╰────────╯  │        │             │        │  ╰────────╯╭────────╮                │        │        │
+ *          ╰────────╯────────╯      ╭────────╮│        ╰────────╮   ╰────────╯             ╰────────╯   ╭────────╯        │╭────────╮      ╰────────╰────────╯
+ *                                   │        ││        │        ╰────────╮                     ╭────────╯        │        ││        │
+ *                                   │        │╰────────╯        │        ╰────────╮   ╭────────╯        │        ╰────────╯│        │
+ *                                   ╰────────╯         ╰────────╯        │        │   │        │        ╰────────╯         ╰────────╯
+ *                                                               ╰────────╯        │   │        ╰────────╯
+ *                                                                        ╰────────╯   ╰────────╯
+ */
+
+        [_NUMROW] = LAYOUT(
+                _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+                XXXXXXX, KC_BSLS, KC_ASTR, KC_X,    KC_GRV,  _______,                               _______, _______, _______, _______, _______,  _______,
+        XXXXXXX,KC_LBRC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______,             _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_RBRC, _______,
+                _______, KC_COLN, KC_PERC, KC_LPRN, KC_RPRN, _______, _______,             _______, KC_PEQL, KC_PPLS, KC_PMNS, KC_PAST, KC_PSLS, _______,
+                                  _______, _______, _______, _______, _______,             _______, _______, _______, _______, _______
+        ),
 
 /*
  * Layer: RAISE
@@ -183,9 +231,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT(
                  KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
                  KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                                  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
- LCAG_T(KC_GRV), KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LCBR,             KC_RCBR, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_BSLS,
-                 KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_BSPC,             KC_EQL,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
-                                   XXXXXXX,  _______, _______, _______, _______,          _______, _______, _______, _______, KC_MUTE
+ LCAG_T(KC_GRV), KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LCBR,             KC_RCBR, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_BSLS,
+                 KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_BSPC,             KC_EQL,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
+                                   XXXXXXX,  _______,KC_SPC, _______, _______,          _______, _______, _______, _______, KC_MUTE
     ),
 /*
  * Layer: ADJUST
@@ -219,39 +267,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_RMOD,            RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                                    _______, _______, XXXXXXX, _______, _______,             _______, _______, XXXXXXX, _______, _______
     ),
-
-/*
- * Layer: NUMROW
- *                                     ╭────────╮                                                                         ╭────────╮
- *                            ╭────────╯        ╰────────╮                                                       ╭────────╯        ╰────────╮
- *                            │        │        │        ╰────────╮                                     ╭────────╯        │        │        │
- *          ╭────────╮────────╯        ╰────────╯        │        │                                     │        │        ╰────────╯        ╰────────╭────────╮
- *          │        │        ╰────────╯        ╰────────╯        │                                     │        ╰────────╯        ╰────────╯        │        │
- *          │        │        │        │        │        ╰────────╯                                     ╰────────╯        │        │        │        │        │
- *          ╰────────╯────────╯        ╰────────╯        │        │                                     │        │        ╰────────╯        ╰────────╰────────╯
- *          │        │        ╰────────╯        ╰────────╯        │                                     │        ╰────────╯        ╰────────╯        │        │
- *          │        │        │        │        │        ╰────────╯ ╭────────╮               ╭────────╮ ╰────────╯        │        │        │        │        │
- * ╭────────╯────────╯────────╯        ╰────────╯        │        │ │        │               │        │ │        │        ╰────────╯        ╰────────╰────────╰────────╮
- * │        │        │        ╰────────╯        ╰────────╯        │ │        │               │        │ │        ╰────────╯        ╰────────╯        │        │        │
- * │        │        │        │        │        │        ╰────────╯ ╰─encodr─╯               ╰─encodr─╯ ╰────────╯        │        │        │        │        │        │
- * ╰────────╮────────╯────────╯        ╰────────╯        │        │  ╭────────╮             ╭────────╮  │        │        ╰────────╯        ╰────────╰────────╭────────╯
- *          │        │        ╰────────╯        ╰────────╯        │  │        │             │        │  │        ╰────────╯        ╰────────╯        │        │
- *          │        │        │                ╭────────╮╰────────╯  │        │             │        │  ╰────────╯╭────────╮                │        │        │
- *          ╰────────╯────────╯      ╭────────╮│        ╰────────╮   ╰────────╯             ╰────────╯   ╭────────╯        │╭────────╮      ╰────────╰────────╯
- *                                   │        ││        │        ╰────────╮                     ╭────────╯        │        ││        │
- *                                   │        │╰────────╯        │        ╰────────╮   ╭────────╯        │        ╰────────╯│        │
- *                                   ╰────────╯         ╰────────╯        │        │   │        │        ╰────────╯         ╰────────╯
- *                                                               ╰────────╯        │   │        ╰────────╯
- *                                                                        ╰────────╯   ╰────────╯
- */
-
-        [_NUMROW] = LAYOUT(
-                _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
-                XXXXXXX, KC_BSLS, KC_ASTR, KC_X,    KC_GRV,  _______,                               _______, _______, _______, _______, _______,  _______,
-        XXXXXXX,KC_LBRC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______,             _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_RBRC, _______,
-                _______, KC_COLN, KC_PERC, KC_LPRN, KC_RPRN, _______, _______,             _______, KC_PEQL, KC_PPLS, KC_PMNS, KC_PAST, KC_PSLS, _______,
-                                  _______, _______, _______, _______, _______,             _______, _______, _______, _______, _______
-        ),
 
 /*
  * Base Layer: SAMPLE
@@ -411,45 +426,279 @@ enum combo_events {
     COMBO_VIM_WRITE,
     COMBO_VIM_WRITEQUIT,
     COMBO_VIM_QUIT,
+    COMBO_VIM_QUITALL,
     COMBO_VIM_SHIFTV,
     COMBO_PC_COPY,
     COMBO_PC_CUT,
     COMBO_PC_PASTE,
     COMBO_PC_FIND,
     COMBO_PC_UNDO,
+    COMBO_LNX_RSRCH,
     COMBO_LENGTH
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
-// vim combos rooted from home row middle finger
-const uint16_t PROGMEM vimwrite[] =     {HRM_N, HRM_T, COMBO_END};
-const uint16_t PROGMEM vimwritequit[] = {HRM_N, KC_D, COMBO_END};
-const uint16_t PROGMEM vimquit[] =      {HRM_N, KC_G, COMBO_END};
-const uint16_t PROGMEM vimshiftv[] =    {HRM_N, KC_P, COMBO_END};
+// vim combos rooted from left home row middle finger
+const uint16_t PROGMEM vimwrite[] =     {KC_M, KC_P, COMBO_END};
+const uint16_t PROGMEM vimwritequit[] = {KC_M, KC_T, COMBO_END};
+const uint16_t PROGMEM vimquit[] =      {KC_M, KC_B, COMBO_END};
+const uint16_t PROGMEM vimquitall[] =   {KC_M, KC_G, COMBO_END};
+const uint16_t PROGMEM vimshiftv[] =    {KC_M, KC_F, COMBO_END};
 
-// copy/paste combos rooted from home row ring finger
-const uint16_t PROGMEM pc_copy[] =      {KC_S, HRM_N, COMBO_END};
-const uint16_t PROGMEM pc_cut[] =       {KC_S, KC_M, COMBO_END};
-const uint16_t PROGMEM pc_paste[] =     {KC_S, HRM_T, COMBO_END};
-const uint16_t PROGMEM pc_find[] =      {KC_S, KC_P, COMBO_END};
-const uint16_t PROGMEM pc_undo[] =      {KC_S, KC_L, COMBO_END};
+// copy/paste combos or left bottom row
+const uint16_t PROGMEM pc_copy[] =      {KC_L, KC_D, COMBO_END};
+const uint16_t PROGMEM pc_cut[] =       {KC_L, KC_T, COMBO_END};
+const uint16_t PROGMEM pc_paste[] =     {KC_C, KC_L, COMBO_END};
+const uint16_t PROGMEM pc_find[] =      {KC_C, KC_N, COMBO_END};
+const uint16_t PROGMEM pc_undo[] =      {KC_W, KC_C, COMBO_END};
+
+// linux/vim combos rooted from right hone row middle finver
+const uint16_t PROGMEM lnx_rsearch[] =  {HRM_A, KC_QUOT, COMBO_END};
 
 combo_t key_combos[] = {
     [COMBO_VIM_WRITE]     = COMBO(vimwrite,       VIMWRITE),
     [COMBO_VIM_WRITEQUIT] = COMBO(vimwritequit,   VIMWRITEQUIT),
     [COMBO_VIM_QUIT]      = COMBO(vimquit,        VIMQUIT),
+    [COMBO_VIM_QUITALL]   = COMBO(vimquitall,     VIMQUITALL),
     [COMBO_VIM_SHIFTV]    = COMBO(vimshiftv,      LSFT(KC_V)),
     [COMBO_PC_COPY]       = COMBO(pc_copy,        PC_COPY),
     [COMBO_PC_CUT]        = COMBO(pc_cut,         PC_CUT),
     [COMBO_PC_PASTE]      = COMBO(pc_paste,       PC_PASTE),
     [COMBO_PC_FIND]       = COMBO(pc_find,        PC_FIND),
     [COMBO_PC_UNDO]       = COMBO(pc_undo,        PC_UNDO),
+    [COMBO_LNX_RSRCH]     = COMBO(lnx_rsearch,    C(KC_R)),
 };
 
 #endif
 
 // CUSTOM KEYSTROKES
+bool process_adaptive_key(uint16_t keycode, const keyrecord_t *record) {
+    bool return_state = true; // assume we don't do anything.
+    static uint16_t prior_keycode = KC_NO; // for process_adaptive_key
+    static uint16_t prior_keydown = 0;
+
+    if (record->event.pressed) {
+        keycode = keycode & 0xFF; // ignore all mods? or just shift?
+        if ((timer_elapsed(prior_keydown) < ADAPTIVE_TERM)) {
+            switch (keycode) {
+                case KC_M:
+                    switch (prior_keycode) {
+                        case KC_F:
+                        case KC_P:
+                        case KC_B:
+                            // unregister_code(KC_LSFT); // remove shift here.
+                            // unregister_code(KC_RSFT); // remove shift here.
+                            tap_code(KC_L);
+                            return_state = false; // done.
+                    }
+                    break;
+/*
+// Left hand adaptives (most are single-handed, bc speed, dexterity limits)
+*/
+
+                // case KC_D:
+                // case KC_F:
+                //     switch (prior_keycode) {
+                //         case KC_B:
+                //         case KC_K:
+                //             unregister_code(KC_LSFT); // remove shift here.
+                //             unregister_code(KC_RSFT); // remove shift here.
+                //             tap_code(KC_L);
+                //             return_state = false; // done.
+                //             break;
+                //         case KC_M: // LF
+                //             tap_code(KC_BSPC);
+                //             tap_code(KC_L);
+                //             tap_code16(keycode);
+                //             return_state = false; // done.
+                //             break;
+                //         case KC_P:
+                //             tap_code(KC_S);
+                //             return_state = false; // done.
+                //     }
+                //     break;
+                // case KC_G:
+                //     switch (prior_keycode) {
+                //         case KC_I: // IG =
+                //             send_string("ng ");
+                //             return_state = false; // done.
+                //     }
+                //     break;
+                // case KC_L:
+                //     switch (prior_keycode) {
+                //         case KC_M: // ML = LL
+                //             tap_code(KC_BSPC);
+                //             tap_code(KC_L);
+                //             tap_code16(keycode);
+                //             return_state = false; // done.
+                //     }
+                //     break;
+
+//                 case KC_N: // Do we need to watch for more?
+//                     switch (prior_keycode) {
+//                         case KC_P: // is this needed?
+//                             unregister_code(KC_LSFT); // remove shift here.
+//                             unregister_code(KC_RSFT); // remove shift here.
+//                             tap_code(KC_H); // quickly typing "?n" yields "?h"
+//                             return_state = false; // done.
+//                             break;
+//                         case KC_T: // demonstrator. TN combo is "TH" digraph
+//                             send_string("ion");
+//                             return_state = false; // done.
+//                             break;
+//                     }
+//                     break;
+//                 case KC_P:
+//                     switch (prior_keycode) {
+//                         case KC_J: // "jp" is "Japan"…ese? A demonstrator AK
+//                             tap_code(KC_BSPC);
+//                             register_code(KC_LSFT); // shift here.
+//                             tap_code(KC_J); // this should always be cap
+//                             unregister_code(KC_LSFT); // remove shift here.
+//                             unregister_code(KC_RSFT); // remove shift here.
+//                             send_string("apan");
+//                             return_state = false; // done.
+//                             break;
+//                         case KC_H: // "hp" is "lp" on Platinum
+//                             tap_code(KC_BSPC);
+//                             unregister_code(KC_LSFT); // remove shift here.
+//                             unregister_code(KC_RSFT); // remove shift here.
+//                             tap_code(KC_L);
+//                             tap_code16(keycode);
+//                             return_state = false; // done.
+//                             break;
+//                         case KC_B:
+//                         case KC_K:
+//                         case KC_V: // quickly typing "?p" yields "?l"
+//                             unregister_code(KC_LSFT); // remove shift here.
+//                             unregister_code(KC_RSFT); // remove shift here.
+//                             tap_code(KC_L);
+//                             return_state = false; // done.
+//                             break;
+//                         case KC_M:
+//                         case KC_F: // "f?" is really uncommon, we prolly want "l?"
+//                             tap_code(KC_BSPC);
+//                             unregister_code(KC_LSFT); // remove shift here.
+//                             unregister_code(KC_RSFT); // remove shift here.
+//                             tap_code(KC_L);
+//                             tap_code16(keycode);
+//                             return_state = false; // done.
+//                     }
+//                     break;
+//                 case KC_T:
+//                     switch (prior_keycode) {
+//                         case KC_K: // ML = LL
+//                             tap_code(KC_L);
+//                             return_state = false; // done.
+//                     }
+//                     break;
+//                 case KC_U:
+//                     switch (prior_keycode) {
+//                         case KC_Y: // YU = You bc YO is a tad awk, but yu is easy, and uncommon
+//                             unregister_code(KC_LSFT); // remove shift here.
+//                             unregister_code(KC_RSFT); // remove shift here.
+//                             tap_code(KC_O);
+//                             tap_code(KC_U);
+//                             return_state = false; // done.
+//                     }
+//                     break;
+//                 case KC_B: // take advantage of B & V being phonotacically similar
+//                 case KC_V: // (and in same finger/column) to process as adaptive key
+//                     switch (prior_keycode) {
+//                         case KC_M:
+//                         case KC_N:
+//                             tap_code(KC_B); // "v" is likely a "b"
+//                             return_state = false; // done.
+//                             break;
+//                         case KC_F:
+//                         case KC_P:  /* this is for bronze */
+//                             tap_code(KC_BSPC); // get rid of the prior
+//                             tap_code(KC_L); // quickly typing "p?" yields "l?"
+//                             tap_code16(keycode); //
+//                             return_state = false; // done.
+//                             break;
+//                         case KC_H: /* mostly for platinum */
+//                            tap_code(KC_L); // quickly typing "hv" yields "lh"
+//                     }
+//                     break;
+
+//                 case KC_S:
+//                     switch (prior_keycode) { // demonstrator. SN combo is "SH" digraph
+//                         case KC_T:
+//                             tap_code(KC_N);
+//                         case KC_N:
+//                             send_string("ess");
+//                             return_state = false; // done.
+//                             break;
+//                     }
+//                     break;
+
+//                 case KC_J: // SAME-HAND TOWARD PINKY ISSUES
+//                 case KC_W: // adjacent fingers don't do next row as easily,
+//                 case KC_X: // especially on ring to pinky.
+//                     switch (prior_keycode) {
+//                         case KC_B: //
+//                         case KC_C: // RING TO PINKY This softens the burden,
+//                         case KC_D: //
+//                         case KC_F: // and equalizes column-stagger & ortho boards.
+//                         case KC_G: //
+//                         case KC_M: // anything that is statistically much more frequent
+//                         case KC_P: // bc why not?
+//                         case KC_V: //
+//                             unregister_code(KC_LSFT); // remove shift here.
+//                             unregister_code(KC_RSFT); // remove shift here.
+//                             tap_code16(KC_R);
+//                             return_state = false; // done.
+//                             break;
+//                         case KC_L: // repeater (For Platinum's thumb-L)
+//                             tap_code16(KC_L); // LW isn't likely, so we'll leave it for the sake of smaller code
+//                             return_state = false; // done.
+//                             break;
+//                     }
+//                     break;
+
+// /*
+// // right hand adaptives
+// */
+
+//                case KC_A:
+//                     switch (prior_keycode) {
+//                         case KC_COMM:
+//                             tap_code(KC_BSPC); // get rid of the prior
+//                             tap_code(KC_U); // quickly typing ",A" yields "UA"
+//                             tap_code16(keycode); //
+//                             return_state = false; // done.
+//                             break;
+//                     }
+//                     break;
+//                 case KC_MINS:
+//                      switch (prior_keycode) {
+//                          case KC_L:
+//                              tap_code16(prior_keycode); // repeater (For Platinum's thumb-L)
+//                              return_state = false; // done.
+//                              break;
+//                      }
+//                      break;
+//                 case KC_COMM:
+//                     switch (prior_keycode) {
+//                         case KC_A:
+//                             tap_code(KC_U); // quickly typing "A," yields "AU"
+//                             return_state = false; // done.
+//                             break;
+//                     }
+//                     break;
+            }
+        }
+        prior_keycode = keycode;
+        prior_keydown = timer_read(); // (re)start prior_key timing
+    }
+    return return_state; //
+}
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // Do we handle an adaptive key?
+    if (!process_adaptive_key(keycode, record)) {
+        return false; // took care of that key
+    }
     switch (keycode) {
         case KC_QWERTY:
             if (record->event.pressed) {
@@ -475,6 +724,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
+        case VIMQUITALL:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_ESCAPE) SS_DELAY(100) SS_LSFT(SS_TAP(X_SCOLON)) SS_DELAY(100) SS_TAP(X_Q) SS_DELAY(100) SS_TAP(X_A) SS_DELAY(100) SS_TAP(X_ENTER));
+            }
+            break;
+
         case VIMPASTE:
             if (record->event.pressed) {
                 SEND_STRING(SS_TAP(X_V) SS_DELAY(100) SS_TAP(X_SPACE) SS_DELAY(100) SS_LCTL(SS_LSFT(SS_TAP(X_V))) SS_DELAY(100) SS_TAP(X_ENTER));
@@ -488,28 +743,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
+
 // Two Encoder Support
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         switch(biton32(layer_state)) {
         case _HANDS_DOWN:
-            alt_tab_timer = timer_read();
-            if (!is_alt_tab_active) {
-                is_alt_tab_active = true;
-                register_code(KC_LALT);
-            }
             if (clockwise) {
-                tap_code16(KC_TAB);
+                tap_code(KC_PGDN);
             } else {
-                tap_code16(S(KC_TAB));
+                tap_code(KC_PGUP);
             }
             break;
-
         case _BYOBU_NAV:
             if (clockwise) {
-                tap_code(KC_VOLU);
+                tap_code16(C(G(KC_RIGHT)));
             } else {
-                tap_code(KC_VOLD);
+                tap_code16(C(G(KC_LEFT)));
             }
             break;
 
@@ -525,10 +775,22 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     } else if (index == 1) {
         switch(biton32(layer_state)) {
         case _HANDS_DOWN:
+            alt_tab_timer = timer_read();
+            if (!is_alt_tab_active) {
+                is_alt_tab_active = true;
+                register_code(KC_LALT);
+            }
             if (clockwise) {
-                tap_code(KC_PGDN);
+                tap_code16(KC_TAB);
             } else {
-                tap_code(KC_PGUP);
+                tap_code16(S(KC_TAB));
+            }
+            break;
+        case _BYOBU_NAV:
+            if (clockwise) {
+                tap_code(KC_VOLU);
+            } else {
+                tap_code(KC_VOLD);
             }
             break;
         // case _RAISE:
@@ -620,7 +882,7 @@ void matrix_scan_user(void) {
         rgblight_sethsv(HSV_WHITE);
     }
     if (is_alt_tab_active) {
-      if (timer_elapsed(alt_tab_timer) > 400) {
+      if (timer_elapsed(alt_tab_timer) > 600) {
         unregister_code(KC_LALT);
         is_alt_tab_active = false;
       }

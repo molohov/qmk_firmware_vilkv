@@ -39,5 +39,10 @@
 
 // For home row mods
 #define TAPPING_TERM 200
-#define IGNORE_MOD_TAP_INTERRUPT
 #define PERMISSIVE_HOLD
+//#define HRM
+// #define IGNORE_MOD_TAP_INTERRUPT
+
+#define ADAPTIVE_TERM 300
+
+#define COMBO_STRICT_TIMER
