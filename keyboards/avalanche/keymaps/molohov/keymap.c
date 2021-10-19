@@ -486,9 +486,21 @@ bool process_adaptive_key(uint16_t keycode, const keyrecord_t *record) {
                         case KC_F:
                         case KC_P:
                         case KC_B:
-                            // unregister_code(KC_LSFT); // remove shift here.
-                            // unregister_code(KC_RSFT); // remove shift here.
                             tap_code(KC_L);
+                            return_state = false; // done.
+                    }
+                    break;
+                case KC_W:
+                    switch (prior_keycode) {
+                        case KC_C:
+                            tap_code(KC_R);
+                            return_state = false; // done.
+                    }
+                    break;
+                case KC_F:
+                    switch (prior_keycode) {
+                        case KC_X:
+                            tap_code(KC_C);
                             return_state = false; // done.
                     }
                     break;
