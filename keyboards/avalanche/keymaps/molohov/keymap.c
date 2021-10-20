@@ -420,7 +420,7 @@ void oled_task_user(void) {
 
 #endif
 
-#ifdef COMBO_ENABLE
+// #ifdef COMBO_ENABLE
 // COMBOS
 enum combo_events {
     COMBO_VIM_WRITE,
@@ -434,6 +434,7 @@ enum combo_events {
     COMBO_PC_FIND,
     COMBO_PC_UNDO,
     COMBO_LNX_RSRCH,
+    COMBO_LNX_LAST,
     COMBO_LENGTH
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
@@ -445,22 +446,23 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 // const uint16_t PROGMEM vimquitall[] =   {KC_M, KC_G, COMBO_END};
 // const uint16_t PROGMEM vimshiftv[] =    {KC_M, KC_F, COMBO_END};
 
-// copy/paste combos or left bottom row
-const uint16_t PROGMEM pc_copy[] =      {KC_L, KC_D, COMBO_END};
-const uint16_t PROGMEM pc_cut[] =       {KC_L, KC_T, COMBO_END};
-const uint16_t PROGMEM pc_paste[] =     {KC_C, KC_L, COMBO_END};
-const uint16_t PROGMEM pc_find[] =      {KC_C, KC_N, COMBO_END};
+// copy/paste combos on left bottom row
 const uint16_t PROGMEM pc_undo[] =      {KC_W, KC_C, COMBO_END};
+const uint16_t PROGMEM pc_copy[] =      {KC_C, KC_L, COMBO_END};
+const uint16_t PROGMEM pc_cut[] =       {KC_C, KC_N, COMBO_END};
+const uint16_t PROGMEM pc_paste[] =     {KC_L, KC_D, COMBO_END};
+const uint16_t PROGMEM pc_find[] =      {KC_L, KC_T, COMBO_END};
 
 // vim combos rooted from right home row middle finger
-const uint16_t PROGMEM vimwrite[] =     {KC_E, KC_A, COMBO_END};
-const uint16_t PROGMEM vimwritequit[] = {KC_E, KC_U, COMBO_END};
+const uint16_t PROGMEM vimwrite[] =     {KC_E, KC_A,    COMBO_END};
+const uint16_t PROGMEM vimwritequit[] = {KC_E, KC_U,    COMBO_END};
 const uint16_t PROGMEM vimquit[] =      {KC_E, KC_QUOT, COMBO_END};
 const uint16_t PROGMEM vimquitall[] =   {KC_E, KC_MINS, COMBO_END};
 const uint16_t PROGMEM vimshiftv[] =    {KC_E, KC_SLSH, COMBO_END};
 
 // linux combos rooted from right home row ring finger
-const uint16_t PROGMEM lnx_rsearch[] =  {KC_I, KC_E, COMBO_END};
+const uint16_t PROGMEM lnx_rsearch[] =  {KC_I, KC_E,    COMBO_END};
+const uint16_t PROGMEM lnx_last[] =     {KC_I, KC_DOT,  COMBO_END};
 
 combo_t key_combos[] = {
     [COMBO_VIM_WRITE]     = COMBO(vimwrite,       VIMWRITE),
@@ -474,9 +476,10 @@ combo_t key_combos[] = {
     [COMBO_PC_FIND]       = COMBO(pc_find,        PC_FIND),
     [COMBO_PC_UNDO]       = COMBO(pc_undo,        PC_UNDO),
     [COMBO_LNX_RSRCH]     = COMBO(lnx_rsearch,    C(KC_R)),
+    [COMBO_LNX_LAST]      = COMBO(lnx_last,       LNX_LAST),
 };
 
-#endif
+// #endif
 
 // CUSTOM KEYSTROKES
 bool process_adaptive_key(uint16_t keycode, const keyrecord_t *record) {

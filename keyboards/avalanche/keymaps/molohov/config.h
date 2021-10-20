@@ -46,3 +46,4 @@
 #define ADAPTIVE_TERM 300
 
 #define COMBO_STRICT_TIMER
+#define COMBO_TERM 15
