@@ -36,25 +36,24 @@ enum custom_keycodes {
 #define  GUIDEL        GUI_T(KC_DEL)
 #define  ADJUST        TG(_ADJUST)
 #define  QWERTY        TG(_QWERTY)
-#define  PC_UNDO       LCTL(KC_Z)
-#define  PC_CUT        LCTL(KC_X)
-#define  PC_COPY       LCTL(KC_C)
-#define  PC_PASTE      LCTL(KC_V)
-#define  PC_FIND       LCTL(KC_F)
-#define  PC_LOCK       LGUI(KC_L)
-#define  PC_BWORD      LCTL(KC_BSPC)
-#define  PC_SLACK      LALT(KC_Q)
-#define  PC_SCRNSHT    LGUI(LSFT(KC_S))
-#define  LNX_PASTE     LSFT(LCTL(KC_V))
-#define  LNX_LWORD     LALT(KC_B)
-#define  LNX_RWORD     LALT(KC_F)
-#define  LNX_RSRCH     LCTL(KC_R)
-#define  BY_VSPL       LCTL(KC_F2)
-#define  BY_HSPL       LSFT(KC_F2)
-#define  BY_CLYT       LSFT(KC_F8)
-#define  BY_FPNE       LSFT(KC_F11)
-#define  BY_KPNE       LCTL(KC_F6)
-#define  BY_DISF       LSFT(KC_F12)
+#define  PC_UNDO       C(KC_Z)
+#define  PC_CUT        C(KC_X)
+#define  PC_COPY       C(KC_C)
+#define  PC_PASTE      C(KC_V)
+#define  PC_FIND       C(KC_F)
+#define  PC_LOCK       G(KC_L)
+#define  PC_BWORD      C(KC_BSPC)
+#define  PC_SLACK      A(KC_Q)
+#define  PC_SCRNSHT    G(S(KC_S))
+#define  LNX_PASTE     S(C(KC_V))
+#define  LNX_LWORD     A(KC_B)
+#define  LNX_RWORD     A(KC_F)
+#define  BY_VSPL       C(KC_F2)
+#define  BY_HSPL       S(KC_F2)
+#define  BY_CLYT       S(KC_F8)
+#define  BY_FPNE       S(KC_F11)
+#define  BY_KPNE       C(KC_F6)
+#define  BY_DISF       S(KC_F12)
 #define  BY_MVWINL     S(C(KC_F3))
 #define  BY_MVWINR     S(C(KC_F4))
 
@@ -109,16 +108,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_HANDS_DOWN] = LAYOUT(
                 KC_GRV,  KC_1,  KC_2,   KC_3,    KC_4,   KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    XXXXXXX,
                 KC_EQL,  KC_X,  KC_F,   KC_M,    KC_P,   KC_B,                              KC_MINS, KC_SLSH, KC_DOT,  KC_COMM, KC_J,    KC_BSLS,
-     VIMPASTE,  KC_Z,    KC_R,  KC_S,   HRM_N,   HRM_T,  KC_G,   PC_LOCK,       KC_MPLY,    KC_QUOT, HRM_A,   HRM_E,   HRM_I,   HRM_H,   KC_Q,    PC_SCRNSHT,
+    VIMPASTE,   KC_Z,    KC_R,  KC_S,   HRM_N,   HRM_T,  KC_G,   PC_LOCK,       KC_MPLY,    KC_QUOT, HRM_A,   HRM_E,   HRM_I,   HRM_H,   KC_Q,    PC_SCRNSHT,
                 KC_HOME, KC_W,  KC_C,   KC_L,    KC_D,   KC_V,   PC_BWORD,      PC_SLACK,   KC_SCLN, KC_U,    KC_O,    KC_Y,    KC_K,    KC_END,
-                                ADJUST, XXXXXXX, GUIDEL, SFTBSP, CTLTAB,        ALTENT,     SPCNAV,  ESCNUM,  LNX_RSRCH,  QWERTY
+                                ADJUST, XXXXXXX, GUIDEL, SFTBSP, CTLTAB,        ALTENT,     SPCNAV,  ESCNUM,  XXXXXXX,  QWERTY
     ),
 
     [_BYOBU_NAV] = LAYOUT(
              XXXXXXX,   KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,                              KC_F6,      KC_F7,      KC_F8,      KC_F9,          KC_F10,  KC_F11,
              _______,   KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            XXXXXXX,    C(KC_LEFT), KC_UP,      C(KC_RIGHT),    XXXXXXX, _______,
-    XXXXXXX, PC_UNDO,   KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    XXXXXXX,    XXXXXXX,    LNX_LWORD,  KC_LEFT,    KC_DOWN,    KC_RIGHT,       LNX_RWORD, _______, KC_F12,
-             BY_KPNE,   BY_DISF,    BY_VSPL,    BY_HSPL,    BY_CLYT,    BY_FPNE,    _______,    _______,    KC_F2,      KC_F3,      KC_F4,      KC_F5,          KC_F8,   KC_F6,
+    XXXXXXX, PC_UNDO,   KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    XXXXXXX,    XXXXXXX,    LNX_LWORD,  KC_LEFT,    KC_DOWN,    KC_RIGHT,       LNX_RWORD, KC_EXLM, KC_F12,
+            BY_KPNE,   BY_DISF,    BY_VSPL,    BY_HSPL,    BY_CLYT,    BY_FPNE,    _______,    _______,    KC_F2,      KC_F3,      KC_F4,      KC_F5,          KC_F8,   KC_F6,
                                     BY_MVWINL,  BY_MVWINR,  _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
 
@@ -287,11 +286,11 @@ enum combo_events {
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
 // vim combos rooted from left home row middle finger
-// const uint16_t PROGMEM vimwrite[] =     {KC_M, KC_P, COMBO_END};
-// const uint16_t PROGMEM vimwritequit[] = {KC_M, KC_T, COMBO_END};
-// const uint16_t PROGMEM vimquit[] =      {KC_M, KC_B, COMBO_END};
-// const uint16_t PROGMEM vimquitall[] =   {KC_M, KC_G, COMBO_END};
-// const uint16_t PROGMEM vimshiftv[] =    {KC_M, KC_F, COMBO_END};
+const uint16_t PROGMEM vimwrite[] =     {KC_N, KC_T, COMBO_END};
+const uint16_t PROGMEM vimwritequit[] = {KC_N, KC_D, COMBO_END};
+const uint16_t PROGMEM vimquit[] =      {KC_N, KC_G, COMBO_END};
+const uint16_t PROGMEM vimquitall[] =   {KC_N, KC_B, COMBO_END};
+const uint16_t PROGMEM vimshiftv[] =    {KC_N, KC_P, COMBO_END};
 
 // copy/paste combos on left bottom row
 const uint16_t PROGMEM pc_undo[] =      {KC_W, KC_C, COMBO_END};
@@ -301,11 +300,11 @@ const uint16_t PROGMEM pc_paste[] =     {KC_L, KC_D, COMBO_END};
 const uint16_t PROGMEM pc_find[] =      {KC_L, KC_T, COMBO_END};
 
 // vim combos rooted from right home row middle finger
-const uint16_t PROGMEM vimwrite[] =     {KC_E, KC_A,    COMBO_END};
-const uint16_t PROGMEM vimwritequit[] = {KC_E, KC_U,    COMBO_END};
-const uint16_t PROGMEM vimquit[] =      {KC_E, KC_QUOT, COMBO_END};
-const uint16_t PROGMEM vimquitall[] =   {KC_E, KC_MINS, COMBO_END};
-const uint16_t PROGMEM vimshiftv[] =    {KC_E, KC_SLSH, COMBO_END};
+// const uint16_t PROGMEM vimwrite[] =     {KC_E, KC_A,    COMBO_END};
+// const uint16_t PROGMEM vimwritequit[] = {KC_E, KC_U,    COMBO_END};
+// const uint16_t PROGMEM vimquit[] =      {KC_E, KC_QUOT, COMBO_END};
+// const uint16_t PROGMEM vimquitall[] =   {KC_E, KC_MINS, COMBO_END};
+// const uint16_t PROGMEM vimshiftv[] =    {KC_E, KC_SLSH, COMBO_END};
 
 // linux combos rooted from right home row ring finger
 const uint16_t PROGMEM lnx_rsearch[] =  {KC_I, KC_E,    COMBO_END};
