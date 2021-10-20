@@ -49,14 +49,14 @@ enum custom_keycodes {
 #define  LNX_LWORD     LALT(KC_B)
 #define  LNX_RWORD     LALT(KC_F)
 #define  LNX_RSRCH     LCTL(KC_R)
-#define  BYO_VSPLIT    LCTL(KC_F2)
-#define  BYO_HSPLIT    LSFT(KC_F2)
-#define  BYO_LAYOUT    LSFT(KC_F8)
-#define  BYO_FULLPANE  LSFT(KC_F11)
-#define  BYO_KILLPANE  LCTL(KC_F6)
-#define  BYO_DISFKEYS  LSFT(KC_F12)
-#define  BYO_MVWINL    S(C(KC_F3))
-#define  BYO_MVWINR    S(C(KC_F4))
+#define  BY_VSPL       LCTL(KC_F2)
+#define  BY_HSPL       LSFT(KC_F2)
+#define  BY_CLYT       LSFT(KC_F8)
+#define  BY_FPNE       LSFT(KC_F11)
+#define  BY_KPNE       LCTL(KC_F6)
+#define  BY_DISF       LSFT(KC_F12)
+#define  BY_MVWINL     S(C(KC_F3))
+#define  BY_MVWINR     S(C(KC_F4))
 
 #ifdef HRM
 #define HRM_N CTL_T(KC_N)
@@ -73,200 +73,6 @@ enum custom_keycodes {
 #define HRM_I KC_I
 #define HRM_H KC_H
 #endif
-
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-/*
- * Layer: HANDS_DOWN
- *                                     ╭────────╮                                                                         ╭────────╮
- *                            ╭────────╯   #    ╰────────╮                                                       ╭────────╯    *   ╰────────╮
- *                            │   @    │   3    │   $    ╰────────╮                                     ╭────────╯    &   │    8   │    (   │
- *          ╭────────╮────────╯   2    ╰────────╯   4    │   %    │                                     │    ^   │    7   ╰────────╯    9   ╰────────╭────────╮
- *          │        │   !    ╰────────╯        ╰────────╯   5    │                                     │    6   ╰────────╯        ╰────────╯    )   │    _   │
- *          │  Esc   │   1    │        │   E    │        ╰────────╯                                     ╰────────╯        │    I   │        │    0   │   -    │
- *          ╰────────╯────────╯   W    ╰────────╯   R    │        │                                     │        │    U   ╰────────╯    O   ╰────────╰────────╯
- *          │        │        ╰────────╯        ╰────────╯   T    │                                     │    Y   ╰────────╯        ╰────────╯        │        │
- *          │  Tab   │   Q    │        │   D    │        ╰────────╯ ╭────────╮               ╭────────╮ ╰────────╯        │    K   │        │    P   │ Bkspce │
- * ╭────────╯────────╯────────╯   S    ╰────────╯   F    │        │ │        │               │        │ │        │    J   ╰────────╯    L   ╰────────╰────────╰────────╮
- * │  ` ~   │  Esc   │        ╰────────╯        ╰────────╯   G    │ │   {    │               │    }   │ │    H   ╰────────╯    <   ╰────────╯    :   │    "   │   |    │
- * │ (c/a/g)│ (ctrl) │   A    │        │   C    │        ╰────────╯ ╰────────╯               ╰────────╯ ╰────────╯        │    ,   │    >   │    ;   │    '   │   \    │
- * ╰────────╮────────╯────────╯   X    ╰────────╯   V    │        │  ╭────────╮             ╭────────╮  │        │    M   ╰────────╯    .   ╰────────╰────────╭────────╯
- *          │        │        ╰────────╯        ╰────────╯   B    │  │        │             │    +   │  │    N   ╰────────╯        ╰────────╯    ?   │(rShift)│
- *          │ Shift  │   Z    │                ╭────────╮╰────────╯  │ Bkspce │             │   =    │  ╰────────╯╭────────╮                │    /   │ Enter  │
- *          ╰────────╯────────╯      ╭────────╮│        ╰────────╮   ╰────────╯             ╰────────╯   ╭────────╯        │╭────────╮      ╰────────╰────────╯
- *                                   │ Paste  ││  CMD   │        ╰────────╮                     ╭────────╯        │  ALT   ││        │
- *                                   │ Board  │╰────────╯  RSE   │        ╰────────╮   ╭────────╯        │  LWR   ╰────────╯│  Mute  │
- *                                   ╰─encodr─╯         ╰────────╯ Bkspace│        │   │        │ Space  ╰────────╯         ╰─encodr─╯
- *                                                               ╰────────╯  Tab   │   │ Enter  ╰────────╯
- *                                                                        ╰────────╯   ╰────────╯
- */
-    [_HANDS_DOWN] = LAYOUT(
-            KC_GRV,  KC_1,  KC_2,   KC_3,    KC_4,   KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    XXXXXXX,
-            KC_EQL,  KC_X,  KC_F,   KC_M,    KC_P,   KC_B,                              KC_MINS, KC_SLSH, KC_DOT,  KC_COMM, KC_J,    KC_BSLS,
- VIMPASTE,  KC_Z,    KC_R,  KC_S,   HRM_N,   HRM_T,  KC_G,   PC_LOCK,       KC_MPLY,    KC_QUOT, HRM_A,   HRM_E,   HRM_I,   HRM_H,   KC_Q,    PC_SCRNSHT,
-            KC_HOME, KC_W,  KC_C,   KC_L,    KC_D,   KC_V,   PC_BWORD,      PC_SLACK,   KC_SCLN, KC_U,    KC_O,    KC_Y,    KC_K,    KC_END,
-                            ADJUST, XXXXXXX, GUIDEL, SFTBSP, CTLTAB,        ALTENT,     SPCNAV,  ESCNUM,  LNX_RSRCH,  QWERTY
-    ),
-
-/*
- * Layer: BYOBU_NAV
- *                                     ╭────────╮                                                                         ╭────────╮
- *                            ╭────────╯        ╰────────╮                                                       ╭────────╯        ╰────────╮
- *                            │        │   F3   │        ╰────────╮                                     ╭────────╯        │   F8   │        │
- *          ╭────────╮────────╯   F2   ╰────────╯   F4   │        │                                     │        │   F7   ╰────────╯   F9   ╰────────╭────────╮
- *          │        │        ╰────────╯        ╰────────╯   F5   │                                     │   F6   ╰────────╯        ╰────────╯        │        │
- *          │  IMP   │   F1   │        │   #    │        ╰────────╯                                     ╰────────╯        │   *    │        │  F10   │  F11   │
- *          ╰────────╯────────╯   @    ╰────────╯   $    │        │                                     │        │   &    ╰────────╯   (    ╰────────╰────────╯
- *          │        │        ╰────────╯        ╰────────╯   %    │                                     │   ^    ╰────────╯        ╰────────╯        │        │
- *          │  Tab   │   !    │  Save  │   (    │        ╰────────╯ ╭────────╮               ╭────────╮ ╰────────╯        │        │        │    )   │ Bckspc │
- * ╭────────╯────────╯────────╯  4Web  ╰────────╯   )    │        │ │   {    │               │    }   │ │        │        ╰────────╯        ╰────────╰────────╰────────╮
- * │        │        │        ╰────────╯        ╰────────╯        │ │   [    │               │    ]   │ │        ╰────────╯    <   ╰────────╯    :   │    "   │        │
- * │ MEDIAQ │  Ctrl  │        │        │   {    │        ╰────────╯ ╰─encodr─╯               ╰─encodr─╯ ╰────────╯        │    ,   │    >   │    ;   │    '   │  F12   │
- * ╰────────╮────────╯────────╯        ╰────────╯   }    │        │  ╭────────╮             ╭────────╮  │        │        ╰────────╯    .   ╰────────╰────────╭────────╯
- *          │        │        ╰────────╯        ╰────────╯        │  │        │             │    +   │  │        ╰────────╯        ╰────────╯    ?   │(rShift)│
- *          │ Shift  │        │                ╭────────╮╰────────╯  │ Bckspc │             │    =   │  ╰────────╯╭────────╮                │    /   │  Enter │
- *          ╰────────╯────────╯      ╭────────╮│        ╰────────╮   ╰────────╯             ╰────────╯   ╭────────╯        │╭────────╮      ╰────────╰────────╯
- *                                   │        ││  FONT  │        ╰────────╮                     ╭────────╯        │  Alt   ││        │
- *                                   │        │╰────────╯  RSE   │        ╰────────╮   ╭────────╯        │  LWR   ╰────────╯│  Mute  │
- *                                   ╰────────╯         ╰────────╯ Space  │        │   │    _   │  Space ╰────────╯         ╰────────╯
- *                                                               ╰────────╯ Enter  │   │   -    ╰────────╯
- *                                                                        ╰────────╯   ╰────────╯
- */
-    [_BYOBU_NAV] = LAYOUT(
-                 XXXXXXX,       KC_F1,          KC_F2,   KC_F3,   KC_F4,   KC_F5,                                 KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-                 _______,       PC_FIND,        LNX_LAST, PC_CUT, VIMWRITEQUIT,  XXXXXXX,                               KC_CIRC, KC_AMPR, KC_UP,   KC_PGUP, KC_PGDN, _______,
-        XXXXXXX, PC_UNDO,       LNX_PASTE,      PC_COPY, PC_PASTE, VIMWRITE, VIMQUIT, KC_LBRC,             KC_RBRC, LNX_LWORD, KC_LEFT, KC_DOWN, KC_RIGHT, LNX_RWORD, _______, KC_F12,
-                 BYO_KILLPANE,  BYO_DISFKEYS,   BYO_VSPLIT, BYO_HSPLIT, BYO_LAYOUT, BYO_FULLPANE, _______,             _______, KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F8,   KC_F6,
-                                BYO_MVWINL,     BYO_MVWINR, _______, _______, _______,             _______, _______, _______, _______, _______
-    ),
-
-/*
- * Layer: NUMROW
- *                                     ╭────────╮                                                                         ╭────────╮
- *                            ╭────────╯        ╰────────╮                                                       ╭────────╯        ╰────────╮
- *                            │        │        │        ╰────────╮                                     ╭────────╯        │        │        │
- *          ╭────────╮────────╯        ╰────────╯        │        │                                     │        │        ╰────────╯        ╰────────╭────────╮
- *          │        │        ╰────────╯        ╰────────╯        │                                     │        ╰────────╯        ╰────────╯        │        │
- *          │        │        │        │        │        ╰────────╯                                     ╰────────╯        │        │        │        │        │
- *          ╰────────╯────────╯        ╰────────╯        │        │                                     │        │        ╰────────╯        ╰────────╰────────╯
- *          │        │        ╰────────╯        ╰────────╯        │                                     │        ╰────────╯        ╰────────╯        │        │
- *          │        │        │        │        │        ╰────────╯ ╭────────╮               ╭────────╮ ╰────────╯        │        │        │        │        │
- * ╭────────╯────────╯────────╯        ╰────────╯        │        │ │        │               │        │ │        │        ╰────────╯        ╰────────╰────────╰────────╮
- * │        │        │        ╰────────╯        ╰────────╯        │ │        │               │        │ │        ╰────────╯        ╰────────╯        │        │        │
- * │        │        │        │        │        │        ╰────────╯ ╰─encodr─╯               ╰─encodr─╯ ╰────────╯        │        │        │        │        │        │
- * ╰────────╮────────╯────────╯        ╰────────╯        │        │  ╭────────╮             ╭────────╮  │        │        ╰────────╯        ╰────────╰────────╭────────╯
- *          │        │        ╰────────╯        ╰────────╯        │  │        │             │        │  │        ╰────────╯        ╰────────╯        │        │
- *          │        │        │                ╭────────╮╰────────╯  │        │             │        │  ╰────────╯╭────────╮                │        │        │
- *          ╰────────╯────────╯      ╭────────╮│        ╰────────╮   ╰────────╯             ╰────────╯   ╭────────╯        │╭────────╮      ╰────────╰────────╯
- *                                   │        ││        │        ╰────────╮                     ╭────────╯        │        ││        │
- *                                   │        │╰────────╯        │        ╰────────╮   ╭────────╯        │        ╰────────╯│        │
- *                                   ╰────────╯         ╰────────╯        │        │   │        │        ╰────────╯         ╰────────╯
- *                                                               ╰────────╯        │   │        ╰────────╯
- *                                                                        ╰────────╯   ╰────────╯
- */
-
-        [_NUMROW] = LAYOUT(
-                _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
-                XXXXXXX, KC_BSLS, KC_ASTR, KC_X,    KC_GRV,  _______,                               _______, _______, _______, _______, _______,  _______,
-        XXXXXXX,KC_LBRC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______,             _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_RBRC, _______,
-                _______, KC_COLN, KC_PERC, KC_LPRN, KC_RPRN, _______, _______,             _______, KC_PEQL, KC_PPLS, KC_PMNS, KC_PAST, KC_PSLS, _______,
-                                  _______, _______, _______, _______, _______,             _______, _______, _______, _______, _______
-        ),
-
-/*
- * Layer: RAISE
- *                                     ╭────────╮                                                                         ╭────────╮
- *                            ╭────────╯        ╰────────╮                                                       ╭────────╯        ╰────────╮
- *                            │        │        │        ╰────────╮                                     ╭────────╯        │        │        │
- *          ╭────────╮────────╯        ╰────────╯        │        │                                     │        │        ╰────────╯        ╰────────╭────────╮
- *          │        │        ╰────────╯ Mouse  ╰────────╯        │                                     │        ╰────────╯        ╰────────╯        │        │
- *          │  UNDO  │  REDO  │        │  Up    │        ╰────────╯                                     ╰────────╯  Prev  │   Up   │  Next  │        │        │
- *          ╰────────╯────────╯        ╰────────╯        │        │                                     │        │  Word  ╰────────╯  Word  ╰────────╰────────╯
- *          │ Shift+ │        ╰────────╯ Mouse  ╰────────╯        │                                     │        ╰────────╯        ╰────────╯        │        │
- *          │  Tab   │        │ Mouse  │ Down   │ Mouse  ╰────────╯ ╭────────╮               ╭────────╮ ╰────────╯        │  Down  │        │        │        │
- * ╭────────╯────────╯────────╯ Left   ╰────────╯ Rght   │        │ │   {    │               │    }   │ │        │  Left  ╰────────╯  Rght  ╰────────╰────────╰────────╮
- * │  ` ~   │ (Ctrl) │        ╰────────╯        ╰────────╯        │ │   [    │               │    ]   │ │        ╰────────╯        ╰────────╯        │        │        │
- * │(c/a/g) │ CAPS   │        │        │        │        ╰────────╯ ╰─encodr─╯               ╰─encodr─╯ ╰────────╯  Line  │        │  Line  │        │        │        │
- * ╰────────╮────────╯────────╯        ╰────────╯        │        │  ╭────────╮             ╭────────╮  │        │  Strt  ╰────────╯  End   ╰────────╰────────╭────────╯
- *          │        │        ╰────────╯        ╰────────╯        │  │        │             │        │  │        ╰────────╯        ╰────────╯        │        │
- *          │ Shift  │        │                ╭────────╮╰────────╯  │        │             │        │  ╰────────╯╭────────╮                │        │        │
- *          ╰────────╯────────╯      ╭────────╮│        ╰────────╮   ╰────────╯             ╰────────╯   ╭────────╯        │╭────────╮      ╰────────╰────────╯
- *                                   │ paste  ││  Cmd   │        ╰────────╮                     ╭────────╯        │  Alt   ││        │
- *                                   │ board  │╰────────╯  RSE   │        ╰────────╮   ╭────────╯  Rght  │  LWR   ╰────────╯│  Mute  │
- *                                   ╰────────╯         ╰────────╯ Space  │        │   │  Left  │  Clck  ╰────────╯         ╰────────╯
- *                                                               ╰────────╯ Enter  │   │  Clck  ╰────────╯
- *                                                                        ╰────────╯   ╰────────╯
- */
-//     [_RAISE] = LAYOUT(
-//                  KC_UNDO, XXXXXXX, _______, _______, _______, _______,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-//                  XXXXXXX, XXXXXXX, XXXXXXX, KC_MS_U, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX,KC_UP,   XXXXXXX,KC_PLUS, KC_DEL,
-// _______, LCTL_T(KC_CAPS), XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX, KC_LBRC,             KC_RBRC, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX, XXXXXXX,
-//                  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-//                                    _______, _______, _______, _______, _______,             KC_BTN1, KC_BTN2, _______, _______, _______
-//     ),
-
-/*
- * Layer: QWERTY
- *                                     ╭────────╮                                                                         ╭────────╮
- *                            ╭────────╯   #    ╰────────╮                                                       ╭────────╯    *   ╰────────╮
- *                            │   @    │   3    │   $    ╰────────╮                                     ╭────────╯    &   │    8   │    (   │
- *          ╭────────╮────────╯   2    ╰────────╯   4    │   %    │                                     │    ^   │    7   ╰────────╯    9   ╰────────╭────────╮
- *          │        │   !    ╰────────╯        ╰────────╯   5    │                                     │    6   ╰────────╯        ╰────────╯    )   │    _   │
- *          │  Esc   │   1    │        │   E    │        ╰────────╯                                     ╰────────╯        │    I   │        │    0   │   -    │
- *          ╰────────╯────────╯   W    ╰────────╯   R    │        │                                     │        │    U   ╰────────╯    O   ╰────────╰────────╯
- *          │        │        ╰────────╯        ╰────────╯   T    │                                     │    Y   ╰────────╯        ╰────────╯        │        │
- *          │  Tab   │   Q    │        │   D    │        ╰────────╯ ╭────────╮               ╭────────╮ ╰────────╯        │    K   │        │    P   │ Bkspce │
- * ╭────────╯────────╯────────╯   S    ╰────────╯   F    │        │ │        │               │        │ │        │    J   ╰────────╯    L   ╰────────╰────────╰────────╮
- * │  ` ~   │  Esc   │        ╰────────╯        ╰────────╯   G    │ │   {    │               │    }   │ │    H   ╰────────╯    <   ╰────────╯    :   │    "   │   |    │
- * │ (c/a/g)│ (ctrl) │   A    │        │   C    │        ╰────────╯ ╰────────╯               ╰────────╯ ╰────────╯        │    ,   │    >   │    ;   │    '   │   \    │
- * ╰────────╮────────╯────────╯   X    ╰────────╯   V    │        │  ╭────────╮             ╭────────╮  │        │    M   ╰────────╯    .   ╰────────╰────────╭────────╯
- *          │        │        ╰────────╯        ╰────────╯   B    │  │        │             │    +   │  │    N   ╰────────╯        ╰────────╯    ?   │(rShift)│
- *          │ Shift  │   Z    │                ╭────────╮╰────────╯  │ Bkspce │             │   =    │  ╰────────╯╭────────╮                │    /   │ Enter  │
- *          ╰────────╯────────╯      ╭────────╮│        ╰────────╮   ╰────────╯             ╰────────╯   ╭────────╯        │╭────────╮      ╰────────╰────────╯
- *                                   │ Paste  ││  CMD   │        ╰────────╮                     ╭────────╯        │  ALT   ││        │
- *                                   │ Board  │╰────────╯  RSE   │        ╰────────╮   ╭────────╯        │  LWR   ╰────────╯│  Mute  │
- *                                   ╰─encodr─╯         ╰────────╯ Bkspace│        │   │        │ Space  ╰────────╯         ╰─encodr─╯
- *                                                               ╰────────╯  Tab   │   │ Enter  ╰────────╯
- *                                                                        ╰────────╯   ╰────────╯
- */
-    [_QWERTY] = LAYOUT(
-                 KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
-                 KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                                  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
- LCAG_T(KC_GRV), KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LCBR,             KC_RCBR, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_BSLS,
-                 KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_BSPC,             KC_EQL,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
-                                   XXXXXXX,  _______,KC_SPC, _______, _______,          _______, _______, _______, _______, KC_MUTE
-    ),
-/*
- * Layer: ADJUST
- *                                     ╭────────╮                                                                         ╭────────╮
- *                            ╭────────╯  RGB   ╰────────╮                                                       ╭────────╯  RGB   ╰────────╮
- *                            │        │  HUE-  │  RGB   ╰────────╮                                     ╭────────╯  RGB   │  HUE+  │        │
- *          ╭────────╮────────╯        ╰────────╯  SAT-  │  RGB   │                                     │  RGB   │  SAT+  ╰────────╯        ╰────────╭────────╮
- *          │        │        ╰────────╯        ╰────────╯  VAL-  │                                     │  VAL+  ╰────────╯        ╰────────╯        │        │
- *          │        │        │        │        │        ╰────────╯                                     ╰────────╯        │        │        │        │        │
- *          ╰────────╯────────╯        ╰────────╯        │        │                                     │        │        ╰────────╯        ╰────────╰────────╯
- *          │        │        ╰────────╯        ╰────────╯        │                                     │        ╰────────╯        ╰────────╯        │        │
- *          │        │        │        │        │        ╰────────╯ ╭────────╮               ╭────────╮ ╰────────╯        │        │        │        │        │
- * ╭────────╯────────╯────────╯        ╰────────╯        │        │ │  RGB   │               │  RGB   │ │        │        ╰────────╯        ╰────────╰────────╰────────╮
- * │ RGB    │        │        ╰────────╯        ╰────────╯        │ │  I/O   │               │  I/O   │ │        ╰────────╯        ╰────────╯        │        │  RGB   │
- * │ RMOD   │        │        │        │        │        ╰────────╯ ╰─encodr─╯               ╰─encodr─╯ ╰────────╯        │        │        │        │        │  MOD   │
- * ╰────────╮────────╯────────╯        ╰────────╯        │        │  ╭────────╮             ╭────────╮  │        │        ╰────────╯        ╰────────╰────────╭────────╯
- *          │        │        ╰────────╯        ╰────────╯        │  │  RGB   │             │  RGB   │  │        ╰────────╯        ╰────────╯        │        │
- *          │        │        │                ╭────────╮╰────────╯  │  MOD-  │             │  MOD+  │  ╰────────╯╭────────╮                │        │        │
- *          ╰────────╯────────╯      ╭────────╮│        ╰────────╮   ╰────────╯             ╰────────╯   ╭────────╯        │╭────────╮      ╰────────╰────────╯
- *                                   │        ││        │        ╰────────╮                     ╭────────╯        │        ││        │
- *                                   │        │╰────────╯  RSE   │        ╰────────╮   ╭────────╯        │  LWR   ╰────────╯│        │
- *                                   ╰────────╯         ╰────────╯        │        │   │        │        ╰────────╯         ╰────────╯
- *                                                               ╰────────╯        │   │        ╰────────╯
- *                                                                        ╰────────╯   ╰────────╯
- */
-
-    [_ADJUST] = LAYOUT(
-                 XXXXXXX, XXXXXXX, XXXXXXX, RGB_HUD, RGB_SAD, RGB_VAD,                               RGB_VAI, RGB_SAI, RGB_HUI, XXXXXXX, XXXXXXX, XXXXXXX,
-                 XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        RGB_RMOD,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_TOG,             RGB_TOG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_MOD,
-                 XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_RMOD,            RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                                   _______, _______, XXXXXXX, _______, _______,             _______, _______, XXXXXXX, _______, _______
-    ),
 
 /*
  * Base Layer: SAMPLE
@@ -299,6 +105,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
  * ),
  */
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    [_HANDS_DOWN] = LAYOUT(
+                KC_GRV,  KC_1,  KC_2,   KC_3,    KC_4,   KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    XXXXXXX,
+                KC_EQL,  KC_X,  KC_F,   KC_M,    KC_P,   KC_B,                              KC_MINS, KC_SLSH, KC_DOT,  KC_COMM, KC_J,    KC_BSLS,
+     VIMPASTE,  KC_Z,    KC_R,  KC_S,   HRM_N,   HRM_T,  KC_G,   PC_LOCK,       KC_MPLY,    KC_QUOT, HRM_A,   HRM_E,   HRM_I,   HRM_H,   KC_Q,    PC_SCRNSHT,
+                KC_HOME, KC_W,  KC_C,   KC_L,    KC_D,   KC_V,   PC_BWORD,      PC_SLACK,   KC_SCLN, KC_U,    KC_O,    KC_Y,    KC_K,    KC_END,
+                                ADJUST, XXXXXXX, GUIDEL, SFTBSP, CTLTAB,        ALTENT,     SPCNAV,  ESCNUM,  LNX_RSRCH,  QWERTY
+    ),
+
+    [_BYOBU_NAV] = LAYOUT(
+             XXXXXXX,   KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,                              KC_F6,      KC_F7,      KC_F8,      KC_F9,          KC_F10,  KC_F11,
+             _______,   KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            XXXXXXX,    C(KC_LEFT), KC_UP,      C(KC_RIGHT),    XXXXXXX, _______,
+    XXXXXXX, PC_UNDO,   KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    XXXXXXX,    XXXXXXX,    LNX_LWORD,  KC_LEFT,    KC_DOWN,    KC_RIGHT,       LNX_RWORD, _______, KC_F12,
+             BY_KPNE,   BY_DISF,    BY_VSPL,    BY_HSPL,    BY_CLYT,    BY_FPNE,    _______,    _______,    KC_F2,      KC_F3,      KC_F4,      KC_F5,          KC_F8,   KC_F6,
+                                    BY_MVWINL,  BY_MVWINR,  _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
+    ),
+
+    [_NUMROW] = LAYOUT(
+            _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+            XXXXXXX, KC_BSLS, KC_ASTR, KC_X,    KC_GRV,  _______,                               _______, _______, _______, _______, _______,  _______,
+    XXXXXXX,KC_LBRC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______,             _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_RBRC, _______,
+            _______, KC_COLN, KC_PERC, KC_LPRN, KC_RPRN, _______, _______,             _______, KC_PEQL, KC_PPLS, KC_PMNS, KC_PAST, KC_PSLS, _______,
+                              _______, _______, _______, _______, _______,             _______, _______, _______, _______, _______
+    ),
+
+    [_QWERTY] = LAYOUT(
+                 KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
+                 KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                                  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+ LCAG_T(KC_GRV), KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LCBR,             KC_RCBR, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_BSLS,
+                 KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_BSPC,             KC_EQL,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
+                                   XXXXXXX,  _______,KC_SPC, _______, _______,          _______, _______, _______, _______, KC_MUTE
+    ),
+
+    [_ADJUST] = LAYOUT(
+                 XXXXXXX, XXXXXXX, XXXXXXX, RGB_HUD, RGB_SAD, RGB_VAD,                               RGB_VAI, RGB_SAI, RGB_HUI, XXXXXXX, XXXXXXX, XXXXXXX,
+                 XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        RGB_RMOD,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_TOG,             RGB_TOG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_MOD,
+                 XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_RMOD,            RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                                   _______, _______, XXXXXXX, _______, _______,             _______, _______, XXXXXXX, _______, _______
+    ),
+
 };
 
 
