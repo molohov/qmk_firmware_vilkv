@@ -109,9 +109,9 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_HANDS_DOWN] = LAYOUT(
                 KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                               KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       XXXXXXX,
-                KC_EQL,     KC_X,       KC_F,       KC_M,       KC_P,       KC_B,                               KC_MINS,    KC_SLSH,    KC_DOT,     KC_COMM,    KC_J,       KC_BSLS,
+                XXXXXXX,    KC_X,       KC_F,       KC_M,       KC_P,       KC_B,                               KC_MINS,    KC_SLSH,    KC_DOT,     KC_COMM,    KC_J,       KC_BSLS,
     VIPASTE,    KC_Z,       KC_R,       KC_S,       HRM_N,      HRM_T,      KC_G,       PC_LOCK,    KC_MPLY,    KC_QUOT,    HRM_A,      HRM_E,      HRM_I,      HRM_H,      KC_Q,       PC_SCRNSHT,
-                KC_HOME,    KC_W,       KC_C,       KC_L,       KC_D,       KC_V,       PC_BSWD,    PC_SLACK,   KC_SCLN,    KC_U,       KC_O,       KC_Y,       KC_K,       KC_END,
+                KC_HOME,    KC_W,       KC_C,       KC_L,       KC_D,       KC_V,       PC_BSWD,    PC_SLACK,   KC_EQL,     KC_U,       KC_O,       KC_Y,       KC_K,       KC_END,
                                         XXXXXXX,    PC_CLIP,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCNUM,     XXXXXXX,    QWERTY_GAME
     ),
 
@@ -272,7 +272,9 @@ enum combo_events {
     COMBO_LNX_RSRCH,
     COMBO_LNX_LAST,
     COMBO_KU_QU,
-    COMBO_SHFT_KU_QU,
+    COMBO_EXCLAMATION,
+    COMBO_DEL_WORD,
+    COMBO_SEMICOLON,
     COMBO_LENGTH
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
@@ -305,7 +307,15 @@ const uint16_t PROGMEM lnx_rsearch[] =  {KC_I, KC_E,    COMBO_END};
 const uint16_t PROGMEM lnx_last[] =     {KC_I, KC_DOT,  COMBO_END};
 
 const uint16_t PROGMEM ku_qu[] =        {KC_U, KC_K,    COMBO_END};
-const uint16_t PROGMEM shft_ku_qu[] =   {KC_LSFT, KC_U, KC_K,    COMBO_END};
+// const uint16_t PROGMEM shft_ku_qu[] =   {KC_LSFT, KC_U, KC_K,    COMBO_END};
+
+// / + . = !
+const uint16_t PROGMEM exclamation[] =  {KC_SLSH, KC_DOT,    COMBO_END};
+// . + , = ;
+const uint16_t PROGMEM semicolon[] =    {KC_DOT, KC_COMM,    COMBO_END};
+
+// this combo mirrors the DW action in vim!
+const uint16_t PROGMEM del_word[] =     {KC_W, KC_D,    COMBO_END};
 
 combo_t key_combos[] = {
     [COMBO_VIM_WRITE]     = COMBO(vimwrite,       VIMWRITE),
@@ -321,6 +331,9 @@ combo_t key_combos[] = {
     [COMBO_LNX_RSRCH]     = COMBO(lnx_rsearch,    C(KC_R)),
     [COMBO_LNX_LAST]      = COMBO(lnx_last,       LNX_LAST),
     [COMBO_KU_QU]         = COMBO(ku_qu,          KU_QU),
+    [COMBO_EXCLAMATION]   = COMBO(exclamation,    KC_EXLM),
+    [COMBO_SEMICOLON]     = COMBO(semicolon,      KC_SCLN),
+    [COMBO_DEL_WORD]      = COMBO(del_word,       C(KC_DEL)),
 };
 
 // #endif
