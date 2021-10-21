@@ -229,9 +229,6 @@ static void print_status_narrow(void) {
         case _NUMROW:
             oled_write_P(PSTR("NumSym"), false);
             break;
-        case _ADJUST:
-            oled_write_P(PSTR("Adj\n"), false);
-            break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
     }
@@ -277,11 +274,11 @@ enum combo_events {
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
 // vim combos rooted from left home row middle finger
-const uint16_t PROGMEM vimwrite[] =     {KC_N, KC_T, COMBO_END};
-const uint16_t PROGMEM vimwritequit[] = {KC_N, KC_D, COMBO_END};
-const uint16_t PROGMEM vimquit[] =      {KC_N, KC_G, COMBO_END};
-const uint16_t PROGMEM vimquitall[] =   {KC_N, KC_B, COMBO_END};
-const uint16_t PROGMEM vimshiftv[] =    {KC_N, KC_P, COMBO_END};
+// const uint16_t PROGMEM vimwrite[] =     {KC_N, KC_T, COMBO_END};
+// const uint16_t PROGMEM vimwritequit[] = {KC_N, KC_D, COMBO_END};
+// const uint16_t PROGMEM vimquit[] =      {KC_N, KC_G, COMBO_END};
+// const uint16_t PROGMEM vimquitall[] =   {KC_N, KC_B, COMBO_END};
+// const uint16_t PROGMEM vimshiftv[] =    {KC_N, KC_P, COMBO_END};
 
 // copy/paste combos on left bottom row
 const uint16_t PROGMEM pc_undo[] =      {KC_W, KC_C, COMBO_END};
@@ -291,10 +288,12 @@ const uint16_t PROGMEM pc_paste[] =     {KC_L, KC_D, COMBO_END};
 const uint16_t PROGMEM pc_find[] =      {KC_L, KC_T, COMBO_END};
 
 // vim combos rooted from right home row middle finger
-// const uint16_t PROGMEM vimwrite[] =     {KC_E, KC_A,    COMBO_END};
-// const uint16_t PROGMEM vimwritequit[] = {KC_E, KC_U,    COMBO_END};
-// const uint16_t PROGMEM vimquit[] =      {KC_E, KC_QUOT, COMBO_END};
-// const uint16_t PROGMEM vimquitall[] =   {KC_E, KC_MINS, COMBO_END};
+const uint16_t PROGMEM vimwrite[] =     {KC_E, KC_A,    COMBO_END};
+const uint16_t PROGMEM vimwritequit[] = {KC_E, KC_U,    COMBO_END};
+const uint16_t PROGMEM vimquit[] =      {KC_E, KC_QUOT, COMBO_END};
+const uint16_t PROGMEM vimquitall[] =   {KC_E, KC_MINS, COMBO_END};
+// keep shift+V on the left side
+const uint16_t PROGMEM vimshiftv[] =    {KC_N, KC_D, COMBO_END};
 // const uint16_t PROGMEM vimshiftv[] =    {KC_E, KC_SLSH, COMBO_END};
 
 // linux combos rooted from right home row ring finger
@@ -559,11 +558,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false; // took care of that key
     }
     switch (keycode) {
-        case KC_QWERTY_GAME:
-            if (record->event.pressed) {
-                set_single_persistent_default_layer(_QWERTY_GAME);
-            }
-            return false;
+        // case KC_QWERTY_GAME:
+        //     if (record->event.pressed) {
+        //         set_single_persistent_default_layer(_QWERTY_GAME);
+        //     }
+        //     return false;
 
         case VIMWRITE:
             if (record->event.pressed) {
@@ -621,14 +620,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 tap_code16(C(G(KC_LEFT)));
             }
             break;
-
-        case _ADJUST:
-            if (clockwise) {
-                rgblight_step();
-            } else {
-                rgblight_step_reverse();
-            }
-            break;
         }
 
     } else if (index == 1) {
@@ -650,13 +641,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 tap_code(KC_VOLU);
             } else {
                 tap_code(KC_VOLD);
-            }
-            break;
-        case _ADJUST:
-            if (clockwise) {
-                rgblight_increase_hue();
-            } else {
-                rgblight_decrease_hue();
             }
             break;
         }
