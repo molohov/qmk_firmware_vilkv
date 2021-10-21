@@ -9,7 +9,7 @@ qmk flash -kb avalanche/rev2 -km default_rev2
 enum layer {
     _HANDS_DOWN,
     _BYOBU_NAV,
-    _QWERTY,
+    _QWERTY_GAME,
     _NUMROW,
 };
 
@@ -18,7 +18,7 @@ uint16_t alt_tab_timer = 0;
 
 enum custom_keycodes {
     KC_HANDS_DOWN = SAFE_RANGE,
-    KC_QWERTY,
+    KC_QWERTY_GAME,
     VIMWRITE,
     VIMWRITEQUIT,
     VIMQUIT,
@@ -33,7 +33,7 @@ enum custom_keycodes {
 #define  CTLTAB         CTL_T(KC_TAB)
 #define  ALTENT         ALT_T(KC_ENT)
 #define  GUIDEL         GUI_T(KC_DEL)
-#define  QWERTY         TG(_QWERTY)
+#define  QWERTY_GAME    TG(_QWERTY_GAME)
 #define  PC_UNDO        C(KC_Z)
 #define  PC_CUT         C(KC_X)
 #define  PC_COPY        C(KC_C)
@@ -97,26 +97,26 @@ enum custom_keycodes {
  *                                                               ╰────────╯        │   │        ╰────────╯
  *                                                                        ╰────────╯   ╰────────╯
  * [_SAMPLE] = LAYOUT(
- *         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
- *         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
- * XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
- *         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
- *                           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+ *              KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                               KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       XXXXXXX,
+ *              KC_EQL,     KC_X,       KC_F,       KC_M,       KC_P,       KC_B,                               KC_MINS,    KC_SLSH,    KC_DOT,     KC_COMM,    KC_J,       KC_BSLS,
+ *  VIPASTE,    KC_Z,       KC_R,       KC_S,       HRM_N,      HRM_T,      KC_G,       PC_LOCK,    KC_MPLY,    KC_QUOT,    HRM_A,      HRM_E,      HRM_I,      HRM_H,      KC_Q,       PC_SCRNSHT,
+ *              KC_HOME,    KC_W,       KC_C,       KC_L,       KC_D,       KC_V,       PC_BSWD,    PC_SLACK,   KC_SCLN,    KC_U,       KC_O,       KC_Y,       KC_K,       KC_END,
+ *                                      XXXXXXX,    XXXXXXX,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCNUM,     XXXXXXX,    QWERTY_GAME
  * ),
  */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_HANDS_DOWN] = LAYOUT(
-                KC_GRV,     KC_1        KC_2,       KC_3,       KC_4,       KC_5,                               KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       XXXXXXX,
+                KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                               KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       XXXXXXX,
                 KC_EQL,     KC_X,       KC_F,       KC_M,       KC_P,       KC_B,                               KC_MINS,    KC_SLSH,    KC_DOT,     KC_COMM,    KC_J,       KC_BSLS,
     VIPASTE,    KC_Z,       KC_R,       KC_S,       HRM_N,      HRM_T,      KC_G,       PC_LOCK,    KC_MPLY,    KC_QUOT,    HRM_A,      HRM_E,      HRM_I,      HRM_H,      KC_Q,       PC_SCRNSHT,
                 KC_HOME,    KC_W,       KC_C,       KC_L,       KC_D,       KC_V,       PC_BSWD,    PC_SLACK,   KC_SCLN,    KC_U,       KC_O,       KC_Y,       KC_K,       KC_END,
-                                        XXXXXXX,    XXXXXXX,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCNUM,     XXXXXXX,    QWERTY
+                                        XXXXXXX,    XXXXXXX,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCNUM,     XXXXXXX,    QWERTY_GAME
     ),
 
     [_BYOBU_NAV] = LAYOUT(
-                XXXXXXX,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,                              KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,
+                KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,                              KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,     KC_F12,
                 _______,    KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            XXXXXXX,    PC_LWRD,    KC_UP,      PC_RWRD,    XXXXXXX,    _______,
-    XXXXXXX,    PC_UNDO,    KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    XXXXXXX,    XXXXXXX,    LNX_LWD,    KC_LEFT,    KC_DOWN,    KC_RGHT,    LNX_RWD,    KC_EXLM,    KC_F12,
+    KC_EQL,     KC_BSLS,    KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    XXXXXXX,    XXXXXXX,    LNX_LWD,    KC_LEFT,    KC_DOWN,    KC_RGHT,    LNX_RWD,    KC_EXLM,    XXXXXXX,
                 BY_KPNE,    BY_DISF,    BY_VSPL,    BY_HSPL,    BY_CLYT,    BY_FPNE,    _______,    _______,    KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F8,      KC_F6,
                                         BY_MVWL,    BY_MVWR,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
@@ -129,12 +129,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
 
-    [_QWERTY] = LAYOUT(
+    [_QWERTY_GAME] = LAYOUT(
                 KC_ESC,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                               KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_MINS,
                 KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,                               KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC,
     XXXXXXX,    KC_LSFT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_LCBR,    KC_RCBR,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,    KC_BSLS,
                 KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_BSPC,    KC_EQL,     KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    XXXXXXX,
-                                        XXXXXXX,    _______,    KC_SPC,     _______,    KC_ENT,     _______,    _______,    _______,    _______,    KC_MUTE
+                                        XXXXXXX,    KC_LCTL,    KC_SPC,     KC_LSFT,    KC_ENT,     _______,    _______,    _______,    _______,    KC_MUTE
     ),
 };
 
@@ -220,8 +220,8 @@ static void print_status_narrow(void) {
         case _HANDS_DOWN:
             oled_write_P(PSTR("Hands Down Neu\n"), false);
             break;
-        case _QWERTY:
-            oled_write_P(PSTR("QWERTY\n"), false);
+        case _QWERTY_GAME:
+            oled_write_P(PSTR("QWERTY_GAME\n"), false);
             break;
         case _BYOBU_NAV:
             oled_write_P(PSTR("ByobuNav"), false);
@@ -559,9 +559,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false; // took care of that key
     }
     switch (keycode) {
-        case KC_QWERTY:
+        case KC_QWERTY_GAME:
             if (record->event.pressed) {
-                set_single_persistent_default_layer(_QWERTY);
+                set_single_persistent_default_layer(_QWERTY_GAME);
             }
             return false;
 
@@ -703,7 +703,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 // // default state
 // // layer_state_t default_layer_state_set_user(layer_state_t state) {
-// //     rgblight_set_layer_state(1, layer_state_cmp(state, _QWERTY));
+// //     rgblight_set_layer_state(1, layer_state_cmp(state, _QWERTY_GAME));
 // //     return state;
 // // }
 
