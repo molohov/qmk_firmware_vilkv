@@ -10,7 +10,6 @@ enum layer {
     _HANDS_DOWN,
     _BYOBU_NAV,
     _QWERTY,
-    _ADJUST,
     _NUMROW,
 };
 
@@ -24,38 +23,39 @@ enum custom_keycodes {
     VIMWRITEQUIT,
     VIMQUIT,
     VIMQUITALL,
-    VIMPASTE,
+    VIPASTE,
     LNX_LAST,
 };
 
-#define  ESCNUM        LT(_NUMROW, KC_ESC)
-#define  SPCNAV        LT(_BYOBU_NAV, KC_SPC)
-#define  SFTBSP        SFT_T(KC_BSPC)
-#define  CTLTAB        CTL_T(KC_TAB)
-#define  ALTENT        ALT_T(KC_ENT)
-#define  GUIDEL        GUI_T(KC_DEL)
-#define  ADJUST        TG(_ADJUST)
-#define  QWERTY        TG(_QWERTY)
-#define  PC_UNDO       C(KC_Z)
-#define  PC_CUT        C(KC_X)
-#define  PC_COPY       C(KC_C)
-#define  PC_PASTE      C(KC_V)
-#define  PC_FIND       C(KC_F)
-#define  PC_LOCK       G(KC_L)
-#define  PC_BWORD      C(KC_BSPC)
-#define  PC_SLACK      A(KC_Q)
-#define  PC_SCRNSHT    G(S(KC_S))
-#define  LNX_PASTE     S(C(KC_V))
-#define  LNX_LWORD     A(KC_B)
-#define  LNX_RWORD     A(KC_F)
-#define  BY_VSPL       C(KC_F2)
-#define  BY_HSPL       S(KC_F2)
-#define  BY_CLYT       S(KC_F8)
-#define  BY_FPNE       S(KC_F11)
-#define  BY_KPNE       C(KC_F6)
-#define  BY_DISF       S(KC_F12)
-#define  BY_MVWINL     S(C(KC_F3))
-#define  BY_MVWINR     S(C(KC_F4))
+#define  ESCNUM         LT(_NUMROW, KC_ESC)
+#define  SPCNAV         LT(_BYOBU_NAV, KC_SPC)
+#define  SFTBSP         SFT_T(KC_BSPC)
+#define  CTLTAB         CTL_T(KC_TAB)
+#define  ALTENT         ALT_T(KC_ENT)
+#define  GUIDEL         GUI_T(KC_DEL)
+#define  QWERTY         TG(_QWERTY)
+#define  PC_UNDO        C(KC_Z)
+#define  PC_CUT         C(KC_X)
+#define  PC_COPY        C(KC_C)
+#define  PC_PASTE       C(KC_V)
+#define  PC_FIND        C(KC_F)
+#define  PC_LOCK        G(KC_L)
+#define  PC_BSWD        C(KC_BSPC)
+#define  PC_SLACK       A(KC_Q)
+#define  PC_SCRNSHT     G(S(KC_S))
+#define  PC_LWRD        C(KC_LEFT)
+#define  PC_RWRD        C(KC_RIGHT)
+#define  LNX_PASTE      S(C(KC_V))
+#define  LNX_LWD        A(KC_B)
+#define  LNX_RWD        A(KC_F)
+#define  BY_VSPL        C(KC_F2)
+#define  BY_HSPL        S(KC_F2)
+#define  BY_CLYT        S(KC_F8)
+#define  BY_FPNE        S(KC_F11)
+#define  BY_KPNE        C(KC_F6)
+#define  BY_DISF        S(KC_F12)
+#define  BY_MVWL        S(C(KC_F3))
+#define  BY_MVWR        S(C(KC_F4))
 
 #ifdef HRM
 #define HRM_N CTL_T(KC_N)
@@ -106,45 +106,36 @@ enum custom_keycodes {
  */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_HANDS_DOWN] = LAYOUT(
-                KC_GRV,  KC_1,  KC_2,   KC_3,    KC_4,   KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    XXXXXXX,
-                KC_EQL,  KC_X,  KC_F,   KC_M,    KC_P,   KC_B,                              KC_MINS, KC_SLSH, KC_DOT,  KC_COMM, KC_J,    KC_BSLS,
-    VIMPASTE,   KC_Z,    KC_R,  KC_S,   HRM_N,   HRM_T,  KC_G,   PC_LOCK,       KC_MPLY,    KC_QUOT, HRM_A,   HRM_E,   HRM_I,   HRM_H,   KC_Q,    PC_SCRNSHT,
-                KC_HOME, KC_W,  KC_C,   KC_L,    KC_D,   KC_V,   PC_BWORD,      PC_SLACK,   KC_SCLN, KC_U,    KC_O,    KC_Y,    KC_K,    KC_END,
-                                ADJUST, XXXXXXX, GUIDEL, SFTBSP, CTLTAB,        ALTENT,     SPCNAV,  ESCNUM,  XXXXXXX,  QWERTY
+                KC_GRV,     KC_1        KC_2,       KC_3,       KC_4,       KC_5,                               KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       XXXXXXX,
+                KC_EQL,     KC_X,       KC_F,       KC_M,       KC_P,       KC_B,                               KC_MINS,    KC_SLSH,    KC_DOT,     KC_COMM,    KC_J,       KC_BSLS,
+    VIPASTE,    KC_Z,       KC_R,       KC_S,       HRM_N,      HRM_T,      KC_G,       PC_LOCK,    KC_MPLY,    KC_QUOT,    HRM_A,      HRM_E,      HRM_I,      HRM_H,      KC_Q,       PC_SCRNSHT,
+                KC_HOME,    KC_W,       KC_C,       KC_L,       KC_D,       KC_V,       PC_BSWD,    PC_SLACK,   KC_SCLN,    KC_U,       KC_O,       KC_Y,       KC_K,       KC_END,
+                                        XXXXXXX,    XXXXXXX,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCNUM,     XXXXXXX,    QWERTY
     ),
 
     [_BYOBU_NAV] = LAYOUT(
-             XXXXXXX,   KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,                              KC_F6,      KC_F7,      KC_F8,      KC_F9,          KC_F10,  KC_F11,
-             _______,   KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            XXXXXXX,    C(KC_LEFT), KC_UP,      C(KC_RIGHT),    XXXXXXX, _______,
-    XXXXXXX, PC_UNDO,   KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    XXXXXXX,    XXXXXXX,    LNX_LWORD,  KC_LEFT,    KC_DOWN,    KC_RIGHT,       LNX_RWORD, KC_EXLM, KC_F12,
-            BY_KPNE,   BY_DISF,    BY_VSPL,    BY_HSPL,    BY_CLYT,    BY_FPNE,    _______,    _______,    KC_F2,      KC_F3,      KC_F4,      KC_F5,          KC_F8,   KC_F6,
-                                    BY_MVWINL,  BY_MVWINR,  _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
+                XXXXXXX,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,                              KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,
+                _______,    KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            XXXXXXX,    PC_LWRD,    KC_UP,      PC_RWRD,    XXXXXXX,    _______,
+    XXXXXXX,    PC_UNDO,    KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    XXXXXXX,    XXXXXXX,    LNX_LWD,    KC_LEFT,    KC_DOWN,    KC_RGHT,    LNX_RWD,    KC_EXLM,    KC_F12,
+                BY_KPNE,    BY_DISF,    BY_VSPL,    BY_HSPL,    BY_CLYT,    BY_FPNE,    _______,    _______,    KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F8,      KC_F6,
+                                        BY_MVWL,    BY_MVWR,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
 
     [_NUMROW] = LAYOUT(
-            _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
-            XXXXXXX, KC_BSLS, KC_ASTR, KC_X,    KC_GRV,  _______,                               _______, _______, _______, _______, _______,  _______,
-    XXXXXXX,KC_LBRC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______,             _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_RBRC, _______,
-            _______, KC_COLN, KC_PERC, KC_LPRN, KC_RPRN, _______, _______,             _______, KC_PEQL, KC_PPLS, KC_PMNS, KC_PAST, KC_PSLS, _______,
-                              _______, _______, _______, _______, _______,             _______, _______, _______, _______, _______
+                _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,
+                XXXXXXX,    KC_BSLS,    KC_ASTR,    KC_X,       KC_GRV,     _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+    XXXXXXX,    KC_LBRC,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       _______,    _______,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_RBRC,    _______,
+                _______,    KC_COLN,    KC_PERC,    KC_LPRN,    KC_RPRN,    _______,    _______,    _______,    KC_PEQL,    KC_PPLS,    KC_PMNS,    KC_PAST,    KC_PSLS,    _______,
+                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
 
     [_QWERTY] = LAYOUT(
-                 KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
-                 KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                                  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
- LCAG_T(KC_GRV), KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LCBR,             KC_RCBR, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_BSLS,
-                 KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_BSPC,             KC_EQL,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_ENT),
-                                   XXXXXXX,  _______,KC_SPC, _______, _______,          _______, _______, _______, _______, KC_MUTE
+                KC_ESC,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                               KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_MINS,
+                KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,                               KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC,
+    XXXXXXX,    KC_LSFT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_LCBR,    KC_RCBR,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,    KC_BSLS,
+                KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_BSPC,    KC_EQL,     KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    XXXXXXX,
+                                        XXXXXXX,    _______,    KC_SPC,     _______,    KC_ENT,     _______,    _______,    _______,    _______,    KC_MUTE
     ),
-
-    [_ADJUST] = LAYOUT(
-                 XXXXXXX, XXXXXXX, XXXXXXX, RGB_HUD, RGB_SAD, RGB_VAD,                               RGB_VAI, RGB_SAI, RGB_HUI, XXXXXXX, XXXXXXX, XXXXXXX,
-                 XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        RGB_RMOD,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_TOG,             RGB_TOG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_MOD,
-                 XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_RMOD,            RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                                   _______, _______, XXXXXXX, _______, _______,             _______, _______, XXXXXXX, _______, _______
-    ),
-
 };
 
 
@@ -598,7 +589,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
-        case VIMPASTE:
+        case VIPASTE:
             if (record->event.pressed) {
                 SEND_STRING(SS_TAP(X_V) SS_DELAY(100) SS_TAP(X_SPACE) SS_DELAY(100) SS_LCTL(SS_LSFT(SS_TAP(X_V))) SS_DELAY(100) SS_TAP(X_ENTER));
             }
