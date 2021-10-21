@@ -25,6 +25,7 @@ enum custom_keycodes {
     VIMQUITALL,
     VIPASTE,
     LNX_LAST,
+    KU_QU,
 };
 
 #define  ESCNUM         LT(_NUMROW, KC_ESC)
@@ -45,6 +46,7 @@ enum custom_keycodes {
 #define  PC_SCRNSHT     G(S(KC_S))
 #define  PC_LWRD        C(KC_LEFT)
 #define  PC_RWRD        C(KC_RIGHT)
+#define  PC_CLIP        G(KC_V)
 #define  LNX_PASTE      S(C(KC_V))
 #define  LNX_LWD        A(KC_B)
 #define  LNX_RWD        A(KC_F)
@@ -97,11 +99,11 @@ enum custom_keycodes {
  *                                                               ╰────────╯        │   │        ╰────────╯
  *                                                                        ╰────────╯   ╰────────╯
  * [_SAMPLE] = LAYOUT(
- *              KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                               KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       XXXXXXX,
- *              KC_EQL,     KC_X,       KC_F,       KC_M,       KC_P,       KC_B,                               KC_MINS,    KC_SLSH,    KC_DOT,     KC_COMM,    KC_J,       KC_BSLS,
- *  VIPASTE,    KC_Z,       KC_R,       KC_S,       HRM_N,      HRM_T,      KC_G,       PC_LOCK,    KC_MPLY,    KC_QUOT,    HRM_A,      HRM_E,      HRM_I,      HRM_H,      KC_Q,       PC_SCRNSHT,
- *              KC_HOME,    KC_W,       KC_C,       KC_L,       KC_D,       KC_V,       PC_BSWD,    PC_SLACK,   KC_SCLN,    KC_U,       KC_O,       KC_Y,       KC_K,       KC_END,
- *                                      XXXXXXX,    XXXXXXX,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCNUM,     XXXXXXX,    QWERTY_GAME
+                KC_ESC,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                               KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_MINS,
+                KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,                               KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC,
+    XXXXXXX,    KC_LSFT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_LCBR,    KC_RCBR,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,    KC_BSLS,
+                KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_BSPC,    KC_EQL,     KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    XXXXXXX,
+                                        XXXXXXX,    KC_LCTL,    KC_SPC,     KC_LSFT,    KC_ENT,     _______,    _______,    _______,    _______,    KC_MUTE
  * ),
  */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -110,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 KC_EQL,     KC_X,       KC_F,       KC_M,       KC_P,       KC_B,                               KC_MINS,    KC_SLSH,    KC_DOT,     KC_COMM,    KC_J,       KC_BSLS,
     VIPASTE,    KC_Z,       KC_R,       KC_S,       HRM_N,      HRM_T,      KC_G,       PC_LOCK,    KC_MPLY,    KC_QUOT,    HRM_A,      HRM_E,      HRM_I,      HRM_H,      KC_Q,       PC_SCRNSHT,
                 KC_HOME,    KC_W,       KC_C,       KC_L,       KC_D,       KC_V,       PC_BSWD,    PC_SLACK,   KC_SCLN,    KC_U,       KC_O,       KC_Y,       KC_K,       KC_END,
-                                        XXXXXXX,    XXXXXXX,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCNUM,     XXXXXXX,    QWERTY_GAME
+                                        XXXXXXX,    PC_CLIP,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCNUM,     XXXXXXX,    QWERTY_GAME
     ),
 
     [_BYOBU_NAV] = LAYOUT(
@@ -269,6 +271,8 @@ enum combo_events {
     COMBO_PC_UNDO,
     COMBO_LNX_RSRCH,
     COMBO_LNX_LAST,
+    COMBO_KU_QU,
+    COMBO_SHFT_KU_QU,
     COMBO_LENGTH
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
@@ -300,6 +304,9 @@ const uint16_t PROGMEM vimshiftv[] =    {KC_N, KC_D, COMBO_END};
 const uint16_t PROGMEM lnx_rsearch[] =  {KC_I, KC_E,    COMBO_END};
 const uint16_t PROGMEM lnx_last[] =     {KC_I, KC_DOT,  COMBO_END};
 
+const uint16_t PROGMEM ku_qu[] =        {KC_U, KC_K,    COMBO_END};
+const uint16_t PROGMEM shft_ku_qu[] =   {KC_LSFT, KC_U, KC_K,    COMBO_END};
+
 combo_t key_combos[] = {
     [COMBO_VIM_WRITE]     = COMBO(vimwrite,       VIMWRITE),
     [COMBO_VIM_WRITEQUIT] = COMBO(vimwritequit,   VIMWRITEQUIT),
@@ -313,6 +320,7 @@ combo_t key_combos[] = {
     [COMBO_PC_UNDO]       = COMBO(pc_undo,        PC_UNDO),
     [COMBO_LNX_RSRCH]     = COMBO(lnx_rsearch,    C(KC_R)),
     [COMBO_LNX_LAST]      = COMBO(lnx_last,       LNX_LAST),
+    [COMBO_KU_QU]         = COMBO(ku_qu,          KU_QU),
 };
 
 // #endif
@@ -595,6 +603,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case LNX_LAST:
             if (record->event.pressed) {
               SEND_STRING(SS_LSFT(SS_TAP(X_1)) SS_DELAY(100) SS_LSFT(SS_TAP(X_4)) SS_DELAY(100) SS_TAP(X_SPACE));
+            }
+            break;
+        case KU_QU:
+            if (record->event.pressed) {
+                SEND_STRING("qu");
             }
             break;
     }
