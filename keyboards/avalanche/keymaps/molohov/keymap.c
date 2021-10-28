@@ -35,6 +35,7 @@ enum custom_keycodes {
 #define  ALTENT         ALT_T(KC_ENT)
 #define  GUIDEL         GUI_T(KC_DEL)
 #define  QWERTY_GAME    TG(_QWERTY_GAME)
+#define  NUMTOG         TG(_NUMROW)
 #define  PC_UNDO        C(KC_Z)
 #define  PC_CUT         C(KC_X)
 #define  PC_COPY        C(KC_C)
@@ -50,14 +51,25 @@ enum custom_keycodes {
 #define  LNX_PASTE      S(C(KC_V))
 #define  LNX_LWD        A(KC_B)
 #define  LNX_RWD        A(KC_F)
+// reverse search
+#define  LNX_RSR        C(KC_R)
 #define  BY_VSPL        C(KC_F2)
 #define  BY_HSPL        S(KC_F2)
+// change layout
 #define  BY_CLYT        S(KC_F8)
+// fullscreen pane
 #define  BY_FPNE        S(KC_F11)
+// kill pane
 #define  BY_KPNE        C(KC_F6)
+// disable function keys
 #define  BY_DISF        S(KC_F12)
 #define  BY_MVWL        S(C(KC_F3))
 #define  BY_MVWR        S(C(KC_F4))
+#define  VS_CTLP        C(KC_P)
+#define  VS_SCTP        S(C(KC_P))
+#define  VS_COMT        C(KC_SLSH)
+#define  VS_TERM        C(KC_GRV)
+#define  VS_CODE        C(KC_1)
 
 #ifdef HRM
 #define HRM_N CTL_T(KC_N)
@@ -108,17 +120,17 @@ enum custom_keycodes {
  */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_HANDS_DOWN] = LAYOUT(
-                KC_GRV,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                               KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       XXXXXXX,
-                XXXXXXX,    KC_X,       KC_F,       KC_M,       KC_P,       KC_B,                               KC_MINS,    KC_SLSH,    KC_DOT,     KC_COMM,    KC_J,       KC_BSLS,
-    VIPASTE,    KC_Z,       KC_R,       KC_S,       HRM_N,      HRM_T,      KC_G,       PC_LOCK,    KC_MPLY,    KC_QUOT,    HRM_A,      HRM_E,      HRM_I,      HRM_H,      KC_Q,       PC_SCRNSHT,
+                VS_CODE,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                               KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       VS_TERM,
+                VS_CTLP,    KC_X,       KC_F,       KC_M,       KC_P,       KC_B,                               KC_MINS,    KC_SLSH,    KC_DOT,     KC_COMM,    KC_Q,       LNX_RSR,
+    VIPASTE,    KC_Z,       KC_R,       KC_S,       HRM_N,      HRM_T,      KC_G,       PC_LOCK,    KC_MPLY,    KC_QUOT,    HRM_A,      HRM_E,      HRM_I,      HRM_H,      KC_J,       PC_SCRNSHT,
                 KC_HOME,    KC_W,       KC_C,       KC_L,       KC_D,       KC_V,       PC_BSWD,    PC_SLACK,   KC_EQL,     KC_U,       KC_O,       KC_Y,       KC_K,       KC_END,
-                                        XXXXXXX,    PC_CLIP,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCNUM,     XXXXXXX,    QWERTY_GAME
+                                        NUMTOG,     VS_COMT,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCNUM,     PC_CLIP,    QWERTY_GAME
     ),
 
     [_BYOBU_NAV] = LAYOUT(
                 KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,                              KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,     KC_F12,
-                _______,    KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            XXXXXXX,    PC_LWRD,    KC_UP,      PC_RWRD,    XXXXXXX,    _______,
-    KC_EQL,     KC_BSLS,    KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    XXXXXXX,    XXXXXXX,    LNX_LWD,    KC_LEFT,    KC_DOWN,    KC_RGHT,    LNX_RWD,    KC_EXLM,    XXXXXXX,
+                VS_SCTP,    KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            XXXXXXX,    PC_LWRD,    KC_UP,      PC_RWRD,    XXXXXXX,    XXXXXXX,
+    XXXXXXX,    KC_BSLS,    KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    XXXXXXX,    XXXXXXX,    LNX_LWD,    KC_LEFT,    KC_DOWN,    KC_RGHT,    LNX_RWD,    XXXXXXX,    XXXXXXX,
                 BY_KPNE,    BY_DISF,    BY_VSPL,    BY_HSPL,    BY_CLYT,    BY_FPNE,    _______,    _______,    KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F8,      KC_F6,
                                         BY_MVWL,    BY_MVWR,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
@@ -127,7 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,
                 XXXXXXX,    KC_BSLS,    KC_ASTR,    KC_X,       KC_GRV,     _______,                            _______,    _______,    _______,    _______,    _______,    _______,
     XXXXXXX,    KC_LBRC,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       _______,    _______,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_RBRC,    _______,
-                _______,    KC_COLN,    KC_PERC,    KC_LPRN,    KC_RPRN,    _______,    _______,    _______,    KC_PEQL,    KC_PPLS,    KC_PMNS,    KC_PAST,    KC_PSLS,    _______,
+                _______,    KC_COLN,    KC_PERC,    KC_LPRN,    KC_RPRN,    _______,    _______,    _______,    KC_EQL,     KC_PPLS,    KC_PMNS,    KC_PAST,    KC_PSLS,    _______,
                                         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
 
@@ -309,8 +321,7 @@ const uint16_t PROGMEM lnx_last[] =     {KC_I, KC_DOT,  COMBO_END};
 const uint16_t PROGMEM ku_qu[] =        {KC_U, KC_K,    COMBO_END};
 // const uint16_t PROGMEM shft_ku_qu[] =   {KC_LSFT, KC_U, KC_K,    COMBO_END};
 
-// / + . = !
-const uint16_t PROGMEM exclamation[] =  {KC_SLSH, KC_DOT,    COMBO_END};
+const uint16_t PROGMEM exclamation[] =  {KC_A, KC_DOT,    COMBO_END};
 // . + , = ;
 const uint16_t PROGMEM semicolon[] =    {KC_DOT, KC_COMM,    COMBO_END};
 
