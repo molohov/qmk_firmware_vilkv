@@ -53,7 +53,9 @@ enum custom_keycodes {
 #define  LNX_RWD        A(KC_F)
 // reverse search
 #define  LNX_RSR        C(KC_R)
+// vertical split
 #define  BY_VSPL        C(KC_F2)
+// horizontal split
 #define  BY_HSPL        S(KC_F2)
 // change layout
 #define  BY_CLYT        S(KC_F8)
@@ -63,8 +65,22 @@ enum custom_keycodes {
 #define  BY_KPNE        C(KC_F6)
 // disable function keys
 #define  BY_DISF        S(KC_F12)
+// move window left
 #define  BY_MVWL        S(C(KC_F3))
+// move window right
 #define  BY_MVWR        S(C(KC_F4))
+// new pane
+#define  BY_NPNE        KC_F2
+// focus on left window
+#define  BY_FSWL        KC_F3
+// focus on right window
+#define  BY_FSWR        KC_F4
+// refresh settings
+#define  BY_RFSH        KC_F5
+// exit server
+#define  BY_KSRV        KC_F6
+// rename window
+#define  BY_RNWN        KC_F8
 #define  VS_CTLP        C(KC_P)
 #define  VS_SCTP        S(C(KC_P))
 #define  VS_COMT        C(KC_SLSH)
@@ -129,16 +145,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NAV_NUM_SYM] = LAYOUT(
                 KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,                              KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,     KC_F12,
-                XXXXXXX,    KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            XXXXXXX,    PC_LWRD,    KC_UP,      PC_RWRD,    XXXXXXX,    XXXXXXX,
+                XXXXXXX,    KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            _______,    _______,    KC_UP,      _______,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    KC_BSLS,    KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    XXXXXXX,    XXXXXXX,    LNX_LWD,    KC_LEFT,    KC_DOWN,    KC_RGHT,    LNX_RWD,    XXXXXXX,    XXXXXXX,
-                XXXXXXX,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       _______,    _______,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       XXXXXXX,
+                XXXXXXX,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       _______,    _______,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_DOT,
                                         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
 
     [_BYO_ONOTE_VSC] = LAYOUT(
                 _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,
                 VS_SCTP,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
-    XXXXXXX,    BY_KPNE,    BY_DISF,    BY_VSPL,    BY_HSPL,    BY_CLYT,    BY_FPNE,    _______,    _______,    KC_F8,      KC_F3,      KC_F2,      KC_F4,      KC_F5,      KC_F6,      XXXXXXX,
+    XXXXXXX,    BY_KPNE,    BY_DISF,    BY_VSPL,    BY_HSPL,    BY_CLYT,    BY_FPNE,    _______,    _______,    BY_RNWN,    BY_FSWL,    BY_NPNE,    BY_FSWR,    BY_RFSH,    BY_KSRV,      XXXXXXX,
                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    BY_MVWL,    _______,    BY_MVWR,    _______,    _______,
                                         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
