@@ -8,9 +8,9 @@ qmk flash -kb avalanche/rev2 -km default_rev2
 
 enum layer {
     _HANDS_DOWN,
-    _BYOBU_NAV,
+    _NAV_NUM_SYM,
     _QWERTY_GAME,
-    _NUMROW,
+    _BYO_ONOTE_VSC,
 };
 
 bool is_alt_tab_active = false;
@@ -28,14 +28,14 @@ enum custom_keycodes {
     KU_QU,
 };
 
-#define  ESCNUM         LT(_NUMROW, KC_ESC)
-#define  SPCNAV         LT(_BYOBU_NAV, KC_SPC)
+#define  ESCNUM         LT(_BYO_ONOTE_VSC, KC_ESC)
+#define  SPCNAV         LT(_NAV_NUM_SYM, KC_SPC)
 #define  SFTBSP         SFT_T(KC_BSPC)
 #define  CTLTAB         CTL_T(KC_TAB)
 #define  ALTENT         ALT_T(KC_ENT)
 #define  GUIDEL         GUI_T(KC_DEL)
 #define  QWERTY_GAME    TG(_QWERTY_GAME)
-#define  NUMTOG         TG(_NUMROW)
+#define  NUMTOG         TG(_NAV_NUM_SYM)
 #define  PC_UNDO        C(KC_Z)
 #define  PC_CUT         C(KC_X)
 #define  PC_COPY        C(KC_C)
@@ -127,19 +127,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         NUMTOG,     VS_COMT,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCNUM,     PC_CLIP,    QWERTY_GAME
     ),
 
-    [_BYOBU_NAV] = LAYOUT(
+    [_NAV_NUM_SYM] = LAYOUT(
                 KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,                              KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,     KC_F12,
-                VS_SCTP,    KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            XXXXXXX,    PC_LWRD,    KC_UP,      PC_RWRD,    XXXXXXX,    XXXXXXX,
+                XXXXXXX,    KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            XXXXXXX,    PC_LWRD,    KC_UP,      PC_RWRD,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    KC_BSLS,    KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    XXXXXXX,    XXXXXXX,    LNX_LWD,    KC_LEFT,    KC_DOWN,    KC_RGHT,    LNX_RWD,    XXXXXXX,    XXXXXXX,
-                BY_KPNE,    BY_DISF,    BY_VSPL,    BY_HSPL,    BY_CLYT,    BY_FPNE,    _______,    _______,    KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F8,      KC_F6,
-                                        BY_MVWL,    BY_MVWR,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
+                XXXXXXX,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       _______,    _______,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       XXXXXXX,
+                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
 
-    [_NUMROW] = LAYOUT(
+    [_BYO_ONOTE_VSC] = LAYOUT(
                 _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,
-                XXXXXXX,    KC_BSLS,    KC_ASTR,    KC_X,       KC_GRV,     _______,                            _______,    _______,    _______,    _______,    _______,    _______,
-    XXXXXXX,    KC_LBRC,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       _______,    _______,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_RBRC,    _______,
-                _______,    KC_COLN,    KC_PERC,    KC_LPRN,    KC_RPRN,    _______,    _______,    _______,    KC_EQL,     KC_PPLS,    KC_PMNS,    KC_PAST,    KC_PSLS,    _______,
+                VS_SCTP,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,    _______,    _______,    _______,    _______,
+    XXXXXXX,    BY_KPNE,    BY_DISF,    BY_VSPL,    BY_HSPL,    BY_CLYT,    BY_FPNE,    _______,    _______,    KC_F8,      KC_F3,      KC_F2,      KC_F4,      KC_F5,      KC_F6,      XXXXXXX,
+                _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    BY_MVWL,    _______,    BY_MVWR,    _______,    _______,
                                         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
 
@@ -237,10 +237,10 @@ static void print_status_narrow(void) {
         case _QWERTY_GAME:
             oled_write_P(PSTR("QWERTY_GAME\n"), false);
             break;
-        case _BYOBU_NAV:
+        case _NAV_NUM_SYM:
             oled_write_P(PSTR("ByobuNav"), false);
             break;
-        case _NUMROW:
+        case _BYO_ONOTE_VSC:
             oled_write_P(PSTR("NumSym"), false);
             break;
         default:
@@ -650,7 +650,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 tap_code(KC_PGUP);
             }
             break;
-        case _BYOBU_NAV:
+        case _NAV_NUM_SYM:
             if (clockwise) {
                 tap_code16(C(G(KC_RIGHT)));
             } else {
@@ -673,7 +673,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 tap_code16(S(KC_TAB));
             }
             break;
-        case _BYOBU_NAV:
+        case _NAV_NUM_SYM:
             if (clockwise) {
                 tap_code(KC_VOLU);
             } else {
@@ -731,7 +731,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 // // Raise and Lower states
 // layer_state_t layer_state_set_user(layer_state_t state) {
 //     rgblight_set_layer_state(2, layer_state_cmp(state, _RAISE));
-//     rgblight_set_layer_state(3, layer_state_cmp(state, _BYOBU_NAV));
+//     rgblight_set_layer_state(3, layer_state_cmp(state, _NAV_NUM_SYM));
 //     return state;
 // }
 
