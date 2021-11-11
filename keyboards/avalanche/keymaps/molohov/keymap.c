@@ -37,6 +37,7 @@ enum custom_keycodes {
 #define  QWERTY_GAME    TG(_QWERTY_GAME)
 #define  NUMTOG         TG(_NAV_NUM_SYM)
 #define  PC_UNDO        C(KC_Z)
+#define  PC_SALL        C(KC_A)
 #define  PC_CUT         C(KC_X)
 #define  PC_COPY        C(KC_C)
 #define  PC_PASTE       C(KC_V)
@@ -44,7 +45,7 @@ enum custom_keycodes {
 #define  PC_LOCK        G(KC_L)
 #define  PC_BSWD        C(KC_BSPC)
 #define  PC_SLACK       A(KC_Q)
-#define  PC_SCRNSHT     G(S(KC_S))
+#define  PC_SCSH        G(S(KC_S))
 #define  PC_LWRD        C(KC_LEFT)
 #define  PC_RWRD        C(KC_RIGHT)
 #define  PC_CLIP        G(KC_V)
@@ -93,8 +94,11 @@ enum custom_keycodes {
 // focus on code area
 #define  VS_EDIT        C(KC_1)
 
+// to-do
 #define ON_TODO         C(KC_1)
+// important
 #define ON_IMPT         C(KC_2)
+// question
 #define ON_QUES         C(KC_3)
 
 #ifdef HRM
@@ -148,15 +152,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_HANDS_DOWN] = LAYOUT(
                 VS_EDIT,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                               KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       VS_TERM,
                 VS_CTLP,    KC_X,       KC_F,       KC_M,       KC_P,       KC_B,                               KC_MINS,    KC_SLSH,    KC_DOT,     KC_COMM,    KC_Q,       LNX_RSR,
-    VIPASTE,    KC_Z,       KC_R,       KC_S,       HRM_N,      HRM_T,      KC_G,       PC_LOCK,    KC_MPLY,    KC_QUOT,    HRM_A,      HRM_E,      HRM_I,      HRM_H,      KC_J,       PC_SCRNSHT,
+    VIPASTE,    KC_Z,       KC_R,       KC_S,       HRM_N,      HRM_T,      KC_G,       PC_LOCK,    KC_MPLY,    KC_QUOT,    HRM_A,      HRM_E,      HRM_I,      HRM_H,      KC_J,       PC_SCSH,
                 KC_HOME,    KC_W,       KC_C,       KC_L,       KC_D,       KC_V,       PC_BSWD,    PC_SLACK,   KC_EQL,     KC_U,       KC_O,       KC_Y,       KC_K,       KC_END,
                                         NUMTOG,     VS_COMT,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCNUM,     PC_CLIP,    QWERTY_GAME
     ),
 
     [_NAV_NUM_SYM] = LAYOUT(
                 KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,                              KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,     KC_F12,
-                XXXXXXX,    KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            _______,    LNX_LWD,    KC_UP,      LNX_RWD,    XXXXXXX,    XXXXXXX,
-    XXXXXXX,    KC_BSLS,    KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    _______,    _______,    _______,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_COMM,    KC_X,       KC_SLSH,
+                XXXXXXX,    KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            KC_MINS,    LNX_LWD,    KC_UP,      LNX_RWD,    XXXXXXX,    XXXXXXX,
+    KC_X,       KC_BSLS,    KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    _______,    _______,    KC_QUOT,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_COMM,    KC_SLSH,    KC_SLSH,
                 KC_EQL,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       _______,    _______,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_DOT,
                                         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
@@ -164,7 +168,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BYO_ONOTE_VSC] = LAYOUT(
                 _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,
                 _______,    _______,    ON_IMPT,    ON_TODO,    ON_QUES,    _______,                            _______,    VS_SCTP,    VS_TERM,    VS_EDIT,    _______,    _______,
-    XXXXXXX,    BY_KPNE,    BY_DISF,    BY_VSPL,    BY_HSPL,    BY_CLYT,    BY_FPNE,    _______,    _______,    BY_RNWN,    BY_FSPL,    BY_NPNE,    BY_FSPR,    BY_RFSH,    BY_KSRV,      XXXXXXX,
+    XXXXXXX,    BY_KPNE,    BY_DISF,    BY_VSPL,    BY_HSPL,    BY_CLYT,    BY_FPNE,    _______,    _______,    BY_RNWN,    BY_FSPL,    BY_NPNE,    BY_FSPR,    BY_RFSH,    BY_KSRV,    XXXXXXX,
                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    BY_FSWL,    BY_FSWR,    BY_MVWL,    BY_MVWR,    _______,
                                         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
@@ -307,6 +311,7 @@ enum combo_events {
     COMBO_PC_PASTE,
     COMBO_PC_FIND,
     COMBO_PC_UNDO,
+    COMBO_PC_SELECTALL,
     COMBO_LNX_RSRCH,
     COMBO_LNX_LAST,
     COMBO_KU_QU,
@@ -326,6 +331,7 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 
 // copy/paste combos on left bottom row
 const uint16_t PROGMEM pc_undo[] =      {KC_W, KC_C, COMBO_END};
+const uint16_t PROGMEM pc_selectall[] = {KC_W, KC_S, COMBO_END};
 const uint16_t PROGMEM pc_copy[] =      {KC_C, KC_L, COMBO_END};
 const uint16_t PROGMEM pc_cut[] =       {KC_C, KC_N, COMBO_END};
 const uint16_t PROGMEM pc_paste[] =     {KC_L, KC_D, COMBO_END};
@@ -365,6 +371,7 @@ combo_t key_combos[] = {
     [COMBO_PC_PASTE]      = COMBO(pc_paste,       PC_PASTE),
     [COMBO_PC_FIND]       = COMBO(pc_find,        PC_FIND),
     [COMBO_PC_UNDO]       = COMBO(pc_undo,        PC_UNDO),
+    [COMBO_PC_SELECTALL]  = COMBO(pc_selectall,   PC_SALL),
     [COMBO_LNX_RSRCH]     = COMBO(lnx_rsearch,    C(KC_R)),
     [COMBO_LNX_LAST]      = COMBO(lnx_last,       LNX_LAST),
     [COMBO_KU_QU]         = COMBO(ku_qu,          KU_QU),
@@ -408,6 +415,13 @@ bool process_adaptive_key(uint16_t keycode, const keyrecord_t *record) {
                             return_state = false; // done.
                     }
                     break;
+                // case KC_C:
+                //     switch (prior_keycode) {
+                //         case KC_L: //LC -> LF
+                //             tap_code(KC_F);
+                //             return_state = false; // done.
+                //     }
+                //     break;
 /*
 // Left hand adaptives (most are single-handed, bc speed, dexterity limits)
 */
