@@ -274,9 +274,9 @@ static void print_status_narrow(void) {
             oled_write_ln_P(PSTR("Game"), false);
             break;
         case _NAV_NUM_SYM:
-            oled_write_ln_P(PSTR("Navig"), false);
-            oled_write_ln_P(PSTR("Symbs"), false);
-            oled_write_ln_P(PSTR("Numbs"), false);
+            oled_write_P(PSTR("Navig"), false);
+            oled_write_P(PSTR("Symbs"), false);
+            oled_write_P(PSTR("Numbs"), false);
             break;
         case _BYO_ONOTE_VSC:
             oled_write_P(PSTR("Byobu"), false);
@@ -289,6 +289,19 @@ static void print_status_narrow(void) {
     oled_write_P(PSTR("\n"), false);
     // led_t led_usb_state = host_keyboard_led_state();
     // oled_write_ln_P(PSTR("CPSLK"), led_usb_state.caps_lock);
+    int current_mods = get_mods();
+    if (current_mods & MOD_MASK_SHIFT) {
+        oled_write_P(PSTR("SHIFT"), false);
+    }
+    if (current_mods & MOD_MASK_CTRL) {
+        oled_write_ln_P(PSTR("CTRL"), false);
+    }
+    if (current_mods & MOD_MASK_GUI) {
+        oled_write_ln_P(PSTR("GUI"), false);
+    }
+    if (current_mods & MOD_MASK_ALT) {
+        oled_write_ln_P(PSTR("ALT"), false);
+    }
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
@@ -299,6 +312,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 }
 
 void oled_task_user(void) {
+    oled_clear();
     if (is_keyboard_master()) {
         print_status_narrow();
     } else {
