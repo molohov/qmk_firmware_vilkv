@@ -266,17 +266,17 @@ static void print_status_narrow(void) {
     switch (get_highest_layer(layer_state)) {
         case _HANDS_DOWN:
             oled_write_P(PSTR("Hands"), false);
-            oled_write_P(PSTR("Down\n"), false);
-            oled_write_P(PSTR("Neu\n"), false);
+            oled_write_ln_P(PSTR("Down"), false);
+            oled_write_ln_P(PSTR("Neu"), false);
             break;
         case _QWERTY_GAME:
-            oled_write_P(PSTR("QWERT\n"), false);
-            oled_write_P(PSTR("Game\n"), false);
+            oled_write_P(PSTR("QWERT"), false);
+            oled_write_ln_P(PSTR("Game"), false);
             break;
         case _NAV_NUM_SYM:
-            oled_write_P(PSTR("Nav\n"), false);
-            oled_write_P(PSTR("Nums\n"), false);
-            oled_write_P(PSTR("Syms\n"), false);
+            oled_write_ln_P(PSTR("Navig"), false);
+            oled_write_ln_P(PSTR("Symbs"), false);
+            oled_write_ln_P(PSTR("Numbs"), false);
             break;
         case _BYO_ONOTE_VSC:
             oled_write_P(PSTR("Byobu"), false);
@@ -284,7 +284,7 @@ static void print_status_narrow(void) {
             oled_write_P(PSTR("VCode"), false);
             break;
         default:
-            oled_write_ln_P(PSTR("Undef"), false);
+            oled_write_P(PSTR("Undef"), false);
     }
     oled_write_P(PSTR("\n"), false);
     // led_t led_usb_state = host_keyboard_led_state();
