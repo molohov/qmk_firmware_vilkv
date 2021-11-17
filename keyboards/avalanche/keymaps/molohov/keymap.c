@@ -26,6 +26,7 @@ enum custom_keycodes {
     VIPASTE,
     LNX_LAST,
     KU_QU,
+    IMPORT_PDB,
 };
 
 #define  ESCNUM         LT(_BYO_ONOTE_VSC, KC_ESC)
@@ -101,6 +102,8 @@ enum custom_keycodes {
 // question
 #define ON_QUES         C(KC_3)
 
+#define PY_IPDB         IMPORT_PDB
+
 #ifdef HRM
 #define HRM_N CTL_T(KC_N)
 #define HRM_T ALT_T(KC_T)
@@ -161,13 +164,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,                              KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,     KC_F12,
                 XXXXXXX,    KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            KC_MINS,    LNX_LWD,    KC_UP,      LNX_RWD,    XXXXXXX,    XXXXXXX,
     KC_X,       KC_BSLS,    KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    _______,    _______,    KC_QUOT,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_COMM,    KC_SLSH,    KC_SLSH,
-                KC_EQL,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       _______,    _______,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_DOT,
+                KC_EQL,     KC_7,       KC_5,       KC_1,       KC_3,       KC_9,       _______,    _______,    KC_8,       KC_2,       KC_0,       KC_4,       KC_6,       KC_DOT,
                                         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
 
     [_BYO_ONOTE_VSC] = LAYOUT(
                 _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,
-                _______,    _______,    ON_IMPT,    ON_TODO,    ON_QUES,    _______,                            _______,    VS_SCTP,    VS_TERM,    VS_EDIT,    _______,    _______,
+                _______,    _______,    ON_IMPT,    ON_TODO,    ON_QUES,    PY_IPDB,                            _______,    VS_SCTP,    VS_TERM,    VS_EDIT,    _______,    _______,
     XXXXXXX,    BY_KPNE,    BY_DISF,    BY_VSPL,    BY_HSPL,    BY_CLYT,    BY_FPNE,    _______,    _______,    BY_RNWN,    BY_FSPL,    BY_NPNE,    BY_FSPR,    BY_RFSH,    BY_KSRV,    XXXXXXX,
                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    BY_FSWL,    BY_FSWR,    BY_MVWL,    BY_MVWR,    _______,
                                         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
@@ -253,7 +256,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //     oled_write_raw_P(gimli_face, sizeof(gimli_face));
 // }
 
-static void print_status_narrow(void) {
+static void print_layers(void) {
     // Print current mode
     // oled_write_P(PSTR("\n\n"), false);
     // Print current layer
@@ -289,6 +292,9 @@ static void print_status_narrow(void) {
     oled_write_P(PSTR("\n"), false);
     // led_t led_usb_state = host_keyboard_led_state();
     // oled_write_ln_P(PSTR("CPSLK"), led_usb_state.caps_lock);
+}
+
+static void print_mods(void) {
     int current_mods = get_mods();
     if (current_mods & MOD_MASK_SHIFT) {
         oled_write_P(PSTR("SHIFT"), false);
@@ -305,18 +311,20 @@ static void print_status_narrow(void) {
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-    if (is_keyboard_master()) {
+    // if (is_keyboard_master()) {
         return OLED_ROTATION_270;
-    }
-    return rotation;
+    // }
+    // return rotation;
 }
 
 void oled_task_user(void) {
     oled_clear();
     if (is_keyboard_master()) {
-        print_status_narrow();
+        print_layers();
+        print_mods();
     } else {
         // render_logo();
+        print_mods();
     }
 }
 
@@ -340,6 +348,7 @@ enum combo_events {
     COMBO_LNX_LAST,
     COMBO_KU_QU,
     COMBO_EXCLAMATION,
+    COMBO_AT,
     COMBO_DEL_WORD,
     COMBO_SEMICOLON,
     COMBO_LENGTH
@@ -378,6 +387,7 @@ const uint16_t PROGMEM ku_qu[] =        {KC_U, KC_K,    COMBO_END};
 // const uint16_t PROGMEM shft_ku_qu[] =   {KC_LSFT, KC_U, KC_K,    COMBO_END};
 
 const uint16_t PROGMEM exclamation[] =  {KC_A, KC_DOT,    COMBO_END};
+const uint16_t PROGMEM at[] =           {KC_SLSH, KC_DOT,    COMBO_END};
 // . + , = ;
 const uint16_t PROGMEM semicolon[] =    {KC_DOT, KC_COMM,    COMBO_END};
 
@@ -396,10 +406,10 @@ combo_t key_combos[] = {
     [COMBO_PC_FIND]       = COMBO(pc_find,        PC_FIND),
     [COMBO_PC_UNDO]       = COMBO(pc_undo,        PC_UNDO),
     [COMBO_PC_SELECTALL]  = COMBO(pc_selectall,   PC_SALL),
-    [COMBO_LNX_RSRCH]     = COMBO(lnx_rsearch,    C(KC_R)),
     [COMBO_LNX_LAST]      = COMBO(lnx_last,       LNX_LAST),
     [COMBO_KU_QU]         = COMBO(ku_qu,          KU_QU),
     [COMBO_EXCLAMATION]   = COMBO(exclamation,    KC_EXLM),
+    [COMBO_AT]            = COMBO(at,             KC_AT),
     [COMBO_SEMICOLON]     = COMBO(semicolon,      KC_SCLN),
     [COMBO_DEL_WORD]      = COMBO(del_word,       C(KC_DEL)),
 };
@@ -696,6 +706,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KU_QU:
             if (record->event.pressed) {
                 SEND_STRING("qu");
+            }
+            break;
+        case IMPORT_PDB:
+            if (record->event.pressed) {
+                SEND_STRING("import pdb; pdb.set_trace()");
             }
             break;
     }
