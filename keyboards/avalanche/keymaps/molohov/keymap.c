@@ -29,7 +29,7 @@ enum custom_keycodes {
     IMPORT_PDB,
 };
 
-#define  ESCNUM         LT(_BYO_ONOTE_VSC, KC_ESC)
+#define  ESCBYO         LT(_BYO_ONOTE_VSC, KC_ESC)
 #define  SPCNAV         LT(_NAV_NUM_SYM, KC_SPC)
 #define  SFTBSP         SFT_T(KC_BSPC)
 #define  CTLTAB         CTL_T(KC_TAB)
@@ -157,7 +157,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 VS_CTLP,    KC_X,       KC_F,       KC_M,       KC_P,       KC_B,                               KC_MINS,    KC_SLSH,    KC_DOT,     KC_COMM,    KC_Q,       LNX_RSR,
     PC_SCSH,    KC_Z,       KC_R,       KC_S,       HRM_N,      HRM_T,      KC_G,       PC_LOCK,    KC_MPLY,    KC_QUOT,    HRM_A,      HRM_E,      HRM_I,      HRM_H,      KC_J,       VIPASTE,
                 KC_HOME,    KC_W,       KC_C,       KC_L,       KC_D,       KC_V,       PC_BSWD,    PC_SLACK,   KC_EQL,     KC_U,       KC_O,       KC_Y,       KC_K,       KC_END,
-                                        NUMTOG,     VS_COMT,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCNUM,     PC_CLIP,    QWERTY_GAME
+                                        NUMTOG,     VS_COMT,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCBYO,     PC_CLIP,    QWERTY_GAME
     ),
 
     [_NAV_NUM_SYM] = LAYOUT(
@@ -348,7 +348,7 @@ enum combo_events {
     COMBO_LNX_CLS,
     COMBO_LNX_LAST,
     COMBO_KU_QU,
-    COMBO_EXCLAMATION,
+    // COMBO_EXCLAMATION,
     COMBO_AT,
     COMBO_DOLLAR,
     COMBO_DEL_WORD,
@@ -394,7 +394,7 @@ const uint16_t PROGMEM lnx_last[] =     {KC_I, KC_DOT,  COMBO_END};
 
 const uint16_t PROGMEM ku_qu[] =        {KC_U, KC_K,    COMBO_END};
 
-const uint16_t PROGMEM exclamation[] =  {KC_DOT, KC_A,    COMBO_END};
+// const uint16_t PROGMEM exclamation[] =  {KC_DOT, KC_A,    COMBO_END};
 const uint16_t PROGMEM at[] =           {KC_DOT, KC_SLSH,   COMBO_END};
 const uint16_t PROGMEM dollar[] =       {KC_DOT, KC_MINS,    COMBO_END};
 // . + , = ;
@@ -418,7 +418,7 @@ combo_t key_combos[] = {
     [COMBO_LNX_LAST]        = COMBO(lnx_last,       LNX_LAST),
     [COMBO_LNX_CLS]         = COMBO(lnx_cls,        C(KC_L)),
     [COMBO_KU_QU]           = COMBO(ku_qu,          KU_QU),
-    [COMBO_EXCLAMATION]     = COMBO(exclamation,    KC_EXLM),
+    // [COMBO_EXCLAMATION]     = COMBO(exclamation,    KC_EXLM),
     [COMBO_AT]              = COMBO(at,             KC_AT),
     [COMBO_DOLLAR]          = COMBO(dollar,         KC_DLR),
     [COMBO_SEMICOLON]       = COMBO(semicolon,      KC_SCLN),
@@ -431,13 +431,24 @@ combo_t key_combos[] = {
 
 // CUSTOM MODIFIER OVERRIDES
 // shift () gives {}
-const key_override_t left_bracket_override = ko_make_basic(MOD_MASK_SHIFT, KC_LPRN, KC_LCBR);
-const key_override_t right_bracket_override = ko_make_basic(MOD_MASK_SHIFT, KC_RPRN, KC_RCBR);
+const key_override_t left_paran_override            = ko_make_basic(MOD_MASK_SHIFT, KC_LPRN, KC_LCBR);
+const key_override_t right_paran_override           = ko_make_basic(MOD_MASK_SHIFT, KC_RPRN, KC_RCBR);
+// shift [] gives <>
+const key_override_t left_squarebracket_override    = ko_make_basic(MOD_MASK_SHIFT, KC_LBRC, KC_LABK);
+const key_override_t right_squarebracket_override   = ko_make_basic(MOD_MASK_SHIFT, KC_RBRC, KC_RABK);
+// shift . gives !
+const key_override_t period_override                = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_EXLM);
+// shift , gives :
+const key_override_t comma_override                 = ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_COLN);
 
 // This globally defines all key overrides to be used
 const key_override_t **key_overrides = (const key_override_t *[]){
-    &left_bracket_override,
-    &right_bracket_override,
+    &left_paran_override,
+    &right_paran_override,
+    &left_squarebracket_override,
+    &right_squarebracket_override,
+    &period_override,
+    &comma_override,
     NULL // Null terminate the array of overrides!
 };
 
