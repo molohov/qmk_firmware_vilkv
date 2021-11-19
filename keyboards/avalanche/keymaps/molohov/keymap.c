@@ -437,7 +437,7 @@ const key_override_t right_paran_override           = ko_make_basic(MOD_MASK_SHI
 const key_override_t left_squarebracket_override    = ko_make_basic(MOD_MASK_SHIFT, KC_LBRC, KC_LABK);
 const key_override_t right_squarebracket_override   = ko_make_basic(MOD_MASK_SHIFT, KC_RBRC, KC_RABK);
 // shift . gives !
-const key_override_t period_override                = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_EXLM);
+const key_override_t period_override                = ko_make_basic(MOD_MASK_SHIFT, KC_DOT,  KC_EXLM);
 // shift , gives :
 const key_override_t comma_override                 = ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_COLN);
 
@@ -700,12 +700,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false; // took care of that key
     }
     switch (keycode) {
-        // case KC_QWERTY_GAME:
-        //     if (record->event.pressed) {
-        //         set_single_persistent_default_layer(_QWERTY_GAME);
-        //     }
-        //     return false;
-
         case VIMWRITE:
             if (record->event.pressed) {
                 SEND_STRING(SS_TAP(X_ESCAPE) SS_DELAY(100) SS_LSFT(SS_TAP(X_SCOLON)) SS_DELAY(100) SS_TAP(X_W) SS_DELAY(100) SS_TAP(X_ENTER));
@@ -857,8 +851,8 @@ void matrix_scan_user(void) {
         has_ran_yet = true;
         // rgblight_mode(RGBLIGHT_MODE_RAINBOW_SWIRL + 3);
         // rgblight_mode(RGBLIGHT_MODE_BREATHING + 1);
-        rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
-        rgblight_sethsv(HSV_WHITE);
+        // rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
+        // rgblight_sethsv(HSV_WHITE);
     }
     if (is_alt_tab_active) {
       if (timer_elapsed(alt_tab_timer) > 600) {
