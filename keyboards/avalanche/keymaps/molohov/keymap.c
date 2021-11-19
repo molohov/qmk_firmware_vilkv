@@ -447,13 +447,6 @@ bool process_adaptive_key(uint16_t keycode, const keyrecord_t *record) {
                             return_state = false; // done.
                     }
                     break;
-                // case KC_W:
-                //     switch (prior_keycode) {
-                //         case KC_C: //CW -> CR
-                //             tap_code(KC_R);
-                //             return_state = false; // done.
-                //     }
-                //     break;
                 case KC_F:
                     switch (prior_keycode) {
                         case KC_X: //XF -> XC
@@ -461,10 +454,17 @@ bool process_adaptive_key(uint16_t keycode, const keyrecord_t *record) {
                             return_state = false; // done.
                     }
                     break;
-                // case KC_C:
+                case KC_V:
+                    switch (prior_keycode) {
+                        case KC_L: //LV -> LB
+                            tap_code(KC_B);
+                            return_state = false; // done.
+                    }
+                    break;
+                // case KC_W:
                 //     switch (prior_keycode) {
-                //         case KC_L: //LC -> LF
-                //             tap_code(KC_F);
+                //         case KC_C: //CW -> CR
+                //             tap_code(KC_R);
                 //             return_state = false; // done.
                 //     }
                 //     break;
