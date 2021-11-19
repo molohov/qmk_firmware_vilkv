@@ -4,8 +4,9 @@ RGBLIGHT_ENABLE = yes
 VIA_ENABLE = no
 EXTRAKEY_ENABLE = yes
 LTO_ENABLE = yes
+COMBO_ENABLE = yes
+KEY_OVERRIDE_ENABLE = yes
 
 # Disable unsupported hardware, maybe it reduces firmware size?
 AUDIO_SUPPORTED = no
 BACKLIGHT_SUPPORTED = no
-COMBO_ENABLE = yes
