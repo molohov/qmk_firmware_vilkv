@@ -367,40 +367,35 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 
 // LEFT HAND
 // copy/paste combos on left bottom row
-const uint16_t PROGMEM pc_undo[] =      {KC_W, KC_C, COMBO_END};
+const uint16_t PROGMEM pc_undo[]      = {KC_W, KC_C, COMBO_END};
 const uint16_t PROGMEM pc_selectall[] = {KC_W, KC_S, COMBO_END};
-const uint16_t PROGMEM pc_copy[] =      {KC_C, KC_L, COMBO_END};
-const uint16_t PROGMEM pc_cut[] =       {KC_C, KC_N, COMBO_END};
-const uint16_t PROGMEM pc_paste[] =     {KC_L, KC_D, COMBO_END};
-const uint16_t PROGMEM pc_find[] =      {KC_L, KC_T, COMBO_END};
+const uint16_t PROGMEM pc_copy[]      = {KC_C, KC_L, COMBO_END};
+const uint16_t PROGMEM pc_cut[]       = {KC_C, KC_N, COMBO_END};
+const uint16_t PROGMEM pc_paste[]     = {KC_L, KC_D, COMBO_END};
+const uint16_t PROGMEM pc_find[]      = {KC_L, KC_T, COMBO_END};
 
 // this combo mirrors the DW action in vim!
-const uint16_t PROGMEM del_word[] =     {KC_W, KC_D,    COMBO_END};
+const uint16_t PROGMEM del_word[] = {KC_W, KC_D, COMBO_END};
 // keep shift+V on the left side
-const uint16_t PROGMEM vimshiftv[] =    {KC_N, KC_D, COMBO_END};
-const uint16_t PROGMEM escape[] =       {KC_F, KC_M, COMBO_END};
-
+const uint16_t PROGMEM vimshiftv[] = {KC_N, KC_D, COMBO_END};
+const uint16_t PROGMEM escape[]    = {KC_F, KC_M, COMBO_END};
 
 // RIGHT HAND
 // vim combos rooted from right home row middle finger
-const uint16_t PROGMEM vimwrite[] =     {KC_E, KC_A,    COMBO_END};
-const uint16_t PROGMEM vimwritequit[] = {KC_E, KC_U,    COMBO_END};
-const uint16_t PROGMEM vimquit[] =      {KC_E, KC_QUOT, COMBO_END};
-const uint16_t PROGMEM vimquitall[] =   {KC_E, KC_MINS, COMBO_END};
-
+const uint16_t PROGMEM vimwrite[]     = {KC_E, KC_A, COMBO_END};
+const uint16_t PROGMEM vimwritequit[] = {KC_E, KC_U, COMBO_END};
+const uint16_t PROGMEM vimquit[]      = {KC_E, KC_QUOT, COMBO_END};
+const uint16_t PROGMEM vimquitall[]   = {KC_E, KC_MINS, COMBO_END};
 // linux combos
-const uint16_t PROGMEM lnx_cls[] =      {KC_Y, KC_O,    COMBO_END};
-const uint16_t PROGMEM lnx_last[] =     {KC_I, KC_DOT,  COMBO_END};
-
-const uint16_t PROGMEM ku_qu[] =        {KC_U, KC_K,    COMBO_END};
-
+const uint16_t PROGMEM lnx_cls[]  = {KC_Y, KC_O, COMBO_END};
+const uint16_t PROGMEM lnx_last[] = {KC_I, KC_DOT, COMBO_END};
+const uint16_t PROGMEM ku_qu[]    = {KC_U, KC_K, COMBO_END};
 // const uint16_t PROGMEM exclamation[] =  {KC_DOT, KC_A,    COMBO_END};
-const uint16_t PROGMEM at[] =           {KC_DOT, KC_SLSH,   COMBO_END};
-const uint16_t PROGMEM dollar[] =       {KC_DOT, KC_MINS,    COMBO_END};
+const uint16_t PROGMEM at[]     = {KC_DOT, KC_SLSH, COMBO_END};
+const uint16_t PROGMEM dollar[] = {KC_DOT, KC_MINS, COMBO_END};
 // . + , = ;
-const uint16_t PROGMEM semicolon[] =    {KC_DOT, KC_COMM,    COMBO_END};
-const uint16_t PROGMEM win_bluetooth[] =  {KC_K, KC_Y, COMBO_END};
-
+const uint16_t PROGMEM semicolon[]     = {KC_DOT, KC_COMM, COMBO_END};
+const uint16_t PROGMEM win_bluetooth[] = {KC_K, KC_Y, COMBO_END};
 
 combo_t key_combos[] = {
     [COMBO_VIM_WRITE]       = COMBO(vimwrite,       VIMWRITE),
@@ -418,12 +413,12 @@ combo_t key_combos[] = {
     [COMBO_LNX_LAST]        = COMBO(lnx_last,       LNX_LAST),
     [COMBO_LNX_CLS]         = COMBO(lnx_cls,        C(KC_L)),
     [COMBO_KU_QU]           = COMBO(ku_qu,          KU_QU),
-    // [COMBO_EXCLAMATION]     = COMBO(exclamation,    KC_EXLM),
     [COMBO_AT]              = COMBO(at,             KC_AT),
     [COMBO_DOLLAR]          = COMBO(dollar,         KC_DLR),
     [COMBO_SEMICOLON]       = COMBO(semicolon,      KC_SCLN),
     [COMBO_DEL_WORD]        = COMBO(del_word,       C(KC_DEL)),
     [COMBO_ESC]             = COMBO(escape,         KC_ESC),
+    // [COMBO_EXCLAMATION]     = COMBO(exclamation,    KC_EXLM),
 };
 
 // #endif
@@ -431,15 +426,15 @@ combo_t key_combos[] = {
 
 // CUSTOM MODIFIER OVERRIDES
 // shift () gives {}
-const key_override_t left_paran_override            = ko_make_basic(MOD_MASK_SHIFT, KC_LPRN, KC_LCBR);
-const key_override_t right_paran_override           = ko_make_basic(MOD_MASK_SHIFT, KC_RPRN, KC_RCBR);
+const key_override_t left_paran_override  = ko_make_basic(MOD_MASK_SHIFT, KC_LPRN, KC_LCBR);
+const key_override_t right_paran_override = ko_make_basic(MOD_MASK_SHIFT, KC_RPRN, KC_RCBR);
 // shift [] gives <>
-const key_override_t left_squarebracket_override    = ko_make_basic(MOD_MASK_SHIFT, KC_LBRC, KC_LABK);
-const key_override_t right_squarebracket_override   = ko_make_basic(MOD_MASK_SHIFT, KC_RBRC, KC_RABK);
+const key_override_t left_squarebracket_override  = ko_make_basic(MOD_MASK_SHIFT, KC_LBRC, KC_LABK);
+const key_override_t right_squarebracket_override = ko_make_basic(MOD_MASK_SHIFT, KC_RBRC, KC_RABK);
 // shift . gives !
-const key_override_t period_override                = ko_make_basic(MOD_MASK_SHIFT, KC_DOT,  KC_EXLM);
+const key_override_t period_override = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_EXLM);
 // shift , gives :
-const key_override_t comma_override                 = ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_COLN);
+const key_override_t comma_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_COLN);
 
 // This globally defines all key overrides to be used
 const key_override_t **key_overrides = (const key_override_t *[]){
@@ -478,13 +473,13 @@ bool process_adaptive_key(uint16_t keycode, const keyrecord_t *record) {
                             return_state = false; // done.
                     }
                     break;
-                case KC_V:
-                    switch (prior_keycode) {
-                        case KC_L: //LV -> LB
-                            tap_code(KC_B);
-                            return_state = false; // done.
-                    }
-                    break;
+                // case KC_V:
+                //     switch (prior_keycode) {
+                //         case KC_L: //LV -> LB
+                //             tap_code(KC_B);
+                //             return_state = false; // done.
+                //     }
+                //     break;
                 // case KC_W:
                 //     switch (prior_keycode) {
                 //         case KC_C: //CW -> CR
