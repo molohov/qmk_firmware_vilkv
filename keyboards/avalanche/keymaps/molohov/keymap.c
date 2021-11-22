@@ -26,6 +26,7 @@ enum custom_keycodes {
     VIPASTE,
     LNX_LAST,
     KU_QU,
+    DLSIM,
     IMPORT_PDB,
 };
 
@@ -119,6 +120,13 @@ enum custom_keycodes {
 #define HRM_I KC_I
 #define HRM_H KC_H
 #endif
+#define MODS_SHIFT (get_mods() & MOD_BIT(KC_LSHIFT) || get_mods() & MOD_BIT(KC_RSHIFT))
+#define SEND_CAP_STRING(str, capitalized) if (MODS_SHIFT) { \
+                                            clear_mods(); \
+                                            SEND_STRING(capitalized); \
+                                          } else { \
+                                            SEND_STRING(str); \
+                                          }
 
 /*
  * Base Layer: SAMPLE
@@ -354,6 +362,7 @@ enum combo_events {
     COMBO_DEL_WORD,
     COMBO_SEMICOLON,
     COMBO_ESC,
+    COMBO_DLSIM,
     COMBO_LENGTH
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
@@ -379,6 +388,7 @@ const uint16_t PROGMEM del_word[] = {KC_W, KC_D, COMBO_END};
 // keep shift+V on the left side
 const uint16_t PROGMEM vimshiftv[] = {KC_N, KC_D, COMBO_END};
 const uint16_t PROGMEM escape[]    = {KC_F, KC_M, COMBO_END};
+const uint16_t PROGMEM dlsim[]    = {KC_M, KC_P, COMBO_END};
 
 // RIGHT HAND
 // vim combos rooted from right home row middle finger
@@ -418,6 +428,7 @@ combo_t key_combos[] = {
     [COMBO_SEMICOLON]       = COMBO(semicolon,      KC_SCLN),
     [COMBO_DEL_WORD]        = COMBO(del_word,       C(KC_DEL)),
     [COMBO_ESC]             = COMBO(escape,         KC_ESC),
+    [COMBO_DLSIM]           = COMBO(dlsim,          DLSIM),
     // [COMBO_EXCLAMATION]     = COMBO(exclamation,    KC_EXLM),
 };
 
@@ -730,7 +741,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case KU_QU:
             if (record->event.pressed) {
-                SEND_STRING("qu");
+                SEND_CAP_STRING("qu", "Qu");
+            }
+            break;
+        case DLSIM:
+            if (record->event.pressed) {
+                SEND_CAP_STRING("dlsim", "DLSim")
             }
             break;
         case IMPORT_PDB:
