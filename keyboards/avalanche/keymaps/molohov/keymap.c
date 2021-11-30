@@ -27,6 +27,8 @@ enum custom_keycodes {
     LNX_LAST,
     KU_QU,
     DLSIM,
+    SLACK_CODE,
+    COPY_PASTE,
     IMPORT_PDB,
 };
 
@@ -169,7 +171,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_NAV_NUM_SYM] = LAYOUT(
-                KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,      KC_F6,                              KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F11,     KC_F12,
+                KC_F11,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,                              KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F12,
                 XXXXXXX,    KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            KC_MINS,    LNX_LWD,    KC_UP,      LNX_RWD,    XXXXXXX,    XXXXXXX,
     KC_X,       KC_BSLS,    KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    _______,    _______,    KC_QUOT,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_COMM,    KC_SLSH,    KC_SLSH,
                 KC_EQL,     KC_7,       KC_3,       KC_1,       KC_5,       KC_9,       _______,    _______,    KC_8,       KC_2,       KC_0,       KC_4,       KC_6,       KC_DOT,
@@ -271,68 +273,85 @@ static void print_layers(void) {
     // oled_write_ln_P(PSTR("layer"), false);
     // render_face();
     // oled_set_cursor(0,12);
-    oled_write_P(PSTR("BUH'S"), false);
-    oled_write_P(PSTR("BOARD"), false);
-    oled_write_P(PSTR("\n"), false);
+    // oled_write_P(PSTR("BUH'S"), false);
+    // oled_write_P(PSTR("BOARD"), false);
+    // oled_write_P(PSTR("\n"), false);
     switch (get_highest_layer(layer_state)) {
         case _HANDS_DOWN:
-            oled_write_P(PSTR("Hands"), false);
-            oled_write_ln_P(PSTR("Down"), false);
-            oled_write_ln_P(PSTR("Neu"), false);
+            // oled_write_P(PSTR("Hands"), false);
+            // oled_write_ln_P(PSTR("Down"), false);
+            // oled_write_ln_P(PSTR("Neu"), false);
+            if (is_keyboard_master()) {
+                oled_write_ln_P(PSTR("  VSCP X F M P B"), false);
+                oled_write_P(   PSTR("SCRN Z R S N T G LOCK"), false);
+                oled_write_P(   PSTR("  HOME W C L D V CBSP"), false);
+                oled_write_P(   PSTR("NUM VC GDEL SBSP CTAB"), false);
+            }
             break;
         case _QWERTY_GAME:
-            oled_write_P(PSTR("QWERT"), false);
-            oled_write_ln_P(PSTR("Game"), false);
+            // oled_write_P(PSTR("QWERT"), false);
+            // oled_write_ln_P(PSTR("Game"), false);
+            oled_write_ln_P(PSTR("ESC Q W E R T"), false);
+            oled_write_ln_P(PSTR("SFT A S D F G"), false);
+            oled_write_ln_P(PSTR("CTL Z X C V B"), false);
+            oled_write_ln_P(PSTR("XXX CTL SPC SFT ENT"), false);
             break;
         case _NAV_NUM_SYM:
-            oled_write_P(PSTR("Navig"), false);
-            oled_write_P(PSTR("Symbs"), false);
-            oled_write_P(PSTR("Numbs"), false);
+            // oled_write_P(PSTR("Navig"), false);
+            // oled_write_P(PSTR("Symbs"), false);
+            // oled_write_P(PSTR("Numbs"), false);
+            oled_write_ln_P(PSTR("F11 F1 F2 F3 F4 F5"), false);
+            oled_write_ln_P(PSTR("    &  `  #  [  ]"), false);
+            oled_write_ln_P(PSTR("X \\ :  \%  *  (  )"), false);
+            oled_write_ln_P(PSTR("  = 7  3  1  5  9"), false);
             break;
         case _BYO_ONOTE_VSC:
-            oled_write_P(PSTR("Byobu"), false);
-            oled_write_P(PSTR("ONote"), false);
-            oled_write_P(PSTR("VCode"), false);
+            // oled_write_P(PSTR("Byobu"), false);
+            // oled_write_P(PSTR("ONote"), false);
+            // oled_write_P(PSTR("VCode"), false);
+            oled_write_P(PSTR("      OIM OTO OQS PDB"), false);
+            oled_write_P(PSTR("KL DSF VSP HSP CL FPN"), false);
             break;
         default:
             oled_write_P(PSTR("Undef"), false);
     }
-    oled_write_P(PSTR("\n"), false);
+    // oled_write_P(PSTR("\n"), false);
     // led_t led_usb_state = host_keyboard_led_state();
     // oled_write_ln_P(PSTR("CPSLK"), led_usb_state.caps_lock);
 }
 
-static void print_mods(void) {
-    int current_mods = get_mods();
-    if (current_mods & MOD_MASK_SHIFT) {
-        oled_write_P(PSTR("SHIFT"), false);
-    }
-    if (current_mods & MOD_MASK_CTRL) {
-        oled_write_ln_P(PSTR("CTRL"), false);
-    }
-    if (current_mods & MOD_MASK_GUI) {
-        oled_write_ln_P(PSTR("GUI"), false);
-    }
-    if (current_mods & MOD_MASK_ALT) {
-        oled_write_ln_P(PSTR("ALT"), false);
-    }
-}
+// static void print_mods(void) {
+//     int current_mods = get_mods();
+//     if (current_mods & MOD_MASK_SHIFT) {
+//         oled_write_P(PSTR("SHIFT"), false);
+//     }
+//     if (current_mods & MOD_MASK_CTRL) {
+//         oled_write_ln_P(PSTR("CTRL"), false);
+//     }
+//     if (current_mods & MOD_MASK_GUI) {
+//         oled_write_ln_P(PSTR("GUI"), false);
+//     }
+//     if (current_mods & MOD_MASK_ALT) {
+//         oled_write_ln_P(PSTR("ALT"), false);
+//     }
+// }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-    // if (is_keyboard_master()) {
-        return OLED_ROTATION_270;
-    // }
-    // return rotation;
+    if (!is_keyboard_master()) {
+        return OLED_ROTATION_180;
+    }
+    return rotation;
 }
 
 void oled_task_user(void) {
     oled_clear();
     if (is_keyboard_master()) {
         print_layers();
-        print_mods();
+        // print_mods();
     } else {
+        print_layers();
         // render_logo();
-        print_mods();
+        // print_mods();
     }
 }
 
@@ -352,9 +371,11 @@ enum combo_events {
     COMBO_PC_FIND,
     COMBO_PC_UNDO,
     COMBO_PC_SELECTALL,
+    COMBO_PC_COPYPASTE,
     COMBO_WIN_BLUETOOTH,
     COMBO_LNX_CLS,
     COMBO_LNX_LAST,
+    COMBO_SLACK_CODE,
     COMBO_KU_QU,
     // COMBO_EXCLAMATION,
     COMBO_AT,
@@ -381,14 +402,16 @@ const uint16_t PROGMEM pc_selectall[] = {KC_W, KC_S, COMBO_END};
 const uint16_t PROGMEM pc_copy[]      = {KC_C, KC_L, COMBO_END};
 const uint16_t PROGMEM pc_cut[]       = {KC_C, KC_N, COMBO_END};
 const uint16_t PROGMEM pc_paste[]     = {KC_L, KC_D, COMBO_END};
+const uint16_t PROGMEM pc_copypaste[] = {KC_C, KC_D, COMBO_END};
 const uint16_t PROGMEM pc_find[]      = {KC_L, KC_T, COMBO_END};
 
 // this combo mirrors the DW action in vim!
 const uint16_t PROGMEM del_word[] = {KC_W, KC_D, COMBO_END};
 // keep shift+V on the left side
 const uint16_t PROGMEM vimshiftv[] = {KC_N, KC_D, COMBO_END};
-const uint16_t PROGMEM escape[]    = {KC_F, KC_M, COMBO_END};
-const uint16_t PROGMEM dlsim[]    = {KC_M, KC_P, COMBO_END};
+const uint16_t PROGMEM slack_code[]    = {KC_F, KC_M, COMBO_END};
+const uint16_t PROGMEM escape[]    = {KC_S, KC_M, COMBO_END};
+const uint16_t PROGMEM dlsim[]    = {KC_M, KC_T, COMBO_END};
 
 // RIGHT HAND
 // vim combos rooted from right home row middle finger
@@ -419,6 +442,7 @@ combo_t key_combos[] = {
     [COMBO_PC_FIND]         = COMBO(pc_find,        PC_FIND),
     [COMBO_PC_UNDO]         = COMBO(pc_undo,        PC_UNDO),
     [COMBO_PC_SELECTALL]    = COMBO(pc_selectall,   PC_SALL),
+    [COMBO_PC_COPYPASTE]    = COMBO(pc_copypaste,   COPY_PASTE),
     [COMBO_WIN_BLUETOOTH]   = COMBO(win_bluetooth,  G(KC_K)),
     [COMBO_LNX_LAST]        = COMBO(lnx_last,       LNX_LAST),
     [COMBO_LNX_CLS]         = COMBO(lnx_cls,        C(KC_L)),
@@ -429,6 +453,7 @@ combo_t key_combos[] = {
     [COMBO_DEL_WORD]        = COMBO(del_word,       C(KC_DEL)),
     [COMBO_ESC]             = COMBO(escape,         KC_ESC),
     [COMBO_DLSIM]           = COMBO(dlsim,          DLSIM),
+    [COMBO_SLACK_CODE]      = COMBO(slack_code,     SLACK_CODE),
     // [COMBO_EXCLAMATION]     = COMBO(exclamation,    KC_EXLM),
 };
 
@@ -747,6 +772,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case DLSIM:
             if (record->event.pressed) {
                 SEND_CAP_STRING("dlsim", "DLSim")
+            }
+            break;
+        case SLACK_CODE:
+            if (record->event.pressed) {
+                SEND_STRING("```");
+            }
+            break;
+        case COPY_PASTE:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LCTL(SS_TAP(X_C)) SS_DELAY(100) SS_LCTL(SS_TAP(X_V)));
             }
             break;
         case IMPORT_PDB:
