@@ -171,10 +171,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_NAV_NUM_SYM] = LAYOUT(
-                KC_F11,     KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,                              KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     KC_F12,
-                XXXXXXX,    KC_AMPR,    KC_GRV,     KC_HASH,    KC_LBRC,    KC_RBRC,                            KC_MINS,    LNX_LWD,    KC_UP,      LNX_RWD,    XXXXXXX,    XXXXXXX,
-    KC_X,       KC_BSLS,    KC_COLN,    KC_PERC,    KC_PAST,    KC_LPRN,    KC_RPRN,    _______,    _______,    KC_QUOT,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_COMM,    KC_SLSH,    KC_SLSH,
-                KC_EQL,     KC_7,       KC_3,       KC_1,       KC_5,       KC_9,       _______,    _______,    KC_8,       KC_2,       KC_0,       KC_4,       KC_6,       KC_DOT,
+                _______,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,                              KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     _______,
+                _______,    KC_AMPR,    KC_PERC,    KC_BSLS,    KC_LBRC,    KC_RBRC,                            _______,    _______,    KC_UP,      _______,    _______,    _______,
+    _______,    KC_EQL,     KC_COLN,    KC_GRV,     KC_PAST,    KC_LPRN,    KC_RPRN,    _______,    _______,    _______,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_DOT,     _______,    _______,
+                _______,    KC_7,       KC_3,       KC_1,       KC_5,       KC_9,       KC_F11,     KC_F12,     KC_8,       KC_2,       KC_0,       KC_4,       KC_6,       _______,
                                         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
 
@@ -189,9 +189,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY_GAME] = LAYOUT(
                 KC_ESC,     KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                               KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_MINS,
                 KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,                               KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC,
-    XXXXXXX,    KC_LSFT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       KC_LCBR,    KC_RCBR,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,    KC_BSLS,
-                KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       KC_BSPC,    KC_EQL,     KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    XXXXXXX,
-                                        XXXXXXX,    KC_LCTL,    KC_SPC,     KC_LSFT,    KC_ENT,     _______,    _______,    _______,    _______,    _______
+    XXXXXXX,    KC_LSFT,    KC_A,       KC_S,       KC_D,       KC_F,       KC_G,       _______,    _______,    KC_H,       KC_J,       KC_K,       KC_L,       KC_SCLN,    KC_QUOT,    KC_BSLS,
+                KC_LCTL,    KC_Z,       KC_X,       KC_C,       KC_V,       KC_B,       _______,    _______,    KC_N,       KC_M,       KC_COMM,    KC_DOT,     KC_SLSH,    XXXXXXX,
+                                        XXXXXXX,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
 };
 
@@ -384,6 +384,7 @@ enum combo_events {
     COMBO_SEMICOLON,
     COMBO_ESC,
     COMBO_DLSIM,
+    COMBO_NEWTAB,
     COMBO_LENGTH
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
@@ -412,6 +413,7 @@ const uint16_t PROGMEM vimshiftv[] = {KC_N, KC_D, COMBO_END};
 const uint16_t PROGMEM slack_code[]    = {KC_F, KC_M, COMBO_END};
 const uint16_t PROGMEM escape[]    = {KC_S, KC_M, COMBO_END};
 const uint16_t PROGMEM dlsim[]    = {KC_M, KC_T, COMBO_END};
+const uint16_t PROGMEM newtab[]      = {KC_T, KC_G, COMBO_END};
 
 // RIGHT HAND
 // vim combos rooted from right home row middle finger
@@ -454,6 +456,7 @@ combo_t key_combos[] = {
     [COMBO_ESC]             = COMBO(escape,         KC_ESC),
     [COMBO_DLSIM]           = COMBO(dlsim,          DLSIM),
     [COMBO_SLACK_CODE]      = COMBO(slack_code,     SLACK_CODE),
+    [COMBO_NEWTAB]          = COMBO(newtab,         C(KC_T)),
     // [COMBO_EXCLAMATION]     = COMBO(exclamation,    KC_EXLM),
 };
 
@@ -471,6 +474,8 @@ const key_override_t right_squarebracket_override = ko_make_basic(MOD_MASK_SHIFT
 const key_override_t period_override = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_EXLM);
 // shift , gives :
 const key_override_t comma_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_COLN);
+// shift * gives #
+const key_override_t asterisk_override = ko_make_basic(MOD_MASK_SHIFT, KC_PAST, KC_HASH);
 
 // This globally defines all key overrides to be used
 const key_override_t **key_overrides = (const key_override_t *[]){
@@ -480,6 +485,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &right_squarebracket_override,
     &period_override,
     &comma_override,
+    &asterisk_override,
     NULL // Null terminate the array of overrides!
 };
 
