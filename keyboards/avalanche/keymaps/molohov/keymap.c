@@ -164,7 +164,7 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_HANDS_DOWN] = LAYOUT(
                 VS_EDIT,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,                               KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       VS_TERM,
-                VS_CTLP,    KC_X,       KC_F,       KC_M,       KC_P,       KC_B,                               KC_MINS,    KC_SLSH,    KC_DOT,     KC_COMM,    KC_Q,       LNX_RSR,
+                VS_CTLP,    KC_X,       KC_F,       KC_M,       KC_P,       KC_B,                               KC_MINS,    KC_DOT,     KC_SLSH,    KC_COMM,    KC_Q,       LNX_RSR,
     PC_SCSH,    KC_Z,       KC_R,       KC_S,       HRM_N,      HRM_T,      KC_G,       PC_LOCK,    KC_MPLY,    KC_QUOT,    HRM_A,      HRM_E,      HRM_I,      HRM_H,      KC_J,       VIPASTE,
                 KC_HOME,    KC_W,       KC_C,       KC_L,       KC_D,       KC_V,       PC_BSWD,    PC_SLACK,   KC_EQL,     KC_U,       KC_O,       KC_Y,       KC_K,       KC_END,
                                         NUMTOG,     VS_COMT,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCBYO,     PC_CLIP,    QWERTY_GAME
@@ -173,7 +173,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NAV_NUM_SYM] = LAYOUT(
                 _______,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,                              KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     _______,
                 _______,    KC_AMPR,    KC_PERC,    KC_BSLS,    KC_LBRC,    KC_RBRC,                            _______,    _______,    KC_UP,      _______,    _______,    _______,
-    _______,    KC_EQL,     KC_COLN,    KC_GRV,     KC_PAST,    KC_LPRN,    KC_RPRN,    _______,    _______,    _______,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_DOT,     _______,    _______,
+    _______,    KC_SLSH,    KC_COLN,    KC_GRV,     KC_PAST,    KC_LPRN,    KC_RPRN,    _______,    _______,    _______,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_EQL,     _______,    _______,
                 _______,    KC_7,       KC_3,       KC_1,       KC_5,       KC_9,       KC_F11,     KC_F12,     KC_8,       KC_2,       KC_0,       KC_4,       KC_6,       _______,
                                         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
@@ -300,10 +300,10 @@ static void print_layers(void) {
             // oled_write_P(PSTR("Navig"), false);
             // oled_write_P(PSTR("Symbs"), false);
             // oled_write_P(PSTR("Numbs"), false);
-            oled_write_ln_P(PSTR("F11 F1 F2 F3 F4 F5"), false);
-            oled_write_ln_P(PSTR("    &  `  #  [  ]"), false);
-            oled_write_ln_P(PSTR("X \\ :  \%  *  (  )"), false);
-            oled_write_ln_P(PSTR("  = 7  3  1  5  9"), false);
+            oled_write_ln_P(PSTR("  F1 F2 F3 F4 F5"), false);
+            oled_write_ln_P(PSTR("  &  \%  \\  [  ]"), false);
+            oled_write_ln_P(PSTR("/ :  `  *  (  )"), false);
+            oled_write_ln_P(PSTR("  7  3  1  5  9  F11"), false);
             break;
         case _BYO_ONOTE_VSC:
             // oled_write_P(PSTR("Byobu"), false);
@@ -412,7 +412,7 @@ const uint16_t PROGMEM del_word[] = {KC_W, KC_D, COMBO_END};
 const uint16_t PROGMEM vimshiftv[] = {KC_N, KC_D, COMBO_END};
 const uint16_t PROGMEM slack_code[]    = {KC_F, KC_M, COMBO_END};
 const uint16_t PROGMEM escape[]    = {KC_S, KC_M, COMBO_END};
-const uint16_t PROGMEM dlsim[]    = {KC_M, KC_T, COMBO_END};
+const uint16_t PROGMEM dlsim[]    = {KC_N, KC_T, COMBO_END};
 const uint16_t PROGMEM newtab[]      = {KC_T, KC_G, COMBO_END};
 
 // RIGHT HAND
@@ -423,11 +423,10 @@ const uint16_t PROGMEM vimquit[]      = {KC_E, KC_QUOT, COMBO_END};
 const uint16_t PROGMEM vimquitall[]   = {KC_E, KC_MINS, COMBO_END};
 // linux combos
 const uint16_t PROGMEM lnx_cls[]  = {KC_Y, KC_O, COMBO_END};
-const uint16_t PROGMEM lnx_last[] = {KC_I, KC_DOT, COMBO_END};
+const uint16_t PROGMEM lnx_last[] = {KC_I, KC_SLSH, COMBO_END};
 const uint16_t PROGMEM ku_qu[]    = {KC_U, KC_K, COMBO_END};
-// const uint16_t PROGMEM exclamation[] =  {KC_DOT, KC_A,    COMBO_END};
 const uint16_t PROGMEM at[]     = {KC_DOT, KC_SLSH, COMBO_END};
-const uint16_t PROGMEM dollar[] = {KC_DOT, KC_MINS, COMBO_END};
+const uint16_t PROGMEM dollar[] = {KC_SLSH, KC_MINS, COMBO_END};
 // . + , = ;
 const uint16_t PROGMEM semicolon[]     = {KC_DOT, KC_COMM, COMBO_END};
 const uint16_t PROGMEM win_bluetooth[] = {KC_K, KC_Y, COMBO_END};
@@ -457,7 +456,6 @@ combo_t key_combos[] = {
     [COMBO_DLSIM]           = COMBO(dlsim,          DLSIM),
     [COMBO_SLACK_CODE]      = COMBO(slack_code,     SLACK_CODE),
     [COMBO_NEWTAB]          = COMBO(newtab,         C(KC_T)),
-    // [COMBO_EXCLAMATION]     = COMBO(exclamation,    KC_EXLM),
 };
 
 // #endif
@@ -470,8 +468,10 @@ const key_override_t right_paran_override = ko_make_basic(MOD_MASK_SHIFT, KC_RPR
 // shift [] gives <>
 const key_override_t left_squarebracket_override  = ko_make_basic(MOD_MASK_SHIFT, KC_LBRC, KC_LABK);
 const key_override_t right_squarebracket_override = ko_make_basic(MOD_MASK_SHIFT, KC_RBRC, KC_RABK);
-// shift . gives !
-const key_override_t period_override = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_EXLM);
+// shift . gives ?
+const key_override_t period_override = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_QUES);
+// shift / gives !
+const key_override_t slash_override = ko_make_basic(MOD_MASK_SHIFT, KC_SLSH, KC_EXLM);
 // shift , gives :
 const key_override_t comma_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_COLN);
 // shift * gives #
@@ -484,6 +484,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &left_squarebracket_override,
     &right_squarebracket_override,
     &period_override,
+    &slash_override,
     &comma_override,
     &asterisk_override,
     NULL // Null terminate the array of overrides!
@@ -504,6 +505,7 @@ bool process_adaptive_key(uint16_t keycode, const keyrecord_t *record) {
                         case KC_F: // FM -> FL
                         case KC_P: // PM -> PL
                         case KC_B: // BM -> BL
+                        case KC_X: // XM -> XL
                             tap_code(KC_L);
                             return_state = false; // done.
                     }
