@@ -53,6 +53,7 @@ enum custom_keycodes {
 #define  PC_LWRD        C(KC_LEFT)
 #define  PC_RWRD        C(KC_RIGHT)
 #define  PC_CLIP        G(KC_V)
+#define  WINRUN         C(A(KC_K))
 #define  LNX_PASTE      S(C(KC_V))
 #define  LNX_LWD        A(KC_B)
 #define  LNX_RWD        A(KC_F)
@@ -167,7 +168,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 VS_CTLP,    KC_X,       KC_F,       KC_M,       KC_P,       KC_B,                               KC_MINS,    KC_DOT,     KC_SLSH,    KC_COMM,    KC_Q,       LNX_RSR,
     PC_SCSH,    KC_Z,       KC_R,       KC_S,       HRM_N,      HRM_T,      KC_G,       PC_LOCK,    KC_MPLY,    KC_QUOT,    HRM_A,      HRM_E,      HRM_I,      HRM_H,      KC_J,       VIPASTE,
                 KC_HOME,    KC_W,       KC_C,       KC_L,       KC_D,       KC_V,       PC_BSWD,    PC_SLACK,   KC_EQL,     KC_U,       KC_O,       KC_Y,       KC_K,       KC_END,
-                                        NUMTOG,     VS_COMT,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCBYO,     PC_CLIP,    QWERTY_GAME
+                                        WINRUN,     VS_COMT,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCBYO,     PC_CLIP,    QWERTY_GAME
     ),
 
     [_NAV_NUM_SYM] = LAYOUT(
@@ -382,7 +383,7 @@ enum combo_events {
     COMBO_DOLLAR,
     COMBO_DEL_WORD,
     COMBO_SEMICOLON,
-    COMBO_ESC,
+    // COMBO_ESC,
     COMBO_DLSIM,
     COMBO_NEWTAB,
     COMBO_LENGTH
@@ -452,7 +453,7 @@ combo_t key_combos[] = {
     [COMBO_DOLLAR]          = COMBO(dollar,         KC_DLR),
     [COMBO_SEMICOLON]       = COMBO(semicolon,      KC_SCLN),
     [COMBO_DEL_WORD]        = COMBO(del_word,       C(KC_DEL)),
-    [COMBO_ESC]             = COMBO(escape,         KC_ESC),
+    // [COMBO_ESC]             = COMBO(escape,         KC_ESC),
     [COMBO_DLSIM]           = COMBO(dlsim,          DLSIM),
     [COMBO_SLACK_CODE]      = COMBO(slack_code,     SLACK_CODE),
     [COMBO_NEWTAB]          = COMBO(newtab,         C(KC_T)),
@@ -476,6 +477,8 @@ const key_override_t slash_override = ko_make_basic(MOD_MASK_SHIFT, KC_SLSH, KC_
 const key_override_t comma_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_COLN);
 // shift * gives #
 const key_override_t asterisk_override = ko_make_basic(MOD_MASK_SHIFT, KC_PAST, KC_HASH);
+// shift : gives ;
+const key_override_t colon_override = ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_SCLN);
 
 // This globally defines all key overrides to be used
 const key_override_t **key_overrides = (const key_override_t *[]){
@@ -487,6 +490,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &slash_override,
     &comma_override,
     &asterisk_override,
+    &colon_override,
     NULL // Null terminate the array of overrides!
 };
 
@@ -514,6 +518,13 @@ bool process_adaptive_key(uint16_t keycode, const keyrecord_t *record) {
                     switch (prior_keycode) {
                         case KC_X: //XF -> XC
                             tap_code(KC_C);
+                            return_state = false; // done.
+                    }
+                    break;
+                case KC_C:
+                    switch (prior_keycode) {
+                        case KC_L: //LC -> LF
+                            tap_code(KC_F);
                             return_state = false; // done.
                     }
                     break;
@@ -909,7 +920,7 @@ void matrix_scan_user(void) {
         // rgblight_sethsv(HSV_WHITE);
     }
     if (is_alt_tab_active) {
-      if (timer_elapsed(alt_tab_timer) > 600) {
+      if (timer_elapsed(alt_tab_timer) > 1000) {
         unregister_code(KC_LALT);
         is_alt_tab_active = false;
       }
