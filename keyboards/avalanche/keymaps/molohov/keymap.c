@@ -80,7 +80,7 @@ enum custom_keycodes {
 // shift pane focus right
 #define  BY_FSPR        S(KC_F4)
 // new pane
-#define  BY_NPNE        KC_F2
+#define  BY_NWIN        KC_F2
 // focus on left window
 #define  BY_FSWL        KC_F3
 // focus on right window
@@ -181,8 +181,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_BYO_ONOTE_VSC] = LAYOUT(
                 CMB_OFF,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,
-                CMB_ON,     _______,    ON_IMPT,    ON_TODO,    ON_QUES,    PY_IPDB,                            _______,    VS_SCTP,    VS_TERM,    VS_EDIT,    _______,    _______,
-    XXXXXXX,    BY_KPNE,    BY_DISF,    BY_VSPL,    BY_HSPL,    BY_CLYT,    BY_FPNE,    _______,    _______,    BY_RNWN,    BY_FSPL,    BY_NPNE,    BY_FSPR,    BY_RFSH,    BY_KSRV,    XXXXXXX,
+                CMB_ON,     _______,    _______,    _______,    _______,    _______,                            BY_FPNE,    BY_CLYT,    BY_HSPL,    BY_VSPL,    BY_DISF,    BY_KPNE,
+    XXXXXXX,    _______,    ON_QUES,    ON_IMPT,    ON_TODO,    PY_IPDB,    _______,    _______,    _______,    BY_RNWN,    BY_FSPL,    BY_NWIN,    BY_FSPR,    BY_RFSH,    BY_KSRV,    XXXXXXX,
                 _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    BY_FSWL,    BY_FSWR,    BY_MVWL,    BY_MVWR,    _______,
                                         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
@@ -400,7 +400,7 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 // LEFT HAND
 // copy/paste combos on left bottom row
 const uint16_t PROGMEM pc_undo[]      = {KC_W, KC_C, COMBO_END};
-const uint16_t PROGMEM pc_selectall[] = {KC_W, KC_S, COMBO_END};
+const uint16_t PROGMEM pc_selectall[] = {KC_W, KC_L, COMBO_END};
 const uint16_t PROGMEM pc_copy[]      = {KC_C, KC_L, COMBO_END};
 const uint16_t PROGMEM pc_cut[]       = {KC_C, KC_N, COMBO_END};
 const uint16_t PROGMEM pc_paste[]     = {KC_L, KC_D, COMBO_END};
@@ -410,11 +410,11 @@ const uint16_t PROGMEM pc_find[]      = {KC_L, KC_T, COMBO_END};
 // this combo mirrors the DW action in vim!
 const uint16_t PROGMEM del_word[] = {KC_W, KC_D, COMBO_END};
 // keep shift+V on the left side
-const uint16_t PROGMEM vimshiftv[] = {KC_N, KC_D, COMBO_END};
-const uint16_t PROGMEM slack_code[]    = {KC_F, KC_M, COMBO_END};
-const uint16_t PROGMEM escape[]    = {KC_S, KC_M, COMBO_END};
-const uint16_t PROGMEM dlsim[]    = {KC_N, KC_T, COMBO_END};
-const uint16_t PROGMEM newtab[]      = {KC_T, KC_G, COMBO_END};
+const uint16_t PROGMEM vimshiftv[]  = {KC_N, KC_D, COMBO_END};
+const uint16_t PROGMEM slack_code[] = {KC_F, KC_M, COMBO_END};
+// const uint16_t PROGMEM escape[]     = {KC_S, KC_M, COMBO_END};
+const uint16_t PROGMEM dlsim[]      = {KC_N, KC_T, COMBO_END};
+const uint16_t PROGMEM newtab[]     = {KC_T, KC_G, COMBO_END};
 
 // RIGHT HAND
 // vim combos rooted from right home row middle finger
