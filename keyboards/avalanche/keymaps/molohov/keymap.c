@@ -28,6 +28,7 @@ enum custom_keycodes {
     KU_QU,
     DLSIM,
     SLACK_CODE,
+    SLACK_CODE_PASTE,
     COPY_PASTE,
     IMPORT_PDB,
 };
@@ -52,7 +53,7 @@ enum custom_keycodes {
 #define  PC_SCSH        G(S(KC_S))
 #define  PC_LWRD        C(KC_LEFT)
 #define  PC_RWRD        C(KC_RIGHT)
-#define  PC_CLIP        G(KC_V)
+#define  ALTESC         ALT_T(KC_ESC)
 #define  WINRUN         C(A(KC_K))
 #define  LNX_PASTE      S(C(KC_V))
 #define  LNX_LWD        A(KC_B)
@@ -98,6 +99,10 @@ enum custom_keycodes {
 #define  VS_TERM        C(KC_GRV)
 // focus on code area
 #define  VS_EDIT        C(KC_1)
+// go to next editor
+#define  VS_NEDT        C(KC_PGDN)
+// go to prev editor
+#define  VS_PEDT        C(KC_PGUP)
 
 // to-do
 #define ON_TODO         C(KC_1)
@@ -168,7 +173,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 VS_CTLP,    KC_X,       KC_F,       KC_M,       KC_P,       KC_B,                               KC_MINS,    KC_DOT,     KC_SLSH,    KC_COMM,    KC_Q,       LNX_RSR,
     PC_SCSH,    KC_Z,       KC_R,       KC_S,       HRM_N,      HRM_T,      KC_G,       PC_LOCK,    KC_MPLY,    KC_QUOT,    HRM_A,      HRM_E,      HRM_I,      HRM_H,      KC_J,       VIPASTE,
                 KC_HOME,    KC_W,       KC_C,       KC_L,       KC_D,       KC_V,       PC_BSWD,    PC_SLACK,   KC_EQL,     KC_U,       KC_O,       KC_Y,       KC_K,       KC_END,
-                                        WINRUN,     PC_CLIP,    GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCBYO,     VS_COMT,    QWERTY_GAME
+                                        WINRUN,     ALTESC,     GUIDEL,     SFTBSP,     CTLTAB,     ALTENT,     SPCNAV,     ESCBYO,     VS_COMT,    QWERTY_GAME
     ),
 
     [_NAV_NUM_SYM] = LAYOUT(
@@ -176,14 +181,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 _______,    KC_AMPR,    KC_PERC,    KC_BSLS,    KC_LBRC,    KC_RBRC,                            _______,    _______,    KC_UP,      _______,    _______,    _______,
     _______,    KC_SLSH,    KC_COLN,    KC_GRV,     KC_PAST,    KC_LPRN,    KC_RPRN,    _______,    _______,    _______,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_EQL,     _______,    _______,
                 _______,    KC_7,       KC_3,       KC_1,       KC_5,       KC_9,       KC_F11,     KC_F12,     KC_8,       KC_2,       KC_0,       KC_4,       KC_6,       _______,
-                                        _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
+                                        _______,    KC_LALT,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
 
     [_BYO_ONOTE_VSC] = LAYOUT(
-                CMB_OFF,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                            XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,
+                CMB_OFF,    KC_F1,      KC_F2,      KC_F3,      KC_F4,      KC_F5,                              KC_F6,      KC_F7,      KC_F8,      KC_F9,      KC_F10,     _______,
                 CMB_ON,     _______,    _______,    _______,    _______,    _______,                            BY_FPNE,    BY_CLYT,    BY_HSPL,    BY_VSPL,    BY_DISF,    BY_KPNE,
     XXXXXXX,    _______,    ON_QUES,    ON_IMPT,    ON_TODO,    PY_IPDB,    _______,    _______,    _______,    BY_RNWN,    BY_FSPL,    BY_NWIN,    BY_FSPR,    BY_RFSH,    BY_KSRV,    XXXXXXX,
-                _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    BY_FSWL,    BY_FSWR,    BY_MVWL,    BY_MVWR,    _______,
+                _______,    VS_PEDT,    VS_NEDT,    VS_EDIT,    VS_TERM,    _______,    _______,    _______,    _______,    BY_FSWL,    BY_FSWR,    BY_MVWL,    BY_MVWR,    _______,
                                         _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______
     ),
 
@@ -374,9 +379,11 @@ enum combo_events {
     COMBO_PC_SELECTALL,
     COMBO_PC_COPYPASTE,
     COMBO_WIN_BLUETOOTH,
+    COMBO_WIN_CLIP,
     COMBO_LNX_CLS,
     COMBO_LNX_LAST,
     COMBO_SLACK_CODE,
+    COMBO_SLACK_CODE_PASTE,
     COMBO_KU_QU,
     // COMBO_EXCLAMATION,
     COMBO_AT,
@@ -406,12 +413,14 @@ const uint16_t PROGMEM pc_cut[]       = {KC_C, KC_N, COMBO_END};
 const uint16_t PROGMEM pc_paste[]     = {KC_L, KC_D, COMBO_END};
 const uint16_t PROGMEM pc_copypaste[] = {KC_C, KC_D, COMBO_END};
 const uint16_t PROGMEM pc_find[]      = {KC_L, KC_T, COMBO_END};
+const uint16_t PROGMEM pc_clip[]      = {KC_D, KC_V, COMBO_END};
 
 // this combo mirrors the DW action in vim!
 const uint16_t PROGMEM del_word[] = {KC_W, KC_D, COMBO_END};
 // keep shift+V on the left side
 const uint16_t PROGMEM vimshiftv[]  = {KC_N, KC_D, COMBO_END};
 const uint16_t PROGMEM slack_code[] = {KC_F, KC_M, COMBO_END};
+const uint16_t PROGMEM slack_code_paste[] = {KC_F, KC_M, KC_P, COMBO_END};
 // const uint16_t PROGMEM escape[]     = {KC_S, KC_M, COMBO_END};
 const uint16_t PROGMEM dlsim[]      = {KC_N, KC_T, COMBO_END};
 const uint16_t PROGMEM newtab[]     = {KC_T, KC_G, COMBO_END};
@@ -456,7 +465,9 @@ combo_t key_combos[] = {
     // [COMBO_ESC]             = COMBO(escape,         KC_ESC),
     [COMBO_DLSIM]           = COMBO(dlsim,          DLSIM),
     [COMBO_SLACK_CODE]      = COMBO(slack_code,     SLACK_CODE),
+    [COMBO_SLACK_CODE_PASTE] = COMBO(slack_code_paste, SLACK_CODE_PASTE),
     [COMBO_NEWTAB]          = COMBO(newtab,         C(KC_T)),
+    [COMBO_WIN_CLIP]        = COMBO(pc_clip,        G(KC_V)),
 };
 
 // #endif
@@ -796,6 +807,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case SLACK_CODE:
             if (record->event.pressed) {
                 SEND_STRING("```");
+            }
+            break;
+        case SLACK_CODE_PASTE:
+            if (record->event.pressed) {
+                SEND_STRING("```" SS_DELAY(100) SS_LCTL(SS_TAP(X_V)));
             }
             break;
         case COPY_PASTE:
